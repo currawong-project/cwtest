@@ -10,12 +10,16 @@ AC_CONFIG_SRCDIR([src/proj/main.c])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIR([m4])
 
+AM_PROG_AR
+
 LT_INIT
 
 # Check for programs
 AC_PROG_CC
 AC_PROG_CXX
 # AC_PROG_RANLIB  # required for static librarires
+
+AM_PROG_CC_C_O
 
 # Checks for libraries.
 AC_CHECK_LIB([cairo],[cairo_debug_reset_static_data],[AC_MSG_RESULT([The 'cairo' library was found.])],[AC_MSG_ERROR([The 'cairo' library was not found.])])
