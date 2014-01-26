@@ -3,7 +3,10 @@ lib_LTLIBRARIES =
 bin_PROGRAMS    =
 include_HEADERS =
 
-
+# To Profile w/ gprof:
+# 1) Modify configure: ./configure --disable-shared CFLAGS="-pg"
+# 2) Run the program. ./foo
+# 3) Run gprof /libtool --mode=execute gprof ./foo
 
 # C compiler flags
 # _GNU_SOURCE - turns on GNU specific extensions and gives correct prototype for double log2(double) 
