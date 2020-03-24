@@ -14,16 +14,18 @@ include_HEADERS =
 # -Wno-multichar - turns off multi-character constant warnings from cmAudioFile.c
 
 
+WS_DIR   = /home/kevin/sdk/libwebsockets/build/out
 
-AM_CPPFLAGS = -D _GNU_SOURCE  -I.. 
+
+AM_CPPFLAGS = -D _GNU_SOURCE  -I..  -I$(srcdir)/src/libcw -I$(WS_DIR)/include
 AM_CFLAGS   = -Wno-multichar 
-AM_CXXFLAGS = 
+AM_CXXFLAGS =  --std=c++17
 AM_LDFLAGS  =  
 
 # debug/release switches
 if DEBUG
   AM_CFLAGS   += -g 
-  AM_CXXFLAGS += -g
+  AM_CXXFLAGS += -g -Wall 
 else
   AM_CFLAGS   += -O3
   AM_CXXFLAGS += -O3
@@ -33,21 +35,22 @@ endif
 if OS_LINUX
 
 if OS_64
+  AM_LDFLAGS +=  -L/usr/lib64 -L$(WS_DIR)/lib   -Wl,-Bstatic -lasound -Wl,-Bdynamic
   AM_CFLAGS  += -m64
 endif	
 endif
 
+include src/libcw/Makefile.am
+
+libcw_la_SOURCES = $(libcwSRC) $(libcwHDR)
+lib_LTLIBRARIES               += libcw.la
+include_HEADERS               += $(libcwHDR)
 
 
-include src/libproj/Makefile.am
+src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
 
+# autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
+src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -lwebsockets
 
-src_libproj_libproj_la_SOURCES = $(libprojSRC) $(libprojHDR)
-lib_LTLIBRARIES               += src/libproj/libproj.la
-include_HEADERS               += $(libprojHDR)
-
-
-src_proj_proj_SOURCES   = src/proj/main.c
-src_proj_proj_LDADD     = src/libproj/libproj.la  # autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
-src_proj_proj_CPPFLAGS  = -I$(srcdir)/src/libproj $(AM_CPPFLAGS)
-bin_PROGRAMS           += src/proj/proj
+# src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
+bin_PROGRAMS               += src/cwtest/cwtest

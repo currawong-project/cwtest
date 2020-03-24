@@ -3,12 +3,12 @@
 # this configure.ac or any of the Makefile.am files.
 #
 
-AC_INIT([proj],[1.0],[proj@larke.org])
+AC_INIT([cwtest],[1.0],[cwtest@larke.org])
 AC_CONFIG_AUX_DIR([build-aux])                    # put aux files in build-aux
 AM_INIT_AUTOMAKE([1.9 -Wall foreign subdir-objects]) # subdir-objects needed for non-recursive make
-AC_CONFIG_SRCDIR([src/proj/main.c])
+AC_CONFIG_SRCDIR([src/cwtest/main.cpp])
 AC_CONFIG_HEADERS([config.h])
-AC_CONFIG_MACRO_DIR([m4])
+AC_CONFIG_MACRO_DIRS([m4])
 
 AM_PROG_AR
 
@@ -22,7 +22,7 @@ AC_PROG_CXX
 AM_PROG_CC_C_O
 
 # Checks for libraries.
-AC_CHECK_LIB([cairo],[cairo_debug_reset_static_data],[AC_MSG_RESULT([The 'cairo' library was found.])],[AC_MSG_ERROR([The 'cairo' library was not found.])])
+# AC_CHECK_LIB([cairo],[cairo_debug_reset_static_data],[AC_MSG_RESULT([The 'cairo' library was found.])],[AC_MSG_ERROR([The 'cairo' library was not found.])])
 #TODO: add more library checks 
 
 
@@ -89,8 +89,8 @@ fi
 #     
 # AC_SUBST([ADD_LIB], [$add_lib])
 
-proj_dir=src/libproj
- AC_SUBST([proj_dir])
+#ldir = src/libcw
+#AC_SUBST([ldir])
 
 AC_CONFIG_FILES([ Makefile ])
 AC_OUTPUT
