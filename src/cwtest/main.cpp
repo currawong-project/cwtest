@@ -173,6 +173,12 @@ void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
 
   o->getv("a",a,"b",b);
   printf("G: %i %i\n",a,b);
+
+  const unsigned bufN = 128;
+  char buf[bufN];
+
+  unsigned i = o->to_string(buf,bufN);
+  printf("%i : %s\n",i, buf);
     
   o->free();
 }
