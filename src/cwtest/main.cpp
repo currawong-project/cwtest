@@ -257,36 +257,61 @@ void socketSrvTcpTest( cw::object_t* cfg, int argc, const char* argv[] )
 
 void sockMgrTest( cw::object_t* cfg, int argc, const char* argv[] )
 {
-  bool           tcpFl      = false;
-  unsigned short localPort  = 0;
-  const char*    remoteIp   = nullptr;
-  unsigned short remotePort = 0;
-
+  bool           tcpFl       = false;
+  const char*    localNicDev = nullptr;
+  unsigned short localPort   = 0;
+  const char*    remoteIp    = nullptr;
+  unsigned short remotePort  = 0;
+  int argi = 0;
+  
   if( argc <3 )
   {
-    printf("Invalid argument count.");
-    printf("Usage: ./cw_rt <cfg_fn> sockMgrTest 'udp | tcp' <localPort>  { <remote_ip> <remote_port> }\n");
+    printf("Error: Invalid argument count.");
     goto errLabel;
   }
 
-
-  if( argc >= 4 )
-  {
-    remoteIp   = argv[3];
-
-    if( argc >= 5 )          
-      remotePort = atoi(argv[4]);
-    
-  }
-
+  // The first arg. must be 'tcp' or 'udp'.
   if( strcmp(argv[1],"tcp")!=0 && strcmp(argv[1],"udp")!=0 )
   {
-    printf("The first argument must be 'udp' or 'tcp'\n");
+    printf("Error: The first argument must be 'udp' or 'tcp'\n");
     goto errLabel;
   }
+
+   
+  tcpFl  = strcmp(argv[1],"tcp")==0;
+ 
+  argi = 2;
+
+  // If the next token is 'dev' ...
+  if( strcmp(argv[argi++],"dev") == 0 )
+  {
+    if( argc <= argi )
+    {
+      printf("Error: No local NIC given.\n");
+      goto errLabel;
+    }
+
+    // .. then the next arg is the localNicDev
+    localNicDev = argv[argi++];
+  }
+
+  if( argc <= argi )
+  {
+    printf("Error: No local port was given.\n");
+    goto errLabel;
+  }
+
+  // get the local port
+  localPort = atoi(argv[argi++]);
   
-  tcpFl     = strcmp(argv[1],"tcp")==0;
-  localPort = atoi(argv[2]);
+  if( argc > argi)
+  {
+    remoteIp   = argv[argi++];
+
+    if( argc > argi)
+      remotePort = atoi(argv[argi++]);
+  }
+  
   
   if( remoteIp != nullptr && remotePort == 0 )
   {
@@ -296,9 +321,15 @@ void sockMgrTest( cw::object_t* cfg, int argc, const char* argv[] )
 
   printf("style:%s local:%i to remote:%s %i\n", argv[1], localPort, cwStringNullGuard(remoteIp), remotePort);      
 
-  cw::socksrv::testMain( tcpFl, localPort, remoteIp, remotePort  );
+  cw::socksrv::testMain( tcpFl, localNicDev, localPort, remoteIp, remotePort  );
 
+  return;
+    
   errLabel:
+
+  //                                                1                                 2               3          4
+  //                                                1         2         3             4               5          6
+  printf("Usage: ./cwtest <cfg_fn> sockMgrTest 'udp | tcp' {'dev' <localNicDevice>} <localPort>  { <remote_ip> <remote_port> }\n");
   
   return;
 }
