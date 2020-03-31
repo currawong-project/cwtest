@@ -42,9 +42,9 @@ endif
 
 include src/libcw/Makefile.am
 
-libcw_la_SOURCES = $(libcwSRC) $(libcwHDR)
-lib_LTLIBRARIES               += libcw.la
-include_HEADERS               += $(libcwHDR)
+libcw_la_SOURCES  = $(libcwSRC) $(libcwHDR)
+lib_LTLIBRARIES  += libcw.la
+include_HEADERS  += $(libcwHDR)
 
 
 src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
