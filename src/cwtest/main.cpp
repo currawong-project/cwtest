@@ -9,6 +9,8 @@
 #include "cwNumericConvert.h"
 #include "cwObject.h"
 #include "cwThread.h"
+#include "cwSpScBuf.h"
+#include "cwThreadMach.h"
 #include "cwWebSock.h"
 #include "cwWebSockSvr.h"
 #include "cwSerialPort.h"
@@ -184,6 +186,7 @@ void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
 }
 
 void threadTest(        cw::object_t* cfg, int argc, const char* argv[] ) { cw::threadTest(); }
+void spscBuf(           cw::object_t* cfg, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
 void websockSrvTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::websockSrvTest(); }
 void serialPortSrvTest( cw::object_t* cfg, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
 void midiDeviceTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::midi::device::test();}
@@ -351,7 +354,7 @@ void dnsSdTest( cw::object_t* cfg, int arg, const char* argv[] )
 
 void euConTest( cw::object_t* cfg, int arg, const char* argv[] )
 {
-  cw::net::eucon::test();
+  cw::eucon::test();
 }
 
 
@@ -411,6 +414,7 @@ int main( int argc, const char* argv[] )
    { "numbCvt", numbCvtTest },
    { "object", objectTest },
    { "thread", threadTest },
+   { "spscBuf", spscBuf },
    { "websockSrv", websockSrvTest },
    { "serialSrv", serialPortSrvTest },
    { "midiDevice", midiDeviceTest },
@@ -462,7 +466,8 @@ int main( int argc, const char* argv[] )
     if( modeArray[i].label == nullptr )
       cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
 
-    cfg->free();
+    if( cfg != nullptr )
+      cfg->free();
   }
   
   cw::log::destroyGlobal();
