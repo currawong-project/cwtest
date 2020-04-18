@@ -185,6 +185,7 @@ void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
   o->free();
 }
 
+void timeTest(          cw::object_t* cfg, int argc, const char* argv[] ) { cw::time::test(); }
 void threadTest(        cw::object_t* cfg, int argc, const char* argv[] ) { cw::threadTest(); }
 void spscBuf(           cw::object_t* cfg, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
 void websockSrvTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::websockSrvTest(); }
@@ -413,6 +414,7 @@ int main( int argc, const char* argv[] )
    { "fileSys", fileSysTest },
    { "numbCvt", numbCvtTest },
    { "object", objectTest },
+   { "time", timeTest },
    { "thread", threadTest },
    { "spscBuf", spscBuf },
    { "websockSrv", websockSrvTest },
@@ -435,6 +437,7 @@ int main( int argc, const char* argv[] )
    { "eucon",  euConTest },
    { "dirEntry", dirEntryTest },
    { "io", ioTest },
+   
    { "stub", stubTest },
    { nullptr, nullptr }
   };
