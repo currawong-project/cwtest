@@ -14,7 +14,7 @@ include_HEADERS =
 # -Wno-multichar - turns off multi-character constant warnings from cmAudioFile.c
 
 
-WS_DIR   = /home/kevin/sdk/libwebsockets/build/out
+WS_DIR   = $(HOME)/sdk/libwebsockets/build/out
 
 
 AM_CPPFLAGS = -D _GNU_SOURCE  -I..  -I$(srcdir)/src/libcw -I$(WS_DIR)/include
@@ -35,9 +35,12 @@ endif
 if OS_LINUX
 
 if OS_64
-  AM_LDFLAGS +=  -L/usr/lib64 -L$(WS_DIR)/lib   -Wl,-Bstatic -lasound -Wl,-Bdynamic
+  AM_LDFLAGS +=  -L/usr/lib64
   AM_CFLAGS  += -m64
-endif	
+endif
+
+  AM_LDFLAGS +=  -L$(WS_DIR)/lib   -Wl,-Bstatic -lasound -Wl,-Bdynamic
+
 endif
 
 include src/libcw/Makefile.am
