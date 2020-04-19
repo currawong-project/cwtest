@@ -10,6 +10,7 @@
 #include "cwObject.h"
 #include "cwThread.h"
 #include "cwSpScBuf.h"
+#include "cwSpScQueueTmpl.h"
 #include "cwThreadMach.h"
 #include "cwWebSock.h"
 #include "cwWebSockSvr.h"
@@ -188,6 +189,7 @@ void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
 void timeTest(          cw::object_t* cfg, int argc, const char* argv[] ) { cw::time::test(); }
 void threadTest(        cw::object_t* cfg, int argc, const char* argv[] ) { cw::threadTest(); }
 void spscBuf(           cw::object_t* cfg, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
+void spscQueueTmpl(     cw::object_t* cfg, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
 void websockSrvTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::websockSrvTest(); }
 void serialPortSrvTest( cw::object_t* cfg, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
 void midiDeviceTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::midi::device::test();}
@@ -417,6 +419,7 @@ int main( int argc, const char* argv[] )
    { "time", timeTest },
    { "thread", threadTest },
    { "spscBuf", spscBuf },
+   { "spscQueueTmpl", spscQueueTmpl },
    { "websockSrv", websockSrvTest },
    { "serialSrv", serialPortSrvTest },
    { "midiDevice", midiDeviceTest },
