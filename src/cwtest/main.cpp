@@ -139,6 +139,16 @@ void fileSysTest( cw::object_t* cfg, int argc, const char* argv[] )
 
   cw::mem::release(pp);
   cw::mem::release(fn);
+
+
+  const char myPath[] = "~/src/foo";
+
+  char* expPath = cw::filesys::expandPath(myPath);
+
+  cwLogInfo("%s %s",myPath,expPath);
+
+  cw::mem::release(expPath);
+  
   
 }
 
@@ -182,6 +192,13 @@ void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
 
   unsigned i = o->to_string(buf,bufN);
   printf("%i : %s\n",i, buf);
+  
+  cw::object_t* oo = o->duplicate();
+
+  oo->print();
+  
+  oo->free();
+  
     
   o->free();
 }
