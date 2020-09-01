@@ -19,7 +19,7 @@ WS_DIR   = $(HOME)/sdk/libwebsockets/build/out
 
 AM_CPPFLAGS = -D _GNU_SOURCE  -I..  -I$(srcdir)/src/libcw -I$(WS_DIR)/include
 AM_CFLAGS   = -Wno-multichar 
-AM_CXXFLAGS =  --std=c++17
+AM_CXXFLAGS =  --std=c++17 -Wno-multichar
 AM_LDFLAGS  =  
 
 # debug/release switches

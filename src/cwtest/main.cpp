@@ -8,6 +8,7 @@
 #include "cwText.h"
 #include "cwNumericConvert.h"
 #include "cwObject.h"
+#include "cwMtx.h"
 #include "cwThread.h"
 #include "cwSpScBuf.h"
 #include "cwSpScQueueTmpl.h"
@@ -34,10 +35,23 @@
 #include "cwEuCon.h"
 #include "cwIo.h"
 #include "cwIoTest.h"
+#include "cwDataSets.h"
+#include "cwSvg.h"
+#include "cwAudioFile.h"
+
 //#include "cwNbMem.h"
 
 #include <iostream>
 
+
+unsigned calc( unsigned n )
+{ return n; }
+
+template<typename T0, typename T1, typename... ARGS>
+  unsigned calc( T0 n, T1 i, ARGS&&... args)
+{  
+  return calc(n + i, std::forward<ARGS>(args)...);
+}
 
 void print()
 {
@@ -105,8 +119,97 @@ template< typename... ARGS>
 
 using namespace std;
 
+enum { kIsFilePathFl = 0x01, kIsDirPathFl=0x02, kPathMustExistFl=0x04, kVarOptionalFl=0x08, kCreateDirFl=0x010 };
+char* instantiatePathVariable( const cw::object_t* args, const char* label, unsigned flags )
+{
+  cw::rc_t    rc;
+  const char* fn         = nullptr;
+  char*       expandedFn = nullptr;
 
-void variadicTplTest( cw::object_t* cfg, int argc, const char* argv[] )
+  // locate the cfg field associated with 'label'
+  if((rc = args->get(label,fn)) != cw::kOkRC )
+  {
+    if( !cwIsFlag(flags,kVarOptionalFl) )
+    {
+      rc = cwLogError(cw::kLabelNotFoundRC,"The mandatory file '%s' was not found.",cwStringNullGuard(label));
+      goto errLabel;
+    }
+    
+    return nullptr;
+  }
+
+  // expand the path (replace ~ with home directory)
+  if((expandedFn  = cw::filesys::expandPath(fn)) == nullptr )
+  {
+    rc = cwLogError(cw::kOpFailRC,"Path expansion failed on '%s'.",fn);
+    goto errLabel;
+  }
+
+  // check if the path must exist
+  if( cwIsFlag(flags,kPathMustExistFl) )
+  {
+    // if this is a file then the file must exist
+    if( cwIsFlag(flags,kIsFilePathFl) && !cw::filesys::isFile(expandedFn) )
+    {
+      rc = cwLogError(cw::kFileNotFoundRC,"The path variable '%s' ('%s') does not identify an existing file.",label,expandedFn );
+      goto errLabel;
+    }
+
+    // if this is a directory then the directory must exist
+    if( cwIsFlag(flags,kIsDirPathFl ) && !cw::filesys::isDir(expandedFn))
+    {
+
+      // the dir. doesn't exist - is it ok to create it?
+      if( cwIsFlag(flags,kCreateDirFl) )
+      {
+        if((rc = cw::filesys::makeDir( expandedFn)) != cw::kOkRC )
+        {
+          rc = cwLogError(rc,"Unable to create the directory for '%s' ('%s').",label,expandedFn);
+          goto errLabel;
+        }
+        
+      }
+      else
+      {    
+        rc = cwLogError(cw::kFileNotFoundRC,"The path variable '%s' ('%s') does not identify an existing directory.",label,expandedFn );
+        goto errLabel;
+      }
+    }
+  }
+
+  errLabel:
+  if( rc != cw::kOkRC )
+    cw::mem::release(expandedFn);
+
+  return expandedFn;
+}
+
+char* requiredExistingDir( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kIsDirPathFl | kPathMustExistFl); }
+
+char* optionalExistingDir( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kVarOptionalFl | kIsDirPathFl | kPathMustExistFl); }
+
+char* requiredNewDir( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kIsDirPathFl | kPathMustExistFl | kCreateDirFl); }
+
+char* optionalNewDir( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kVarOptionalFl | kIsDirPathFl | kPathMustExistFl | kCreateDirFl ); }
+
+char* requiredExistingFile( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kIsFilePathFl | kPathMustExistFl); }
+
+char* optionalExistingFile( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kVarOptionalFl | kIsFilePathFl | kPathMustExistFl); }
+
+char* requiredNewFile( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,0); }
+
+char* optionalNewFile( const cw::object_t* args, const char* label )
+{ return instantiatePathVariable(args,label,kVarOptionalFl); }
+
+
+void variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   print("a", 1, "b", 3.14, "c",5L);
   
@@ -121,11 +224,15 @@ void variadicTplTest( cw::object_t* cfg, int argc, const char* argv[] )
   buf[0] = '\0';
   unsigned n = to_text("prefix: ",buf,bufN,"a",1,"b",3.2,"hi","ho");
   printf("%i : %s\n",n,buf);
+
+
+  unsigned m = calc(0,1,2,3);
+  printf("Calc:%i\n",m);
 }
 
 
 
-void fileSysTest( cw::object_t* cfg, int argc, const char* argv[] )
+void fileSysTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   cw::filesys::pathPart_t* pp = cw::filesys::pathParts(__FILE__);
   
@@ -152,7 +259,7 @@ void fileSysTest( cw::object_t* cfg, int argc, const char* argv[] )
   
 }
 
-void numbCvtTest( cw::object_t* cfg, int argc, const char* argv[] )
+void numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   int8_t x0 = 3;
   int x1 = 127;
@@ -169,7 +276,7 @@ void numbCvtTest( cw::object_t* cfg, int argc, const char* argv[] )
   
 }
 
-void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
+void objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   cw::object_t* o;
   const char s [] = "{ a:1, b:2, c:[ 1.23, 4.56 ], d:true, e:false, f:true }";
@@ -203,21 +310,24 @@ void objectTest( cw::object_t* cfg, int argc, const char* argv[] )
   o->free();
 }
 
-void timeTest(          cw::object_t* cfg, int argc, const char* argv[] ) { cw::time::test(); }
-void threadTest(        cw::object_t* cfg, int argc, const char* argv[] ) { cw::threadTest(); }
-void spscBuf(           cw::object_t* cfg, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
-void spscQueueTmpl(     cw::object_t* cfg, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
-void websockSrvTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::websockSrvTest(); }
-void serialPortSrvTest( cw::object_t* cfg, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
-void midiDeviceTest(    cw::object_t* cfg, int argc, const char* argv[] ) { cw::midi::device::test();}
-void textBufTest(       cw::object_t* cfg, int argc, const char* argv[] ) { cw::textBuf::test(); }
-void audioBufTest(      cw::object_t* cfg, int argc, const char* argv[] ) { cw::audio::buf::test(); }
-void audioDevTest(      cw::object_t* cfg, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
-void audioDevAlsaTest(  cw::object_t* cfg, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
-void audioDevRpt(       cw::object_t* cfg, int argc, const char* argv[] ) { cw::audio::device::report(); }
-void ioTest(            cw::object_t* cfg, int argc, const char* argv[] ) { cw::io::test(); }
+void timeTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::time::test(); }
+void threadTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::threadTest(); }
+void spscBuf(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
+void spscQueueTmpl(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
+void websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::websockSrvTest(); }
+void serialPortSrvTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
+void midiDeviceTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::midi::device::test();}
+void textBufTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::textBuf::test(); }
+void audioBufTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::buf::test(); }
+void audioDevTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
+void audioDevAlsaTest(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
+void audioDevRpt(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::report(); }
+void ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::io::test(); }
+void mtxTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::mtx::test(args); }
+void audioFileTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::test(args); }
+void audioFileMix(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::mix(args); }
 
-void socketTest( cw::object_t* cfg, int argc, const char* argv[] )
+void socketTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   if( argc >= 3 )
   {
@@ -230,7 +340,7 @@ void socketTest( cw::object_t* cfg, int argc, const char* argv[] )
   }
 }
 
-void socketTestTcp( cw::object_t* cfg, int argc, const char* argv[] )
+void socketTestTcp( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   // server: ./cw_rt main.cfg socketTcp 5434 5435 dgram/stream server
   // client: ./cw_rt main.cfg socketTcp 5435 5434 dgram/stream
@@ -251,7 +361,7 @@ void socketTestTcp( cw::object_t* cfg, int argc, const char* argv[] )
   }
 }
 
-void socketSrvUdpTest( cw::object_t* cfg, int argc, const char* argv[] )
+void socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   if( argc >= 4 )
   {
@@ -264,7 +374,7 @@ void socketSrvUdpTest( cw::object_t* cfg, int argc, const char* argv[] )
     cw::net::srv::test_udp_srv( localPort, remoteIp, remotePort );
   }
 }
-void socketSrvTcpTest( cw::object_t* cfg, int argc, const char* argv[] )
+void socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   if( argc >= 4 )
   {
@@ -278,7 +388,7 @@ void socketSrvTcpTest( cw::object_t* cfg, int argc, const char* argv[] )
   }
 }
 
-void sockMgrTest( cw::object_t* cfg, int argc, const char* argv[] )
+void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   bool           tcpFl       = false;
   const char*    localNicDev = nullptr;
@@ -357,28 +467,30 @@ void sockMgrTest( cw::object_t* cfg, int argc, const char* argv[] )
   return;
 }
 
-void uiTest( cw::object_t* cfg, int argc, const char* argv[] )
+void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { cw::ui::test(); }
+void socketMdnsTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::net::mdns::test(); }
+void dnsSdTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )       { cw::net::dnssd::test(); }
+void euConTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )       { cw::eucon::test(); }
+void mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  cw::ui::test();
+  char* inDir  = requiredExistingDir( args, "inDir");
+  char* htmlFn = requiredNewFile(     args, "outHtmlFn");
+  
+  cw::dataset::mnist::test(inDir,htmlFn);
 }
 
-void socketMdnsTest( cw::object_t* cfg, int argc, const char* argv[] )
+void svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  cw::net::mdns::test();
+  char* htmlFn = requiredNewFile( args, "outHtmlFn");
+  char* cssFn  = optionalNewFile( args, "outCssFn");
+  
+  cw::svg::test(htmlFn,cssFn);
+  
+  cw::mem::release(htmlFn);
+  cw::mem::release(cssFn);
 }
 
-void dnsSdTest( cw::object_t* cfg, int arg, const char* argv[] )
-{
-  cw::net::dnssd::test();
-}
-
-void euConTest( cw::object_t* cfg, int arg, const char* argv[] )
-{
-  cw::eucon::test();
-}
-
-
-void dirEntryTest( cw::object_t* cfg, int argc, const char* argv[] )
+void dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   if( argc >= 2 )
   {
@@ -393,29 +505,39 @@ void dirEntryTest( cw::object_t* cfg, int argc, const char* argv[] )
   }
 }
 
-void stubTest( cw::object_t* cfg, int argc, const char* argv[] )
+void stubTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  /*
-  typedef struct v_str
-  {
-    int x = 1;
-    int y = 2;
-    void* z = nullptr;
-  } v_t;
-
-
-  v_t v;
-  printf("%i %i %p\n",v.x,v.y,v.z);
-  */
-  /*
-  const char* s = "\x16lmac=00-90-D5-80-F4-DE\x7dummy=0";
-  printf("len:%li\n",strlen(s));
-  */
-
-  
-  
+    
 }
 
+const cw::object_t* _locateArgsRecd( const cw::object_t* cfg, const char*& cfgLabel )
+{
+  const cw::object_t* o;
+
+  if((cfg = cfg->find_child("test")) == nullptr )
+  {
+    cwLogError(cw::kSyntaxErrorRC,"The cwtest cfg. file does not have a 'test' record.");
+    return nullptr;
+  }
+
+  if((o = cfg->find_child(cfgLabel)) == nullptr )
+      cwLogError(cw::kLabelNotFoundRC,"The test selector: '%s' was not found in the configuratoin file.", cwStringNullGuard(cfgLabel));
+  else
+  {
+  
+    const struct cw::object_str* oo     = nullptr;
+
+    // if the cfg record label does not match the test mode label - then get the test mode label
+    if((oo = o->find_child( "test_label" )) != nullptr )
+    {
+      const char* test_label = nullptr;
+      if( oo->value(test_label) == cw::kOkRC )
+        cfgLabel = test_label;
+    }
+  }
+
+  return o;
+}
 
 int main( int argc, const char* argv[] )
 {  
@@ -423,7 +545,7 @@ int main( int argc, const char* argv[] )
   typedef struct func_str
   {
     const char* label;
-    void (*func)(cw::object_t* cfg, int argc, const char* argv[] );    
+    void (*func)(const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] );    
   } func_t;
 
   // function dispatch list
@@ -457,15 +579,19 @@ int main( int argc, const char* argv[] )
    { "eucon",  euConTest },
    { "dirEntry", dirEntryTest },
    { "io", ioTest },
-   
+   { "mnist", mnistTest },
+   { "svg",   svgTest },
+   { "mtx",   mtxTest },
+   { "audiofile", audioFileTest },
+   { "audio_mix", audioFileMix },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
 
   // read the command line
-  cw::object_t* cfg   = NULL;
-  const char*   cfgFn = argc > 1 ? argv[1] : nullptr;
-  const char*   mode  = argc > 2 ? argv[2] : nullptr;
+        cw::object_t* cfg   = nullptr;
+  const char*         cfgFn = argc > 1 ? argv[1] : nullptr;
+  const char*         mode  = argc > 2 ? argv[2] : nullptr;
 
   
   cw::log::createGlobal();
@@ -473,22 +599,29 @@ int main( int argc, const char* argv[] )
   // if valid command line args were given and the cfg file was successfully read
   if( cfgFn != nullptr && mode != nullptr && objectFromFile( cfgFn, cfg ) == cw::kOkRC )
   {
-    int i;
+
+    const cw::object_t* args;
+    int  i = 0;
+  
+    // if the arg's record was not found
+    if((args = _locateArgsRecd(cfg,mode)) == nullptr )
+      goto errLabel;
+  
     // locate the requested function and call it
     for(i=0; modeArray[i].label!=nullptr; ++i)
     {
-      //printf("'%s' '%s'\n",modeArray[i].label,mode);
-      
       if( cw::textCompare(modeArray[i].label,mode)==0 )
       {
-        modeArray[i].func( cfg, argc-2, argv + 2 );
+        modeArray[i].func( cfg, args, argc-2, argv + 2 );
         break;
       }
     }
+  
     // if the requested function was not found
     if( modeArray[i].label == nullptr )
       cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
-
+    
+  errLabel:
     if( cfg != nullptr )
       cfg->free();
   }

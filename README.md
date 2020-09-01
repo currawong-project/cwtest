@@ -32,3 +32,15 @@ Add support for custom controls.
 Add an option to print the UI elment information as they are created.
 This is a useful way to see if id maps are working.
 Print: ele name, uuid, appId and parent name, uuid, appId
+
+
+# GDB Setup:
+
+`set env LD_LIBRARY_PATH /home/kevin/sdk/libwebsockets/build/out/lib`
+`r ~/src/cwtest/src/cwtest/cfg/main.cfg mtx`
+
+
+# Valgrind setup
+
+`export LD_LIBRARY_PATH=~/sdk/libwebsockets/build/out/lib`
+`valgrind --leak-check=yes --log-file=vg0.txt ./cwtest  ~/src/cwtest/src/cwtest/cfg/main.cfg mtx`
