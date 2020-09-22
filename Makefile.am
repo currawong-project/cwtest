@@ -39,27 +39,30 @@ if OS_64
   AM_CFLAGS  += -m64
 endif
 
+if cwALSA
   AM_LDFLAGS +=    -Wl,-Bstatic -lasound -Wl,-Bdynamic
+endif
 
 endif
 
 include src/libcw/Makefile.am
 
 libcw_la_SOURCES  = $(libcwSRC) $(libcwHDR)
-lib_LTLIBRARIES  += libcw.la
+lib_LTLIBRARIES  += libcw.la 
 include_HEADERS  += $(libcwHDR)
 
 
 src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
 
 # autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
-src_cwtest_cwtest_LDADD     = libcw.la  -lpthread
+src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -ldl
 
 if cwWEBSOCK
   AM_CPPFLAGS += -I$(WS_DIR)/include
   AM_LDFLAGS  += -L$(WS_DIR)/lib
   src_cwtest_cwtest_LDADD +=  -lwebsockets
 endif
+
 
 # src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
 bin_PROGRAMS               += src/cwtest/cwtest

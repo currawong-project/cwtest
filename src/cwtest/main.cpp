@@ -27,10 +27,14 @@
 
 #include "cwTime.h"
 #include "cwMidi.h"
-#include "cwMidiPort.h"
 #include "cwAudioDevice.h"
+
+#if defined(cwALSA)
+#include "cwMidiPort.h"
 #include "cwAudioDeviceTest.h"
 #include "cwAudioDeviceAlsa.h"
+#endif
+
 #include "cwAudioBuf.h"
 #include "cwTcpSocket.h"
 #include "cwTcpSocketSrv.h"
@@ -326,12 +330,8 @@ void threadTest(           const cw::object_t* cfg, const cw::object_t* args, in
 void spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
 void spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
 void serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
-void midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::midi::device::test();}
 void textBufTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::textBuf::test(); }
 void audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::buf::test(); }
-void audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
-void audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
-void audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::report(); }
 void mtxTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::mtx::test(args); }
 void audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::test(args); }
 void audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::test(args); }
@@ -355,6 +355,18 @@ void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const 
 #endif
 
 
+#if defined(cwALSA)
+void midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::midi::device::test();}
+void audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
+void audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
+void audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::report(); }
+#else
+void _no_alsa() { cwLogError(cw::kResourceNotAvailableRC,"ALSA based functionality not included in this build."); } 
+void midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa();}
+void audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa(); }
+void audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa(); }
+void audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa(); }
+#endif
 
 void socketTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {

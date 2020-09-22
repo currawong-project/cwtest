@@ -13,9 +13,9 @@ cd ${curdir}
 # 3) Run gprof /libtool --mode=execute gprof ./foo
 
 # To enable websock: --enable-websock \
+# To enable alsa: --enable-alsa \
     
-../../../configure --prefix=${curdir} \
---enable-debug \
+../../../configure --prefix=${curdir} --enable-debug --enable-alsa \
 CFLAGS="-g -Wall" \
 CXXFLAGS="-g -Wall" \
 CPPFLAGS= \

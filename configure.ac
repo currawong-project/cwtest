@@ -61,6 +61,9 @@ echo "OS='${ax_cv_os_type}'"
 AM_CONDITIONAL([OS_64],[test x"${ax_cv_os_64}" == xx86_64])
 echo "ptr width='${ax_cv_os_64}'"
 
+#
+# Enable Debug
+#
 
 AC_ARG_ENABLE([debug],
      [  --enable-debug    Turn on debugging],
@@ -78,7 +81,9 @@ if test x$debug = xfalse; then
 AC_DEFINE([NDEBUG], 1,[Debugging off.])
 fi
 
-
+#
+# Enable libwebsock
+#
 AC_ARG_ENABLE([websock],
      [  --enable-websock    Include websock dependencies],
      [case "${enableval}" in
@@ -93,6 +98,25 @@ AM_CONDITIONAL([cwWEBSOCK], [test x$websock = xtrue])
 
 if test x"$websock" = xtrue; then
 AC_DEFINE([cwWEBSOCK], 1,[Use libwebsock.])
+fi
+
+#
+# Enable ALSA
+#
+AC_ARG_ENABLE([alsa],
+     [  --enable-alsa    Include ALSA dependencies],
+     [case "${enableval}" in
+       yes) alsa=true ;;
+       no)  alsa=false ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-alsa]) ;;
+     esac],[alsa=false])
+     
+echo "alsa=${alsa}"
+     
+AM_CONDITIONAL([cwALSA], [test x$alsa = xtrue])
+
+if test x"$alsa" = xtrue; then
+AC_DEFINE([cwALSA], 1,[Use libalsa.])
 fi
 
 
