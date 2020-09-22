@@ -12,6 +12,8 @@ cd ${curdir}
 # 2) Run the program. ./foo
 # 3) Run gprof /libtool --mode=execute gprof ./foo
 
+# To enable websock: --enable-websock \
+    
 ../../../configure --prefix=${curdir} \
 --enable-debug \
 CFLAGS="-g -Wall" \

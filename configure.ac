@@ -79,6 +79,23 @@ AC_DEFINE([NDEBUG], 1,[Debugging off.])
 fi
 
 
+AC_ARG_ENABLE([websock],
+     [  --enable-websock    Include websock dependencies],
+     [case "${enableval}" in
+       yes) websock=true ;;
+       no)  websock=false ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-websock]) ;;
+     esac],[websock=false])
+     
+echo "websock=${websock}"
+     
+AM_CONDITIONAL([cwWEBSOCK], [test x$websock = xtrue])
+
+if test x"$websock" = xtrue; then
+AC_DEFINE([cwWEBSOCK], 1,[Use libwebsock.])
+fi
+
+
 
 # AC_ARG_ENABLE([add_lib],
 #     [  --enable-add_lib    Append some additional libs to the end of the library link list.],

@@ -17,7 +17,7 @@ include_HEADERS =
 WS_DIR   = $(HOME)/sdk/libwebsockets/build/out
 
 
-AM_CPPFLAGS = -D _GNU_SOURCE  -I..  -I$(srcdir)/src/libcw -I$(WS_DIR)/include
+AM_CPPFLAGS = -D _GNU_SOURCE  -I..  -I$(srcdir)/src/libcw
 AM_CFLAGS   = -Wno-multichar 
 AM_CXXFLAGS =  --std=c++17 -Wno-multichar
 AM_LDFLAGS  =  
@@ -39,7 +39,7 @@ if OS_64
   AM_CFLAGS  += -m64
 endif
 
-  AM_LDFLAGS +=  -L$(WS_DIR)/lib   -Wl,-Bstatic -lasound -Wl,-Bdynamic
+  AM_LDFLAGS +=    -Wl,-Bstatic -lasound -Wl,-Bdynamic
 
 endif
 
@@ -53,7 +53,13 @@ include_HEADERS  += $(libcwHDR)
 src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
 
 # autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
-src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -lwebsockets
+src_cwtest_cwtest_LDADD     = libcw.la  -lpthread
+
+if cwWEBSOCK
+  AM_CPPFLAGS += -I$(WS_DIR)/include
+  AM_LDFLAGS  += -L$(WS_DIR)/lib
+  src_cwtest_cwtest_LDADD +=  -lwebsockets
+endif
 
 # src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
 bin_PROGRAMS               += src/cwtest/cwtest

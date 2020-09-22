@@ -8,18 +8,23 @@
 #include "cwText.h"
 #include "cwNumericConvert.h"
 #include "cwObject.h"
+#include "cwVectOps.h"
 #include "cwMtx.h"
 #include "cwThread.h"
 #include "cwSpScBuf.h"
 #include "cwSpScQueueTmpl.h"
 #include "cwThreadMach.h"
-#include "cwWebSock.h"
-#include "cwWebSockSvr.h"
 #include "cwSerialPort.h"
 #include "cwSerialPortSrv.h"
 #include "cwSocket.h"
+
+#if defined(cwWEBSOCK)
+#include "cwWebSock.h"
+#include "cwWebSockSvr.h"
 #include "cwUi.h"
 #include "cwUiTest.h"
+#endif
+
 #include "cwTime.h"
 #include "cwMidi.h"
 #include "cwMidiPort.h"
@@ -30,14 +35,20 @@
 #include "cwTcpSocket.h"
 #include "cwTcpSocketSrv.h"
 #include "cwTcpSocketTest.h"
+
+
 #include "cwMdns.h"
 #include "cwDnsSd.h"
 #include "cwEuCon.h"
+#if defined(cwWEBSOCK)
 #include "cwIo.h"
 #include "cwIoTest.h"
+#endif
+
 #include "cwDataSets.h"
 #include "cwSvg.h"
 #include "cwAudioFile.h"
+#include "cwAudioFileOps.h"
 
 //#include "cwNbMem.h"
 
@@ -310,22 +321,40 @@ void objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc, co
   o->free();
 }
 
-void timeTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::time::test(); }
-void threadTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::threadTest(); }
-void spscBuf(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
-void spscQueueTmpl(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
+void timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::time::test(); }
+void threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::threadTest(); }
+void spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
+void spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
+void serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
+void midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::midi::device::test();}
+void textBufTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::textBuf::test(); }
+void audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::buf::test(); }
+void audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
+void audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
+void audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::report(); }
+void mtxTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::mtx::test(args); }
+void audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::test(args); }
+void audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::test(args); }
+void audioFileMix(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::mix(args); }
+void audioFileSelToFile(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::selectToFile(args); }
+void audioFileCutAndMix(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::cutAndMix(args); }
+void audioFileParallelMix( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::parallelMix(args); }
+void socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::net::mdns::test(); }
+void dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::net::dnssd::test(); }
+void euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::eucon::test(); }
+
+#if defined(cwWEBSOCK)
 void websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::websockSrvTest(); }
-void serialPortSrvTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
-void midiDeviceTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::midi::device::test();}
-void textBufTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::textBuf::test(); }
-void audioBufTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::buf::test(); }
-void audioDevTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
-void audioDevAlsaTest(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
-void audioDevRpt(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::report(); }
 void ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::io::test(); }
-void mtxTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::mtx::test(args); }
-void audioFileTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::test(args); }
-void audioFileMix(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::mix(args); }
+void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { cw::ui::test(); }
+#else
+void _no_websock() { cwLogError(cw::kResourceNotAvailableRC,"Websocket functionality not included in this build."); } 
+void websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_websock(); }
+void ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_websock(); }
+void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { _no_websock(); }
+#endif
+
+
 
 void socketTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -467,10 +496,6 @@ void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
   return;
 }
 
-void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { cw::ui::test(); }
-void socketMdnsTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::net::mdns::test(); }
-void dnsSdTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )       { cw::net::dnssd::test(); }
-void euConTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )       { cw::eucon::test(); }
 void mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   char* inDir  = requiredExistingDir( args, "inDir");
@@ -478,6 +503,9 @@ void mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, con
   
   cw::dataset::mnist::test(inDir,htmlFn);
 }
+
+void datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+{ cw::dataset::test(args); }
 
 void svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -580,10 +608,15 @@ int main( int argc, const char* argv[] )
    { "dirEntry", dirEntryTest },
    { "io", ioTest },
    { "mnist", mnistTest },
+   { "dataset", datasetTest },
    { "svg",   svgTest },
    { "mtx",   mtxTest },
+   { "afop",      audioFileOp },
    { "audiofile", audioFileTest },
    { "audio_mix", audioFileMix },
+   { "select_to_file", audioFileSelToFile },
+   { "cut_and_mix", audioFileCutAndMix },
+   { "parallel_mix",audioFileParallelMix },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
