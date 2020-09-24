@@ -54,7 +54,8 @@ include_HEADERS  += $(libcwHDR)
 
 src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
 
-# autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
+# 1) autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
+# 2) -ldl is required for dlopen(),dlclose() ...
 src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -ldl
 
 if cwWEBSOCK
