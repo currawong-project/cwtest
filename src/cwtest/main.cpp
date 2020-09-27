@@ -224,7 +224,7 @@ char* optionalNewFile( const cw::object_t* args, const char* label )
 { return instantiatePathVariable(args,label,kVarOptionalFl); }
 
 
-void variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   print("a", 1, "b", 3.14, "c",5L);
   
@@ -243,11 +243,13 @@ void variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int arg
 
   unsigned m = calc(0,1,2,3);
   printf("Calc:%i\n",m);
+
+  return cw::kOkRC;
 }
 
 
 
-void fileSysTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t fileSysTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   cw::filesys::pathPart_t* pp = cw::filesys::pathParts(__FILE__);
   
@@ -271,10 +273,10 @@ void fileSysTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
 
   cw::mem::release(expPath);
   
-  
+  return cw::kOkRC;
 }
 
-void numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   int8_t x0 = 3;
   int x1 = 127;
@@ -288,10 +290,11 @@ void numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
   cw::string_to_number("123",v0);
   cw::string_to_number("3.4",v1);
   printf("%i %f\n",v0,v1 );
-  
+
+  return cw::kOkRC;
 }
 
-void objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   cw::object_t* o;
   const char s [] = "{ a:1, b:2, c:[ 1.23, 4.56 ], d:true, e:false, f:true }";
@@ -323,70 +326,79 @@ void objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc, co
   
     
   o->free();
+  return cw::kOkRC;
 }
 
-void timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::time::test(); }
-void threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::threadTest(); }
-void spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::spsc_buf::test(); }
-void spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::testSpScQueueTmpl(); }
-void serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::serialPortSrvTest(); }
-void textBufTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::textBuf::test(); }
-void audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::buf::test(); }
-void mtxTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::mtx::test(args); }
-void audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audiofile::test(args); }
-void audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::test(args); }
-void audioFileMix(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::mix(args); }
-void audioFileSelToFile(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::selectToFile(args); }
-void audioFileCutAndMix(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::cutAndMix(args); }
-void audioFileParallelMix( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::afop::parallelMix(args); }
-void socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::net::mdns::test(); }
-void dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::net::dnssd::test(); }
-void euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::eucon::test(); }
+cw::rc_t timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::time::test(); }
+cw::rc_t threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::threadTest(); }
+cw::rc_t spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::spsc_buf::test(); }
+cw::rc_t spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::testSpScQueueTmpl(); }
+cw::rc_t serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::serialPortSrvTest(); }
+cw::rc_t textBufTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::textBuf::test(); }
+cw::rc_t audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::buf::test(); }
+cw::rc_t mtxTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::mtx::test(args); }
+cw::rc_t audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audiofile::test(args); }
+cw::rc_t audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::test(args); }
+cw::rc_t audioFileMix(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::mix(args); }
+cw::rc_t audioFileSelToFile(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::selectToFile(args); }
+cw::rc_t audioFileCutAndMix(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::cutAndMix(args); }
+cw::rc_t audioFileParallelMix( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::parallelMix(args); }
+cw::rc_t socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::mdns::test(); }
+cw::rc_t dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::dnssd::test(); }
+cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::eucon::test(); }
 
 #if defined(cwWEBSOCK)
-void websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::websockSrvTest(); }
-void ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::io::test(); }
-void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { cw::ui::test(); }
+cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(); }
+cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::test(); }
+cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return cw::ui::test(); }
 #else
-void _no_websock() { cwLogError(cw::kResourceNotAvailableRC,"Websocket functionality not included in this build."); } 
-void websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_websock(); }
-void ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_websock(); }
-void uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { _no_websock(); }
+cw::rc_t _no_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websocket functionality not included in this build."); } 
+cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
+cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
+cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return _no_websock(); }
 #endif
 
 
 #if defined(cwALSA)
-void midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::midi::device::test();}
-void audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::test( argc, argv ); }
-void audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::alsa::report(); }
-void audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::audio::device::report(); }
+cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::test();}
+cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test( argc, argv ); }
+cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::alsa::report(); }
+cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::report(); }
 #else
-void _no_alsa() { cwLogError(cw::kResourceNotAvailableRC,"ALSA based functionality not included in this build."); } 
-void midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa();}
-void audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa(); }
-void audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa(); }
-void audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { _no_alsa(); }
+cw::rc_t _no_alsa() { return cwLogError(cw::kResourceNotAvailableRC,"ALSA based functionality not included in this build."); } 
+cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
+cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
+cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
+cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 #endif
 
-void socketTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t socketTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  if( argc >= 3 )
+  cw::rc_t rc = cw::kOkRC;
+  
+  if( argc < 3 )
+    rc = cwLogError(cw::kInvalidArgRC,"Invalid arg count to socketTest().");
+  else
   {
     unsigned short localPort  = atoi(argv[1]);
     unsigned short remotePort = atoi(argv[2]);
     const char* remoteAddr = "127.0.0.1"; //"224.0.0.251"; //"127.0.0.1";
     printf("local:%i remote:%i\n", localPort, remotePort);
     
-    cw::net::socket::test( localPort, remoteAddr, remotePort );
+    rc = cw::net::socket::test( localPort, remoteAddr, remotePort );
   }
+  return rc;
 }
 
-void socketTestTcp( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t socketTestTcp( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   // server: ./cw_rt main.cfg socketTcp 5434 5435 dgram/stream server
   // client: ./cw_rt main.cfg socketTcp 5435 5434 dgram/stream
+  cw::rc_t rc = cw::kOkRC;
   
-  if( argc >= 4 )
+  if( argc < 4 )
+    rc = cwLogError(cw::kInvalidArgRC,"Invalid arg. count to socketTestTcp().");
+  else
   {
     unsigned short localPort  = atoi(argv[1]);
     unsigned short remotePort = atoi(argv[2]);
@@ -398,13 +410,19 @@ void socketTestTcp( const cw::object_t* cfg, const cw::object_t* args, int argc,
 
     printf("local:%i remote:%i %s %s\n", localPort, remotePort, dgramFl ? "dgram":"stream", serverFl?"server":"client");
     
-    cw::net::socket::test_tcp( localPort, "127.0.0.1", remotePort, dgramFl, serverFl );
+    rc = cw::net::socket::test_tcp( localPort, "127.0.0.1", remotePort, dgramFl, serverFl );
   }
+
+  return rc;
 }
 
-void socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  if( argc >= 4 )
+  cw::rc_t rc = cw::kOkRC;
+  
+  if( argc < 4 )
+    rc = cwLogError(cw::kInvalidArgRC,"Invalid arg. count to socketSrvUdpTest().");
+  else
   {
     unsigned short localPort  = atoi(argv[1]);
     const char*    remoteIp   = argv[2];
@@ -412,12 +430,17 @@ void socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int ar
 
     printf("local:%i to remote:%s %i\n", localPort, remoteIp, remotePort);
     
-    cw::net::srv::test_udp_srv( localPort, remoteIp, remotePort );
+    rc = cw::net::srv::test_udp_srv( localPort, remoteIp, remotePort );
   }
+  return rc;
 }
-void socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  if( argc >= 4 )
+  cw::rc_t rc = cw::kOkRC;
+  
+  if( argc < 4 )
+    rc = cwLogError(cw::kInvalidArgRC,"Invaid arg. count to socketSrvTcpTest().");
+  else
   {
     unsigned short localPort  = atoi(argv[1]);
     const char*    remoteIp   = argv[2];
@@ -425,12 +448,14 @@ void socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int ar
 
     printf("local:%i to remote:%s %i\n", localPort, remoteIp, remotePort);
     
-    cw::net::srv::test_tcp_srv( localPort, remoteIp, remotePort );
+    rc = cw::net::srv::test_tcp_srv( localPort, remoteIp, remotePort );
   }
+  return rc;
 }
 
-void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
+  cw::rc_t       rc          = cw::kOkRC;
   bool           tcpFl       = false;
   const char*    localNicDev = nullptr;
   unsigned short localPort   = 0;
@@ -440,14 +465,14 @@ void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
   
   if( argc <3 )
   {
-    printf("Error: Invalid argument count.");
+    rc = cwLogError(cw::kInvalidArgRC,"Error: Invalid argument count to sockMgrTest().");
     goto errLabel;
   }
 
   // The first arg. must be 'tcp' or 'udp'.
   if( strcmp(argv[1],"tcp")!=0 && strcmp(argv[1],"udp")!=0 )
   {
-    printf("Error: The first argument must be 'udp' or 'tcp'\n");
+    rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: The first argument must be 'udp' or 'tcp'\n");
     goto errLabel;
   }
 
@@ -461,7 +486,7 @@ void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
   {
     if( argc <= argi )
     {
-      printf("Error: No local NIC given.\n");
+      rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: No local NIC given.\n");
       goto errLabel;
     }
 
@@ -471,7 +496,7 @@ void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
 
   if( argc <= argi )
   {
-    printf("Error: No local port was given.\n");
+    rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: No local port was given.\n");
     goto errLabel;
   }
 
@@ -489,50 +514,56 @@ void sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, c
   
   if( remoteIp != nullptr && remotePort == 0 )
   {
-    printf("A remote adddress '%s' was given but no remote port was given.", remoteIp);
+    rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: A remote adddress '%s' was given but no remote port was given.", remoteIp);
     goto errLabel;
   }
 
-  printf("style:%s local:%i to remote:%s %i\n", argv[1], localPort, cwStringNullGuard(remoteIp), remotePort);      
+  cwLogInfo("style:%s local:%i to remote:%s %i\n", argv[1], localPort, cwStringNullGuard(remoteIp), remotePort);      
 
-  cw::socksrv::testMain( tcpFl, localNicDev, localPort, remoteIp, remotePort  );
+  rc = cw::socksrv::testMain( tcpFl, localNicDev, localPort, remoteIp, remotePort  );
 
-  return;
+  return rc;
     
   errLabel:
 
+  rc = cwLogError(rc,"SockMgrTest() failed.");
+  
   //                                                1                                 2               3          4
   //                                                1         2         3             4               5          6
-  printf("Usage: ./cwtest <cfg_fn> sockMgrTest 'udp | tcp' {'dev' <localNicDevice>} <localPort>  { <remote_ip> <remote_port> }\n");
+  cwLogInfo("Usage: ./cwtest <cfg_fn> sockMgrTest 'udp | tcp' {'dev' <localNicDevice>} <localPort>  { <remote_ip> <remote_port> }\n");
   
-  return;
+  return rc;
 }
 
-void mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   char* inDir  = requiredExistingDir( args, "inDir");
   char* htmlFn = requiredNewFile(     args, "outHtmlFn");
   
-  cw::dataset::mnist::test(inDir,htmlFn);
+  return cw::dataset::mnist::test(inDir,htmlFn);
 }
 
-void datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{ cw::dataset::test(args); }
+cw::rc_t datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+{ return cw::dataset::test(args); }
 
-void svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   char* htmlFn = requiredNewFile( args, "outHtmlFn");
   char* cssFn  = optionalNewFile( args, "outCssFn");
   
-  cw::svg::test(htmlFn,cssFn);
+  cw::rc_t rc = cw::svg::test(htmlFn,cssFn);
   
   cw::mem::release(htmlFn);
   cw::mem::release(cssFn);
+  return rc;
 }
 
-void dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  if( argc >= 2 )
+  cw::rc_t rc = cw::kOkRC;
+  if( argc < 2 )
+    rc = cwLogError(cw::kInvalidArgRC,"dirEntryTest() error: Invalid arg. count.");
+  else
   {
     const char*              path         = argv[1];
     unsigned                 dirEntryN    = 0;
@@ -543,11 +574,13 @@ void dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, 
 
     cw::mem::release(de);
   }
+  return rc;
 }
 
-void stubTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+cw::rc_t stubTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-    
+  cw::rc_t rc = cw::kOkRC;
+  return rc;
 }
 
 const cw::object_t* _locateArgsRecd( const cw::object_t* cfg, const char*& cfgLabel )
@@ -581,11 +614,12 @@ const cw::object_t* _locateArgsRecd( const cw::object_t* cfg, const char*& cfgLa
 
 int main( int argc, const char* argv[] )
 {  
-
+  cw::rc_t rc = cw::kOkRC;
+  
   typedef struct func_str
   {
     const char* label;
-    void (*func)(const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] );    
+    cw::rc_t (*func)(const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] );    
   } func_t;
 
   // function dispatch list
@@ -657,14 +691,14 @@ int main( int argc, const char* argv[] )
     {
       if( cw::textCompare(modeArray[i].label,mode)==0 )
       {
-        modeArray[i].func( cfg, args, argc-2, argv + 2 );
+        rc = modeArray[i].func( cfg, args, argc-2, argv + 2 );
         break;
       }
     }
   
     // if the requested function was not found
     if( modeArray[i].label == nullptr )
-      cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
+      rc = cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
     
   errLabel:
     if( cfg != nullptr )
@@ -673,7 +707,7 @@ int main( int argc, const char* argv[] )
   
   cw::log::destroyGlobal();
 
-  return 0;
+  return (int)rc;
 }
 
 
