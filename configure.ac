@@ -92,14 +92,14 @@ AC_ARG_ENABLE([websock],
        no)  websock=false ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-websock]) ;;
      esac],[websock=false])
-     
-echo "websock=${websock}"
-     
-AM_CONDITIONAL([cwWEBSOCK], [test x$websock = xtrue])
 
 if test x"$websock" = xtrue; then
-AC_DEFINE([cwWEBSOCK], 1,[Use libwebsock.])
+  AC_CHECK_LIB([websockets],[lws_get_library_version],[AC_MSG_RESULT([The 'websockets' library was found.])],[AC_MSG_ERROR([The 'websockets' library was not found.])])
+  AC_DEFINE([cwWEBSOCK], 1,[Use libwebsock.])
 fi
+AM_CONDITIONAL([cwWEBSOCK], [test x$websock = xtrue])
+echo "websock=${websock}"
+
 
 #
 # Enable ALSA
@@ -111,14 +111,37 @@ AC_ARG_ENABLE([alsa],
        no)  alsa=false ;;
        *) AC_MSG_ERROR([bad value ${enableval} for --enable-alsa]) ;;
      esac],[alsa=false])
-     
-echo "alsa=${alsa}"
-     
-AM_CONDITIONAL([cwALSA], [test x$alsa = xtrue])
 
+	
 if test x"$alsa" = xtrue; then
+AC_CHECK_LIB([asound],[snd_asoundlib_version],[AC_MSG_RESULT([The 'ALSA' library was found.])],[AC_MSG_ERROR([The 'ALSA' library was not found.])])
 AC_DEFINE([cwALSA], 1,[Use libalsa.])
 fi
+
+AM_CONDITIONAL([cwALSA], [test x$alsa = xtrue])
+
+echo "alsa=${alsa}"
+     
+
+
+# check for C++17
+hasCpp17=true
+AX_CHECK_COMPILE_FLAG(-std=c++17, [CXXFLAGS="$CXXFLAGS -std=c++17"],[hasCpp17=false])
+if test x"$hasCpp17" = xtrue; then
+AC_DEFINE([cwCPP17], 1,[C++ 17 is available.])
+else
+
+# C++17 is not available check for C++11
+hasCpp11=true
+AX_CHECK_COMPILE_FLAG([-std=c++11], [CXXFLAGS="$CXXFLAGS -std=c++11"], [hasCpp11=false])
+if test x"$hasCpp11" = xtrue; then
+AC_DEFINE([cwCPP11], 1,[C++ 11 is available.])
+fi
+echo "c++11=${hasCpp11}"
+
+fi
+echo "c++17=${hasCpp17}"
+
 
 
 
