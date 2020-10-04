@@ -17,6 +17,8 @@
 #include "cwSerialPort.h"
 #include "cwSerialPortSrv.h"
 #include "cwSocket.h"
+#include "cwUtility.h"
+#include "cwDsp.h"
 
 #if defined(cwWEBSOCK)
 #include "cwWebSock.h"
@@ -343,6 +345,11 @@ cw::rc_t audioFileMix(         const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t audioFileSelToFile(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::selectToFile(args); }
 cw::rc_t audioFileCutAndMix(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::cutAndMix(args); }
 cw::rc_t audioFileParallelMix( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::parallelMix(args); }
+cw::rc_t audioFileTransformApp(const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::transformApp(args); }
+cw::rc_t audioFileConvolve(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::convolve(args); }
+cw::rc_t fftTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::fft::test(); }
+cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::ifft::test(); }
+cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
 cw::rc_t socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::mdns::test(); }
 cw::rc_t dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::dnssd::test(); }
 cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::eucon::test(); }
@@ -594,7 +601,7 @@ const cw::object_t* _locateArgsRecd( const cw::object_t* cfg, const char*& cfgLa
   }
 
   if((o = cfg->find_child(cfgLabel)) == nullptr )
-      cwLogError(cw::kLabelNotFoundRC,"The test selector: '%s' was not found in the configuratoin file.", cwStringNullGuard(cfgLabel));
+      cwLogError(cw::kLabelNotFoundRC,"The test selector: '%s' was not found in the configuration file.", cwStringNullGuard(cfgLabel));
   else
   {
   
@@ -663,6 +670,11 @@ int main( int argc, const char* argv[] )
    { "select_to_file", audioFileSelToFile },
    { "cut_and_mix", audioFileCutAndMix },
    { "parallel_mix",audioFileParallelMix },
+   { "transform_app", audioFileTransformApp },
+   { "convolve_file", audioFileConvolve },
+   { "fft", fftTest },
+   { "ifft", ifftTest },
+   { "convolve", convolveTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };

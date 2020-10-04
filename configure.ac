@@ -3,6 +3,7 @@
 # this configure.ac or any of the Makefile.am files.
 #
 
+AC_COPYRIGHT([Copyright (C) 2019-2020 Kevin Larke])
 AC_INIT([cwtest],[1.0],[cwtest@larke.org])
 AC_CONFIG_AUX_DIR([build-aux])                    # put aux files in build-aux
 AM_INIT_AUTOMAKE([1.9 -Wall foreign subdir-objects]) # subdir-objects needed for non-recursive make
