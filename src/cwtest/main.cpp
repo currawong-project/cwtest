@@ -51,8 +51,11 @@
 #include "cwIoTest.h"
 #endif
 
+#if defined(cwWeb)
 #include "cwDataSets.h"
 #include "cwSvg.h"
+#endif
+
 #include "cwAudioFile.h"
 #include "cwAudioFileOps.h"
 
@@ -542,6 +545,15 @@ cw::rc_t sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int arg
   return rc;
 }
 
+#if defined(cwWEB)
+cw::rc_t _no_c11() { return cwLogError(cw::kResourceNotAvailableRC,"C++11 functionality not included in this build."); } 
+
+cw::rc_t mnistTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_c11(); }
+cw::rc_t datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_c11(); }
+cw::rc_t svgTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_c11(); }
+
+#else
+
 cw::rc_t mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   char* inDir  = requiredExistingDir( args, "inDir");
@@ -564,6 +576,7 @@ cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc,
   cw::mem::release(cssFn);
   return rc;
 }
+#endif
 
 cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {

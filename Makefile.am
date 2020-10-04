@@ -45,6 +45,18 @@ endif
 
 endif
 
+if cwWEB
+  FFT_DIR   = $(HOME)/src/fftw-3.3.8/build
+  FFT_DIR_D   = $(FFT_DIR)/d
+  FFT_DIR_S   = $(FFT_DIR)/s
+
+  AM_CXXFLAGS += --std=c++11
+  AM_CPPFLAGS += -I$(FFT_DIR)/include -I$(FFT_DIR_D)/include -I$(FFT_DIR_S)/include
+  AM_LDFLAGS  += -L$(FFT_DIR)/lib     -L$(FFT_DIR_D)/lib     -L$(FFT_DIR_S)/lib
+else
+  AM_CXXFLAGS += --std=c++17
+endif
+
 include src/libcw/Makefile.am
 
 libcw_la_SOURCES  = $(libcwSRC) $(libcwHDR)

@@ -125,24 +125,43 @@ echo "alsa=${alsa}"
 
 
 # check for C++17
-hasCpp17=true
-AX_CHECK_COMPILE_FLAG(-std=c++17, [CXXFLAGS="$CXXFLAGS -std=c++17"],[hasCpp17=false])
-if test x"$hasCpp17" = xtrue; then
-AC_DEFINE([cwCPP17], 1,[C++ 17 is available.])
-else
+# hasCpp17=true
+# AX_CHECK_COMPILE_FLAG(-std=c++17, [CXXFLAGS="$CXXFLAGS -std=c++17"],[hasCpp17=false])
+# if test x"$hasCpp17" = xtrue; then
+# AC_DEFINE([cwCPP17], 1,[C++ 17 is available.])
+# else
 
 # C++17 is not available check for C++11
-hasCpp11=true
-AX_CHECK_COMPILE_FLAG([-std=c++11], [CXXFLAGS="$CXXFLAGS -std=c++11"], [hasCpp11=false])
-if test x"$hasCpp11" = xtrue; then
-AC_DEFINE([cwCPP11], 1,[C++ 11 is available.])
+# hasCpp11=true
+# AX_CHECK_COMPILE_FLAG([-std=c++11], [CXXFLAGS="$CXXFLAGS -std=c++11"], [hasCpp11=false])
+# if test x"$hasCpp11" = xtrue; then
+# AC_DEFINE([cwCPP11], 1,[C++ 11 is available.])
+# fi
+# echo "c++11=${hasCpp11}"
+
+#fi
+#echo "c++17=${hasCpp17}"
+
+#
+# Enable ALSA
+#
+
+AC_ARG_ENABLE([web],
+     [  --enable-web    Include WEB dependencies],
+     [case "${enableval}" in
+       yes) web=true ;;
+       no)  web=false ;;
+       *) AC_MSG_ERROR([bad value ${enableval} for --enable-web]) ;;
+     esac],[web=false])
+
+	
+if test x"$web" = xtrue; then
+AC_DEFINE([cwWEB], 1,[Use libweb.])
 fi
-echo "c++11=${hasCpp11}"
 
-fi
-echo "c++17=${hasCpp17}"
+AM_CONDITIONAL([cwWEB], [test x$web = xtrue])
 
-
+echo "web=${web}"
 
 
 # AC_ARG_ENABLE([add_lib],
