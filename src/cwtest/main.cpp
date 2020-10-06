@@ -51,7 +51,7 @@
 #include "cwIoTest.h"
 #endif
 
-#if defined(cwWeb)
+#if !defined(cwWeb)
 #include "cwDataSets.h"
 #include "cwSvg.h"
 #endif
