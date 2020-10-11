@@ -46,11 +46,14 @@ endif
 endif
 
 if cwWEB
+
+  AM_CXXFLAGS += --std=c++11
+
   FFT_DIR   = $(HOME)/src/fftw-3.3.8/build
   FFT_DIR_D   = $(FFT_DIR)/d
   FFT_DIR_S   = $(FFT_DIR)/s
 
-  AM_CXXFLAGS += --std=c++11
+
   AM_CPPFLAGS += -I$(FFT_DIR)/include -I$(FFT_DIR_D)/include -I$(FFT_DIR_S)/include
   AM_LDFLAGS  += -L$(FFT_DIR)/lib     -L$(FFT_DIR_D)/lib     -L$(FFT_DIR_S)/lib
 else
@@ -68,7 +71,15 @@ src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
 
 # 1) autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
 # 2) -ldl is required for dlopen(),dlclose() ...
-src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -ldl -lfftw3 -lfftw3f
+src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -ldl
+
+if cwFFTW
+  src_cwtest_cwtest_LDADD += -lfftw3 -lfftw3f
+endif
+
+if cwWEB
+  src_cwtest_cwtest_LDADD += -lfftw3 -lfftw3f
+endif
 
 if cwWEBSOCK
   AM_CPPFLAGS += -I$(WS_DIR)/include

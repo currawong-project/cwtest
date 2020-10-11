@@ -22,10 +22,6 @@ AC_PROG_CXX
 
 AM_PROG_CC_C_O
 
-# Checks for libraries.
-# AC_CHECK_LIB([cairo],[cairo_debug_reset_static_data],[AC_MSG_RESULT([The 'cairo' library was found.])],[AC_MSG_ERROR([The 'cairo' library was not found.])])
-#TODO: add more library checks 
-
 
 # Checks for header files.
 AC_CHECK_HEADERS([arpa/inet.h fcntl.h float.h limits.h mach/mach.h netinet/in.h stdlib.h string.h sys/ioctl.h sys/socket.h sys/time.h termios.h unistd.h])
@@ -46,6 +42,16 @@ AC_FUNC_REALLOC
 AC_FUNC_STRTOD
 AC_CHECK_FUNCS([clock_gettime floor memmove memset mkdir pow rint select socket sqrt strcasecmp strchr strcspn strerror strspn strstr strtol])
 
+# Checks for libraries.
+fftw=false
+AC_CHECK_LIB([fftw3],[fftw_malloc],[fftw=true],[])
+AM_CONDITIONAL([cwFFTW],[test x"${fftw}" = xtrue])
+
+if test x"$fftw" = xtrue; then
+AC_DEFINE([cwFFTW], 1,[Use libfftw3.])
+fi
+
+echo "fftw='${fftw}'"
 
 # The following is a custom macro in ./m4/os_type.m4
 # be sure to also set "ACLOCAL_AMFLAGS = -I m4" in ./Makefile.am
