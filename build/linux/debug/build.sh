@@ -15,7 +15,7 @@ cd ${curdir}
 # To enable websock: --enable-websock \
 # To enable alsa: --enable-alsa \
     
-../../../configure --prefix=${curdir}  --enable-debug --enable-alsa \
+../../../configure --prefix=${curdir}  --enable-debug  --enable-websock --enable-alsa \
 CFLAGS="-g -Wall" \
 CXXFLAGS="-g -Wall" \
 CPPFLAGS="-I${HOME}/sdk/libwebsockets/build/out/include" \

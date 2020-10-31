@@ -5,9 +5,9 @@
 
 AC_COPYRIGHT([Copyright (C) 2019-2020 Kevin Larke])
 AC_INIT([cwtest],[1.0],[cwtest@larke.org])
+AC_CONFIG_SRCDIR([src/cwtest/main.cpp])
 AC_CONFIG_AUX_DIR([build-aux])                    # put aux files in build-aux
 AM_INIT_AUTOMAKE([1.9 -Wall foreign subdir-objects]) # subdir-objects needed for non-recursive make
-AC_CONFIG_SRCDIR([src/cwtest/main.cpp])
 AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_MACRO_DIRS([m4])
 
@@ -61,8 +61,8 @@ AX_FUNC_OS_TYPE
 AX_FUNC_OS_64
 
 # ac_cv_os_type is set by AX_FUNC_OS_TYPE
-AM_CONDITIONAL([OS_LINUX],[test x"${ax_cv_os_type}" = xLinux])
-AM_CONDITIONAL([OS_OSX],[test x"${ax_cv_os_type}" = xDarwin])
+AM_CONDITIONAL([OS_LINUX],[test x"${ax_cv_os_type}" == xLinux])
+AM_CONDITIONAL([OS_OSX],[test x"${ax_cv_os_type}" == xDarwin])
 echo "OS='${ax_cv_os_type}'"
 
 AM_CONDITIONAL([OS_64],[test x"${ax_cv_os_64}" == xx86_64])
@@ -82,7 +82,7 @@ AC_ARG_ENABLE([debug],
      
 echo "debug=${debug}"
      
-AM_CONDITIONAL([DEBUG], [test x$debug = xtrue])
+AM_CONDITIONAL([DEBUG], [test x$debug == xtrue])
 
 if test x$debug = xfalse; then
 AC_DEFINE([NDEBUG], 1,[Debugging off.])
@@ -103,7 +103,7 @@ if test x"$websock" = xtrue; then
   AC_CHECK_LIB([websockets],[lws_get_library_version],[AC_MSG_RESULT([The 'websockets' library was found.])],[AC_MSG_ERROR([The 'websockets' library was not found.])])
   AC_DEFINE([cwWEBSOCK], 1,[Use libwebsock.])
 fi
-AM_CONDITIONAL([cwWEBSOCK], [test x$websock = xtrue])
+AM_CONDITIONAL([cwWEBSOCK], [test x$websock == xtrue])
 echo "websock=${websock}"
 
 
@@ -124,7 +124,7 @@ AC_CHECK_LIB([asound],[snd_asoundlib_version],[AC_MSG_RESULT([The 'ALSA' library
 AC_DEFINE([cwALSA], 1,[Use libalsa.])
 fi
 
-AM_CONDITIONAL([cwALSA], [test x$alsa = xtrue])
+AM_CONDITIONAL([cwALSA], [test x$alsa == xtrue])
 
 echo "alsa=${alsa}"
      
@@ -165,7 +165,7 @@ if test x"$web" = xtrue; then
 AC_DEFINE([cwWEB], 1,[Use libweb.])
 fi
 
-AM_CONDITIONAL([cwWEB], [test x$web = xtrue])
+AM_CONDITIONAL([cwWEB], [test x$web == xtrue])
 
 echo "web=${web}"
 
