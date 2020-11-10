@@ -17,15 +17,15 @@ include_HEADERS =
 WS_DIR   = $(HOME)/sdk/libwebsockets/build/out
 
 
-AM_CPPFLAGS = -D _GNU_SOURCE  -I..  -I$(srcdir)/src/libcw
+AM_CPPFLAGS =   -I..  -I$(srcdir)/src/libcw
 AM_CFLAGS   = -Wno-multichar 
 AM_CXXFLAGS = -Wno-multichar
 AM_LDFLAGS  =  
 
 # debug/release switches
 if DEBUG
-  AM_CFLAGS   += -g 
-  AM_CXXFLAGS += -g -Wall 
+  AM_CFLAGS   += -g
+  AM_CXXFLAGS += -g -Wall  -fsanitize=undefined
 else
   AM_CFLAGS   += -O3
   AM_CXXFLAGS += -O3
@@ -62,16 +62,18 @@ endif
 
 include src/libcw/Makefile.am
 
-libcw_la_SOURCES  = $(libcwSRC) $(libcwHDR)
-lib_LTLIBRARIES  += libcw.la 
-include_HEADERS  += $(libcwHDR)
+#libcw_la_SOURCES  = $(libcwSRC) $(libcwHDR)
+#lib_LTLIBRARIES  += libcw.la 
+#include_HEADERS  += $(libcwHDR)
 
 
-src_cwtest_cwtest_SOURCES   = src/cwtest/main.cpp
+src_cwtest_cwtest_SOURCES   =  $(libcwHDR) $(libcwSRC) src/cwtest/main.cpp 
 
 # 1) autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
 # 2) -ldl is required for dlopen(),dlclose() ...
-src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -ldl
+# src_cwtest_cwtest_LDADD     = libcw.la  -lpthread -ldl
+
+src_cwtest_cwtest_LDADD     =   -lpthread -ldl
 
 if cwFFTW
   src_cwtest_cwtest_LDADD += -lfftw3 -lfftw3f
