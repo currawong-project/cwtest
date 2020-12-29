@@ -2,6 +2,8 @@
 #include "cwLog.h"
 #include "cwCommonImpl.h"
 #include "cwMem.h"
+#include "cwFile.h"
+#include "cwVariant.h"
 #include "cwFileSys.h"
 #include "cwTextBuf.h"
 #include "cwLex.h"
@@ -377,13 +379,15 @@ cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, i
 
 #if defined(cwALSA)
 cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::test();}
-cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test( argc, argv ); }
+cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test( args ); }
+cw::rc_t audioDevTestTone(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test_tone( args ); }
 cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::alsa::report(); }
 cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::report(); }
 #else
 cw::rc_t _no_alsa() { return cwLogError(cw::kResourceNotAvailableRC,"ALSA based functionality not included in this build."); } 
 cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
 cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
+cw::rc_t audioDevTestTone(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 #endif
@@ -561,15 +565,14 @@ cw::rc_t svgTest(     const cw::object_t* cfg, const cw::object_t* args, int arg
 #else
 
 cw::rc_t mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  char* inDir  = requiredExistingDir( args, "inDir");
-  char* htmlFn = requiredNewFile(     args, "outHtmlFn");
-  
-  return cw::dataset::mnist::test(inDir,htmlFn);
+{  
+  return cw::dataset::mnist::test(cfg);
 }
 
-cw::rc_t datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{ return cw::dataset::test(args); }
+cw::rc_t datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )     { return cw::dataset::test(args); }
+cw::rc_t datasetWtrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return cw::dataset::wtr::test(args); }
+cw::rc_t datasetRdrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return cw::dataset::rdr::test(args); }
+cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return cw::dataset::adapter::test(args); }
 
 cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -664,7 +667,8 @@ int main( int argc, const char* argv[] )
    { "midiDevice", midiDeviceTest },
    { "textBuf", textBufTest },
    { "audioBuf", audioBufTest },
-   { "audioDev",audioDevTest },
+   { "audioDevTest",audioDevTest },
+   { "audioDevTone", audioDevTestTone },
    { "audioDevAlsa", audioDevAlsaTest },
    { "audioDevRpt", audioDevRpt },
    //{ "nbmem", nbmemTest },
@@ -681,6 +685,9 @@ int main( int argc, const char* argv[] )
    { "io", ioTest },
    { "mnist", mnistTest },
    { "dataset", datasetTest },
+   { "dataset_wtr", datasetWtrTest },
+   { "dataset_rdr", datasetRdrTest },
+   { "dataset_adapter", datasetAdapterTest },
    { "svg",   svgTest },
    { "mtx",   mtxTest },
    { "afop",      audioFileOp },
