@@ -66,7 +66,6 @@ include src/libcw/Makefile.am
 #lib_LTLIBRARIES  += libcw.la 
 #include_HEADERS  += $(libcwHDR)
 
-
 src_cwtest_cwtest_SOURCES   =  $(libcwHDR) $(libcwSRC) src/cwtest/main.cpp 
 
 # 1) autoconfig manual recommends setting direct referenes to non-3rd party libraries rather than using -L and -l
@@ -84,8 +83,8 @@ if cwWEB
 endif
 
 if cwWEBSOCK
-  AM_CPPFLAGS += -I$(WS_DIR)/include
-  AM_LDFLAGS  += -L$(WS_DIR)/lib
+  # AM_CPPFLAGS += -I$(WS_DIR)/include
+  # AM_LDFLAGS  += -L$(WS_DIR)/lib
   src_cwtest_cwtest_LDADD +=  -lwebsockets
 endif
 
