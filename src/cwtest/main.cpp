@@ -293,8 +293,8 @@ cw::rc_t numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int arg
   printf("%i %i\n",x0,x1);
     
 
-  int v0;
-  double v1;
+  int v0 = -1;
+  double v1 = -1;
   cw::string_to_number("123",v0);
   cw::string_to_number("3.4",v1);
   printf("%i %f\n",v0,v1 );
@@ -564,6 +564,9 @@ cw::rc_t _no_c11() { return cwLogError(cw::kResourceNotAvailableRC,"C++11 functi
 cw::rc_t mnistTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_c11(); }
 cw::rc_t datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_c11(); }
 cw::rc_t svgTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_c11(); }
+cw::rc_t datasetWtrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return _no_c11(); }
+cw::rc_t datasetRdrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return _no_c11(); }
+cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return _no_c11(); }
 
 #else
 
