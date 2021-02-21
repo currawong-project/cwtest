@@ -31,6 +31,7 @@
 
 #include "cwTime.h"
 #include "cwMidi.h"
+#include "cwMidiFile.h"
 #include "cwAudioDevice.h"
 
 #if defined(cwALSA)
@@ -344,6 +345,7 @@ cw::rc_t serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t textBufTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::textBuf::test(); }
 cw::rc_t audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::buf::test(); }
 cw::rc_t mtxTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::mtx::test(args); }
+cw::rc_t midiFileTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::file::test(args); }
 cw::rc_t audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audiofile::test(args); }
 cw::rc_t audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::test(args); }
 cw::rc_t audioFileMix(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::mix(args); }
@@ -352,6 +354,7 @@ cw::rc_t audioFileCutAndMix(   const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t audioFileParallelMix( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::parallelMix(args); }
 cw::rc_t audioFileTransformApp(const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::transformApp(args); }
 cw::rc_t audioFileConvolve(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::convolve(args); }
+cw::rc_t audioFileGenerate(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::generate(args); }
 cw::rc_t fftTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::fft::test(); }
 cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::ifft::test(); }
 cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
@@ -690,14 +693,16 @@ int main( int argc, const char* argv[] )
    { "dataset_adapter", datasetAdapterTest },
    { "svg",   svgTest },
    { "mtx",   mtxTest },
-   { "afop",      audioFileOp },
+   { "midifile", midiFileTest },
    { "audiofile", audioFileTest },
+   { "afop",      audioFileOp },
    { "audio_mix", audioFileMix },
    { "select_to_file", audioFileSelToFile },
    { "cut_and_mix", audioFileCutAndMix },
    { "parallel_mix",audioFileParallelMix },
    { "transform_app", audioFileTransformApp },
    { "convolve_file", audioFileConvolve },
+   { "generate_audio",audioFileGenerate },
    { "fft", fftTest },
    { "ifft", ifftTest },
    { "convolve", convolveTest },
