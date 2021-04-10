@@ -52,6 +52,7 @@
 #if defined(cwWEBSOCK)
 #include "cwIo.h"
 #include "cwIoTest.h"
+#include "cwIoAudioMidi.h"
 #endif
 
 #if !defined(cwWEB)
@@ -367,16 +368,18 @@ cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, i
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return cw::ui::test(args); }
 #if defined(cwALSA)
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::test(args); }
+cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::audio_midi::main(args); }
 #else
 cw::rc_t _no_alsa_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websock or ALSA functionality not included in this build."); } 
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
-
+cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
 #endif
 #else
 cw::rc_t _no_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websocket functionality not included in this build."); } 
 cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return _no_websock(); }
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
+cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 #endif
 
 
@@ -689,6 +692,7 @@ int main( int argc, const char* argv[] )
    { "eucon",  euConTest },
    { "dirEntry", dirEntryTest },
    { "io", ioTest },
+   { "audio_midi", ioAudioMidiTest },
    { "mnist", mnistTest },
    { "dataset", datasetTest },
    { "dataset_wtr", datasetWtrTest },
