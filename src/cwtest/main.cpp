@@ -26,6 +26,7 @@
 #include "cwAudioFileProc.h"
 #include "cwPvAudioFileProc.h"
 #include "cwFlow.h"
+#include "cwIoPresetSelApp.h"
 
 #if defined(cwWEBSOCK)
 #include "cwWebSock.h"
@@ -392,10 +393,12 @@ cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, co
 #if defined(cwALSA)
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::test(args); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio_midi_app::main(args); }
+cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::preset_sel_app::main(args); }
 #else
 cw::rc_t _no_alsa_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websock or ALSA functionality not included in this build."); } 
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
+cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
 #endif
 #else
 cw::rc_t _no_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websocket functionality not included in this build."); } 
@@ -403,6 +406,7 @@ cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, i
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return _no_websock(); }
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
+cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 #endif
 
 
@@ -746,6 +750,7 @@ int main( int argc, const char* argv[] )
    { "flow_test", flowTest },
    { "flow_pv", flowTest },
    { "flow_spec_dist", flowTest },
+   { "preset_sel", ioPresetSelTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
