@@ -70,5 +70,59 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 
 # Preset Select
 
-- Add a status box to report errors and warnings to the user.
-- When a invalid value is entered (thereby disabling a control) a message should be written to the status box.
+- Test:
+   audio_split
+   audio_merge
+   audio_mix
+   audio_delay
+   balance
+   
+
+- Functionality
++ create a wrappers for all the cm based procs.
++ UI:         clear UI when the app disconnects.
++ App:        automatically load on start
++ object       Improve performance of load parser.
++ App:         Add input / output metering
+
++ flow:       allow setting a specific variable value from a network preset
++ flow:       create default system wide sample rate
++ UI          uiSetValue() should be optionally reflected back to the app with kValueOpId messages.
+              This way all value change messages could be handled from one place no matter
+			  if the value changes originate on the GUI or from the app.
+			  
++ IO threading
++ document basic functionality: flow, UI, Audio
++ Using the 'blob' functionality should be the default way for tying UI elements to program model.
+  Rewrite the UI test case to reflect this.
+
++ breakout libcw from application / reorganize project
++ create true plug-in architecture - requires a C only interface.
+
+
+
+- Add attributes to proc variables:
+  1. 'init' this variable is only used to initialize the proc. It cannot be changed during runtime.  (e.g. audio_split.map)
+  2. 'scalar' this variable may only be a scalar.  It can never be placed in a list.  (e.g. sine_tone.chCnt)
+  3. 'multi' this src variable can be repeated and it's label is always suffixed with an integer. 
+  4. 'src' this variable must be connected to a source.
+  5. 'min','max' for numeric variables.
+  6. 'channelize' The proc should instantiate one internal process for each input channel. (e.g. spec_dist )
+  
+- Create a var args version of 'var_get()' in cwFlowTypes.h.
+
+DONE:
++ save preset check box state.
++ verify that all fragments are saved and restored
++ UI:         remove 'Filename' entry box.
++ flow proc:  gain, audio channel split map, audio channel merge map, fixed delay 
++ Fix CPU usage: work around for serial port server.
++ App:        apply wet/dry and gain when new presets are loaded.
++ App:        add 'Note' to fragment 
++ App:        add per fragment play control with begin/end locations
++ UI:         reorganinze top panel layout
++ App:        Add a status box to report errors and warnings to the user.
++ App:        Send log output to "Log" UI.
++ App:        When a invalid value is entered (thereby disabling a control) a message should be written to the status box.
++ App:        Add ranges to numeric controls.
++ App:        What happens when an invalid value is entered in a GUI control?
