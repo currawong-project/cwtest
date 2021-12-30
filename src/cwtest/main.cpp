@@ -21,11 +21,13 @@
 #include "cwSocket.h"
 #include "cwUtility.h"
 #include "cwMath.h"
+#include "cwDspTypes.h"
 #include "cwDsp.h"
 #include "cwAudioTransforms.h"
 #include "cwAudioFileProc.h"
 #include "cwPvAudioFileProc.h"
 #include "cwFlow.h"
+#include "cwPianoScore.h"
 #include "cwIoPresetSelApp.h"
 
 #if defined(cwWEBSOCK)
@@ -367,6 +369,7 @@ cw::rc_t audioFileGenerate(    const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t fftTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::fft::test(); }
 cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::ifft::test(); }
 cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
+cw::rc_t pianoScoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score::test(args); }
 cw::rc_t audioTransformsTest(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::test(args); }
 cw::rc_t amToMidiFile(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_record_play::am_to_midi_file(args); }
 cw::rc_t audioFileProc(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::file_processor(args); }
@@ -378,12 +381,12 @@ cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   cw::rc_t            rc;
-  const cw::object_t* flow_class = nullptr;
+  const cw::object_t* flow_proc_dict = nullptr;
   
-  if((rc = cfg->getv("flow_class",flow_class)) != cw::kOkRC )
-    return cwLogError(rc,"The 'flow_class' specification object was not found.");
+  if((rc = cfg->getv("flow_proc_dict",flow_proc_dict)) != cw::kOkRC )
+    return cwLogError(rc,"The 'flow_proc_dict' specification object was not found.");
     
-  return cw::flow::test(flow_class,args);
+  return cw::flow::test(flow_proc_dict,args);
 }
 
 
@@ -393,7 +396,17 @@ cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, co
 #if defined(cwALSA)
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::test(args); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio_midi_app::main(args); }
-cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::preset_sel_app::main(args); }
+cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+{
+  
+  cw::rc_t            rc;
+  const cw::object_t* flow_proc_dict = nullptr;
+  
+  if((rc = cfg->getv("flow_proc_dict",flow_proc_dict)) != cw::kOkRC )
+    return cwLogError(rc,"The 'flow_proc_dict' specification object was not found.");
+  
+  return cw::preset_sel_app::main(args,flow_proc_dict);
+}
 #else
 cw::rc_t _no_alsa_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websock or ALSA functionality not included in this build."); } 
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
@@ -743,6 +756,7 @@ int main( int argc, const char* argv[] )
    { "fft", fftTest },
    { "ifft", ifftTest },
    { "convolve", convolveTest },
+   { "piano_score", pianoScoreTest },
    { "audio_transforms", audioTransformsTest },
    { "am_to_midi_file", amToMidiFile },
    { "audio_file_proc", audioFileProc },
@@ -766,32 +780,59 @@ int main( int argc, const char* argv[] )
   {
     cwLogInfo("cwtest <config_filename> <mode>");
     goto errLabel;
-  }  
+  }
+
+  if( cw::textLength(cfgFn) == 0 )
+  {
+    rc = cwLogError(cw::kInvalidArgRC,"The configuration file name is empty.");
+    goto errLabel;
+  }
+
+  if( cw::textLength(mode) == 0 )
+  {
+    rc = cwLogError(cw::kInvalidArgRC,"The mode selector label is empty.");
+    goto errLabel;
+  }
 
   // if valid command line args were given and the cfg file was successfully read
-  if( cfgFn != nullptr && mode != nullptr && objectFromFile( cfgFn, cfg ) == cw::kOkRC )
+  if((rc = objectFromFile( cfgFn, cfg )) != cw::kOkRC )
+  {
+    rc = cwLogError(rc,"The cwtest main configuraiton file parse failed.");
+    goto errLabel;
+  }
+  else
   {
 
+    cw::rc_t rc = cw::kOkRC;
+    const cw::object_t* test_cfg;
     const cw::object_t* args;
     int  i = 0;
-  
-    // if the arg's record was found
-    if((args = _locateArgsRecd(cfg,mode)) != nullptr )
+
+    // get the dict. of test cfg. records
+    if((rc = cfg->getv("test", test_cfg)) != cw::kOkRC )
     {
-      // locate the requested function and call it
-      for(int i=0; modeArray[i].label!=nullptr; ++i)
+      cwLogError(rc,"The 'test' dictionary was not found.");
+      goto errLabel;
+    }
+
+    // get the requested cfg. records
+    if((rc = test_cfg->getv(mode, args)) != cw::kOkRC )
+    {
+      cwLogError(rc,"The requested test configuration record: '%s' was not found.",cwStringNullGuard(mode));
+      goto errLabel;
+    }
+    
+    // locate the requested function and call it
+    for(int i=0; modeArray[i].label!=nullptr; ++i)
+      if( cw::textIsEqual(modeArray[i].label,mode) )
       {
-        if( cw::textCompare(modeArray[i].label,mode)==0 )
-        {
-          rc = modeArray[i].func( cfg, args, argc-2, argv + 2 );
-          break;
-        }
+        rc = modeArray[i].func( test_cfg, args, argc-2, argv + 2 );
+        break;
       }
   
-      // if the requested function was not found
-      if( modeArray[i].label == nullptr )
-        rc = cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
-    }
+    // if the requested function was not found
+    if( modeArray[i].label == nullptr )
+      rc = cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
     
     if( cfg != nullptr )
       cfg->free();
