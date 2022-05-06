@@ -1,5 +1,8 @@
 libcw Testing and Development App
 
+3773
+8940
+
 # GDB Setup:
 
     set env LD_LIBRARY_PATH /home/kevin/sdk/libwebsockets/build/out/lib
@@ -69,23 +72,35 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 
 
 # Preset Select
-
-- Test:
-   audio_split
-   audio_merge
-   audio_mix
-   audio_delay
-   balance
    
 
 - Functionality
-+ create a wrappers for all the cm based procs.
-+ UI:         clear UI when the app disconnects.
-+ App:        automatically load on start
-+ object       Improve performance of load parser.
-+ App:         Add input / output metering
 
-+ flow:       allow setting a specific variable value from a network preset
+
++ play on preset letter select
++ backup to numbered file on save
++ occaisonal drop-outs (decrease count of cross-fade instances to 2)
+
++ test adding,deleting, saving and restoring fragment records
++ 
++ flow metering object with resetable clip indicator and audio I/O meters
++ indicate drop-outs that are detected from the audio IO system
++ allow a pre/post network before and after cross fader
++ allow modifiable FFT window and hop length as part of preset 
++ add selectable audio output file object to easily test for out of time problems
++ add HTML class and name assignments to row/col div's. 
++ The sampler requires a different velocity map than the piano. The piano was scaled down but now the sampler is too quiet.
++ Velocity of the individual notes of chords should be scaled to such that their sum matches the dynamic value.
+
++ add attribute list to instances: [ init_only, scalar_only, print="print values", ui ]
++ add min/max/incr/decpl attributes to numeric variables
++ why are multiple records given in the 'args:{}' attribute?
++ allow the network to be reloaded without restarting the program
++ create a wrappers for all the cm based procs.
++ create an interactive spec-dist panel to experiment with presets
++ UI:         clear UI when the app disconnects.
+
+
 + flow:       create default system wide sample rate
 + UI          uiSetValue() should be optionally reflected back to the app with kValueOpId messages.
               This way all value change messages could be handled from one place no matter
@@ -111,6 +126,17 @@ Print: ele name, uuid, appId and parent name, uuid, appId
   
 - Create a var args version of 'var_get()' in cwFlowTypes.h.
 
+REVIEW:
++ gain problem
+- was it really the transition bug and not a gain bug?
+- FFT normalization
+- Float/Int conversion on ALSA output
+- create a metering object to examine signal at various places in network
+- add compressor/limiter like in cm based network
+
++ object      Improve performance of load parser.
+
+
 DONE:
 + save preset check box state.
 + verify that all fragments are saved and restored
@@ -126,3 +152,7 @@ DONE:
 + App:        When a invalid value is entered (thereby disabling a control) a message should be written to the status box.
 + App:        Add ranges to numeric controls.
 + App:        What happens when an invalid value is entered in a GUI control?
++ App:        interactive wet in gain, wet out gain, dry gain, piano midi enable, sampler midi enable, sampler delay
++ App:        interactive print network
++ App:        automatically load on start
++ flow:       Allow setting a specific variable value from a network preset
