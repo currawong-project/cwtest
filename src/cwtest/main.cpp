@@ -548,9 +548,9 @@ cw::rc_t sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int arg
   argi = 2;
 
   // If the next token is 'dev' ...
-  if( strcmp(argv[argi++],"dev") == 0 )
+  if( strcmp(argv[argi],"dev") == 0 )
   {
-    if( argc <= argi )
+    if( argc <= ++argi )
     {
       rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: No local NIC given.\n");
       goto errLabel;
@@ -776,7 +776,7 @@ int main( int argc, const char* argv[] )
 
   cw::log::createGlobal();
 
-  if( argc != 3 )
+  if( argc < 3 )
   {
     cwLogInfo("cwtest <config_filename> <mode>");
     goto errLabel;
