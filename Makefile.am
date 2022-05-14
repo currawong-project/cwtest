@@ -40,7 +40,7 @@ if OS_64
 endif
 
 if cwALSA
-  AM_LDFLAGS +=    -Wl,-Bstatic -lasound -Wl,-Bdynamic
+  AM_LDFLAGS += -lasound #   -Wl,-Bstatic -lasound -Wl,-Bdynamic
 endif
 
 endif
