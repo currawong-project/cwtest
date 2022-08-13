@@ -91,3 +91,16 @@ endif
 
 # src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
 bin_PROGRAMS               += src/cwtest/cwtest
+
+# ${exec_prefix} is the install prefix given to 'configure' by the user.
+# ${srcdir} is the directory of this Makefile and is set by autoconf.
+
+# distclean-local sets the source tree back to it's minimal, pre-configure, state.
+distclean-local:
+	rm -rf ${exec_prefix}/src        
+	rm -rf ${srcdir}/autom4te.cache
+	rm -rf ${srcdir}/build-aux
+	rm -f  ${srcdir}/m4/libtool.m4   ${srcdir}/m4/lt~obsolete.m4 ${srcdir}/m4/ltsugar.m4
+	rm -f  ${srcdir}/m4/ltversion.m4 ${srcdir}/m4/ltoptions.m4
+	rm -f  ${srcdir}/aclocal.m4      ${srcdir}/config.h.in ${srcdir}/config.h.in~
+	rm -f  ${srcdir}/Makefile.in     ${srcdir}/configure
