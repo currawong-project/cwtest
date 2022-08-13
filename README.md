@@ -1,7 +1,5 @@
 libcw Testing and Development App
 
-3773
-8940
 
 # GDB Setup:
 
@@ -57,6 +55,7 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 
 
 
+
 ### UI Properties
 
     name            - becomes the HTML id for this element
@@ -89,7 +88,6 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 + allow modifiable FFT window and hop length as part of preset 
 + add selectable audio output file object to easily test for out of time problems
 + add HTML class and name assignments to row/col div's. 
-+ The sampler requires a different velocity map than the piano. The piano was scaled down but now the sampler is too quiet.
 + Velocity of the individual notes of chords should be scaled to such that their sum matches the dynamic value.
 
 + add attribute list to instances: [ init_only, scalar_only, print="print values", ui ]
@@ -156,3 +154,4 @@ DONE:
 + App:        interactive print network
 + App:        automatically load on start
 + flow:       Allow setting a specific variable value from a network preset
++ preset_sel: The sampler requires a different velocity map than the piano. The piano was scaled down but now the sampler is too quiet.
