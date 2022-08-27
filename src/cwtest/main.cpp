@@ -13,6 +13,7 @@
 #include "cwVectOps.h"
 #include "cwMtx.h"
 #include "cwThread.h"
+#include "cwKeyboard.h"
 #include "cwSpScBuf.h"
 #include "cwSpScQueueTmpl.h"
 #include "cwThreadMach.h"
@@ -60,6 +61,7 @@
 #if defined(cwWEBSOCK)
 #include "cwIo.h"
 #include "cwIoTest.h"
+#include "cwIoMinTest.h"
 #include "cwIoAudioMidi.h"
 #include "cwIoAudioMidiApp.h"
 #include "cwIoMidiRecordPlay.h"
@@ -350,6 +352,9 @@ cw::rc_t objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc
 
 cw::rc_t timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::time::test(); }
 cw::rc_t threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::threadTest(); }
+cw::rc_t kbTest1Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest1(); return cw::kOkRC; }
+cw::rc_t kbTest2Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest2(); return cw::kOkRC; }
+cw::rc_t kbTest3Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest3(); return cw::kOkRC; }
 cw::rc_t spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::spsc_buf::test(); }
 cw::rc_t spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::testSpScQueueTmpl(); }
 cw::rc_t serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::serialPortSrvTest(); }
@@ -395,6 +400,7 @@ cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, i
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return cw::ui::test(args); }
 #if defined(cwALSA)
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::test(args); }
+cw::rc_t ioMinTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::min_test(args); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio_midi_app::main(args); }
 cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -410,6 +416,7 @@ cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, i
 #else
 cw::rc_t _no_alsa_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websock or ALSA functionality not included in this build."); } 
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
+cw::rc_t ioMinTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
 cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa_websock(); }
 #endif
@@ -418,6 +425,7 @@ cw::rc_t _no_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websocke
 cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return _no_websock(); }
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
+cw::rc_t ioMinTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_websock(); }
 #endif
@@ -712,6 +720,9 @@ int main( int argc, const char* argv[] )
    { "object", objectTest },
    { "time", timeTest },
    { "thread", threadTest },
+   { "kbTest1", kbTest1Test },
+   { "kbTest2", kbTest2Test },
+   { "kbTest3", kbTest3Test },
    { "spscBuf", spscBuf },
    { "spscQueueTmpl", spscQueueTmpl },
    { "websockSrv", websockSrvTest },
@@ -735,6 +746,7 @@ int main( int argc, const char* argv[] )
    { "eucon",  euConTest },
    { "dirEntry", dirEntryTest },
    { "io", ioTest },
+   { "io_minimal", ioMinTest },
    { "audio_midi", ioAudioMidiTest },
    { "mnist", mnistTest },
    { "dataset", datasetTest },
@@ -823,7 +835,7 @@ int main( int argc, const char* argv[] )
     }
     
     // locate the requested function and call it
-    for(int i=0; modeArray[i].label!=nullptr; ++i)
+    for(i=0; modeArray[i].label!=nullptr; ++i)
       if( cw::textIsEqual(modeArray[i].label,mode) )
       {
         rc = modeArray[i].func( test_cfg, args, argc-2, argv + 2 );
