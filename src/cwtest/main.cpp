@@ -404,14 +404,14 @@ cw::rc_t ioMinTest(         const cw::object_t* cfg, const cw::object_t* args, i
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio_midi_app::main(args); }
 cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  
+  /*
   cw::rc_t            rc;
   const cw::object_t* flow_proc_dict = nullptr;
   
   if((rc = cfg->getv("flow_proc_dict",flow_proc_dict)) != cw::kOkRC )
     return cwLogError(rc,"The 'flow_proc_dict' specification object was not found.");
-  
-  return cw::preset_sel_app::main(args,flow_proc_dict);
+  */
+  return cw::preset_sel_app::main(args);
 }
 #else
 cw::rc_t _no_alsa_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websock or ALSA functionality not included in this build."); } 

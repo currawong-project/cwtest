@@ -9,7 +9,7 @@ libcw Testing and Development App
 
 # Valgrind setup
 
-    export LD_LIBRARY_PATH=~/sdk/libwebsockets/build/out/lib
+    export LD_LIBRARY_PATH=~/sdk/libwebsockets/build/out/lib:~/src/libcm/build/linux/debug/lib
     valgrind --leak-check=yes --log-file=vg0.txt ./cwtest  ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
 #Design Questions:

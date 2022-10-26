@@ -35,7 +35,7 @@ endif
 if OS_LINUX
 
 if OS_64
-  AM_LDFLAGS +=  -L/usr/lib64
+  AM_LDFLAGS +=  -L/usr/lib64/atlas -L/usr/lib64
   AM_CFLAGS  += -m64
 endif
 
@@ -88,6 +88,7 @@ if cwWEBSOCK
   src_cwtest_cwtest_LDADD +=  -lwebsockets
 endif
 
+src_cwtest_cwtest_LDADD += -lsatlas -lcm
 
 # src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
 bin_PROGRAMS               += src/cwtest/cwtest
