@@ -3,7 +3,7 @@ libcw Testing and Development App
 
 # GDB Setup:
 
-    set env LD_LIBRARY_PATH /home/kevin/sdk/libwebsockets/build/out/lib
+    set env LD_LIBRARY_PATH /home/kevin/sdk/libwebsockets/build/out/lib::~/src/libcm/build/linux/debug/lib
     r ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
 
