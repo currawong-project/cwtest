@@ -1,0 +1,171 @@
+{
+  "masterSyncDelayMs": 400.0,
+  "masterDryGain": 1.0,
+  "masterWetOutGain": 1.0,
+  "masterWetInGain": 1.5,
+  "fragN": 2,
+  "fragL": [
+      {
+      "presetN": 2,
+      "note": "",
+      "begPlayLoc": 0,
+      "endPlayLoc": 9387,
+      "fadeOutMs": 500.0,
+      "wetDryGain": 0.5,
+      "outGain": 1.0,
+      "inGain": 1.0,
+      "endTimestamp_nsec": 0,
+      "endTimestamp_sec": 0,
+      "endLoc": 9387,
+      "fragId": 0,
+      "presetL": [
+        {
+          "play_fl": true,
+          "preset_label": "dry",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "a",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "b",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "c",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "d",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f1",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f2",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f3",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f4",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "g",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "ga",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "g1a",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "g1d",
+          "order": 0
+        }
+      ]
+    },
+    {
+      "presetN": 2,
+      "note": "",
+      "begPlayLoc": 9388,
+      "endPlayLoc": 9848,
+      "fadeOutMs": 500.0,
+      "wetDryGain": 0.5,
+      "outGain": 1.0,
+      "inGain": 1.0,
+      "endTimestamp_nsec": 0,
+      "endTimestamp_sec": 0,
+      "endLoc": 9848,
+      "fragId": 1,
+      "presetL": [
+        {
+          "play_fl": true,
+          "preset_label": "dry",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "a",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "b",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "c",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "d",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f1",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f2",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f3",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "f4",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "g",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "ga",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "g1a",
+          "order": 0
+        },
+        {
+          "play_fl": false,
+          "preset_label": "g1d",
+          "order": 0
+        }
+      ]
+    }
+  ]
+}
