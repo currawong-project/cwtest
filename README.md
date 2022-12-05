@@ -81,6 +81,7 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 + occaisonal drop-outs (decrease count of cross-fade instances to 2)
 
 + test adding,deleting, saving and restoring fragment records
++ deleting a fragment does not automatically fill in the missing location space.
 + 
 + flow metering object with resetable clip indicator and audio I/O meters
 + indicate drop-outs that are detected from the audio IO system
@@ -104,7 +105,7 @@ Print: ele name, uuid, appId and parent name, uuid, appId
               This way all value change messages could be handled from one place no matter
 			  if the value changes originate on the GUI or from the app.
 			  
-+ IO threading
++ IO threading: (this is implemented in the MP3 player version of libcw)
 + document basic functionality: flow, UI, Audio
 + Using the 'blob' functionality should be the default way for tying UI elements to program model.
   Rewrite the UI test case to reflect this.
