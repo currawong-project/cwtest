@@ -1,0 +1,2601 @@
+{
+    "masterSyncDelayMs": 400.0,
+    "masterDryGain": 1.0,
+    "masterWetOutGain": 1.0,
+    "masterWetInGain": 1.5,
+    "fragN": 32,
+    "fragL": [
+	{
+	    "note": "",
+	    "fragId": 1,
+	    "endLoc": 11173,
+	    "begPlayLoc": 1,
+	    "endPlayLoc": 11173,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 2,
+	    "endLoc": 11205,
+	    "begPlayLoc": 11174,
+	    "endPlayLoc": 11205,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 3,
+	    "endLoc": 11218,
+	    "begPlayLoc": 11206,
+	    "endPlayLoc": 11218,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 4,
+	    "endLoc": 11267,
+	    "begPlayLoc": 11219,
+	    "endPlayLoc": 11267,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 5,
+	    "endLoc": 11285,
+	    "begPlayLoc": 11268,
+	    "endPlayLoc": 11285,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 6,
+	    "endLoc": 11297,
+	    "begPlayLoc": 11286,
+	    "endPlayLoc": 11297,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 7,
+	    "endLoc": 11306,
+	    "begPlayLoc": 11298,
+	    "endPlayLoc": 11306,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 8,
+	    "endLoc": 11320,
+	    "begPlayLoc": 11307,
+	    "endPlayLoc": 11320,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 9,
+	    "endLoc": 11348,
+	    "begPlayLoc": 11321,
+	    "endPlayLoc": 11348,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 10,
+	    "endLoc": 11382,
+	    "begPlayLoc": 11349,
+	    "endPlayLoc": 11382,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 11,
+	    "endLoc": 11412,
+	    "begPlayLoc": 11383,
+	    "endPlayLoc": 11412,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 12,
+	    "endLoc": 11428,
+	    "begPlayLoc": 11413,
+	    "endPlayLoc": 11428,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 13,
+	    "endLoc": 11458,
+	    "begPlayLoc": 11429,
+	    "endPlayLoc": 11458,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 14,
+	    "endLoc": 11502,
+	    "begPlayLoc": 11459,
+	    "endPlayLoc": 11502,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 15,
+	    "endLoc": 11531,
+	    "begPlayLoc": 11503,
+	    "endPlayLoc": 11531,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 16,
+	    "endLoc": 11548,
+	    "begPlayLoc": 11532,
+	    "endPlayLoc": 11548,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 17,
+	    "endLoc": 11586,
+	    "begPlayLoc": 11549,
+	    "endPlayLoc": 11586,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 18,
+	    "endLoc": 11610,
+	    "begPlayLoc": 11587,
+	    "endPlayLoc": 11610,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 19,
+	    "endLoc": 11632,
+	    "begPlayLoc": 11611,
+	    "endPlayLoc": 11632,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 20,
+	    "endLoc": 11693,
+	    "begPlayLoc": 11633,
+	    "endPlayLoc": 11693,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 21,
+	    "endLoc": 11763,
+	    "begPlayLoc": 11694,
+	    "endPlayLoc": 11763,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 22,
+	    "endLoc": 11811,
+	    "begPlayLoc": 11764,
+	    "endPlayLoc": 11811,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 23,
+	    "endLoc": 11921,
+	    "begPlayLoc": 11812,
+	    "endPlayLoc": 11921,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 24,
+	    "endLoc": 11964,
+	    "begPlayLoc": 11922,
+	    "endPlayLoc": 11964,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 25,
+	    "endLoc": 12070,
+	    "begPlayLoc": 11965,
+	    "endPlayLoc": 12070,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 26,
+	    "endLoc": 12111,
+	    "begPlayLoc": 12071,
+	    "endPlayLoc": 12111,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 27,
+	    "endLoc": 12145,
+	    "begPlayLoc": 12112,
+	    "endPlayLoc": 12145,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 28,
+	    "endLoc": 12201,
+	    "begPlayLoc": 12146,
+	    "endPlayLoc": 12201,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 29,
+	    "endLoc": 12241,
+	    "begPlayLoc": 12202,
+	    "endPlayLoc": 12241,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 30,
+	    "endLoc": 12289,
+	    "begPlayLoc": 12242,
+	    "endPlayLoc": 12289,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 31,
+	    "endLoc": 12309,
+	    "begPlayLoc": 12290,
+	    "endPlayLoc": 12309,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	},    
+	{
+	    "note": "",
+	    "fragId": 32,
+	    "endLoc": 12376,
+	    "begPlayLoc": 12310,
+	    "endPlayLoc": 12376,
+	    "fadeOutMs": 500.0,
+	    "wetDryGain": 0.5,
+	    "outGain": 1.0,
+	    "inGain": 1.0,
+	    "endTimestamp_nsec": 0,
+	    "endTimestamp_sec": 0,
+	    "presetN": 13,
+	    "presetL": [
+		{
+		    "play_fl": true,
+		    "preset_label": "dry",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "b",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "c",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "d",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f1",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f2",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f3",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "f4",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "ga",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1a",
+		    "order": 0
+		},
+		{
+		    "play_fl": false,
+		    "preset_label": "g1d",
+		    "order": 0
+		}
+	    ]
+	}    
+    ]
+}
