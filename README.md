@@ -6,6 +6,8 @@ libcw Testing and Development App
     set env LD_LIBRARY_PATH /home/kevin/sdk/libwebsockets/build/out/lib::~/src/libcm/build/linux/debug/lib
     r ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
+    // if problems occur with gdb hanging while download debuginfo 
+	dnf upgrade --enablerepo=*-debuginfo "*-debuginfo"   # update all debuginfo files
 
 # Valgrind setup
 
@@ -45,12 +47,6 @@ even though the resource object is invalid (i.e. there is a missing brace).
 This is a useful way to see if id maps are working.
 Print: ele name, uuid, appId and parent name, uuid, appId
 
-- UI: Add an error indicator and API for each control (e.g. border set to red)
-- UI: Add the ability to order child lists via the 'order' attribute.
-- UI: Add API to delete a UI element
-
-- PresetSel: Select and highlight a fragment.
-- Enable 'Delete' button when a fragment is selected.
 
 
 
@@ -81,7 +77,6 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 + occaisonal drop-outs (decrease count of cross-fade instances to 2)
 
 + test adding,deleting, saving and restoring fragment records
-+ deleting a fragment does not automatically fill in the missing location space.
 + 
 + flow metering object with resetable clip indicator and audio I/O meters
 + indicate drop-outs that are detected from the audio IO system
@@ -97,15 +92,14 @@ Print: ele name, uuid, appId and parent name, uuid, appId
 + allow the network to be reloaded without restarting the program
 + create a wrappers for all the cm based procs.
 + create an interactive spec-dist panel to experiment with presets
-+ UI:         clear UI when the app disconnects.
 
 
 + flow:       create default system wide sample rate
++ flow:       implement MIDI processors
 + UI          uiSetValue() should be optionally reflected back to the app with kValueOpId messages.
               This way all value change messages could be handled from one place no matter
 			  if the value changes originate on the GUI or from the app.
 			  
-+ IO threading: (this is implemented in the MP3 player version of libcw)
 + document basic functionality: flow, UI, Audio
 + Using the 'blob' functionality should be the default way for tying UI elements to program model.
   Rewrite the UI test case to reflect this.
@@ -156,3 +150,12 @@ DONE:
 + App:        automatically load on start
 + flow:       Allow setting a specific variable value from a network preset
 + preset_sel: The sampler requires a different velocity map than the piano. The piano was scaled down but now the sampler is too quiet.
++ preset_set: deleting a fragment does not automatically fill in the missing location space.
++ libcw:      Make IO sub-systems optionally synchronous
++ UI:         clear UI when the app disconnects.
++ UI: Add an error indicator and API for each control (e.g. border set to red)
++ UI: Add the ability to order child lists via the 'order' attribute.
++ UI: Add API to delete a UI element
+
++ PresetSel: Select and highlight a fragment.
++ Enable 'Delete' button when a fragment is selected.
