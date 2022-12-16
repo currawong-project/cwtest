@@ -14,9 +14,6 @@ include_HEADERS =
 # -Wno-multichar - turns off multi-character constant warnings from cmAudioFile.c
 
 
-WS_DIR   = $(HOME)/sdk/libwebsockets/build/out
-
-
 AM_CPPFLAGS =   -I..  -I$(srcdir)/src/libcw
 AM_CFLAGS   = -Wno-multichar 
 AM_CXXFLAGS = -Wno-multichar
@@ -83,8 +80,6 @@ if cwWEB
 endif
 
 if cwWEBSOCK
-  # AM_CPPFLAGS += -I$(WS_DIR)/include
-  # AM_LDFLAGS  += -L$(WS_DIR)/lib
   src_cwtest_cwtest_LDADD +=  -lwebsockets
 endif
 

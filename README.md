@@ -3,15 +3,15 @@ libcw Testing and Development App
 
 # GDB Setup:
 
-    set env LD_LIBRARY_PATH /home/kevin/sdk/libwebsockets/build/out/lib::~/src/libcm/build/linux/debug/lib
+    set env LD_LIBRARY_PATH ~/src/libcm/build/linux/debug/lib
     r ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
     // if problems occur with gdb hanging while download debuginfo 
-	dnf upgrade --enablerepo=*-debuginfo "*-debuginfo"   # update all debuginfo files
+	sudo dnf upgrade --enablerepo=*-debuginfo "*-debuginfo"   # update all debuginfo files
 
 # Valgrind setup
 
-    export LD_LIBRARY_PATH=~/sdk/libwebsockets/build/out/lib:~/src/libcm/build/linux/debug/lib
+    export LD_LIBRARY_PATH=~/src/libcm/build/linux/debug/lib
     valgrind --leak-check=yes --log-file=vg0.txt ./cwtest  ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
 #Design Questions:

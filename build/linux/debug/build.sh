@@ -19,8 +19,8 @@ cd ${curdir}
 --enable-alsa \
 CFLAGS="-g -Wall" \
 CXXFLAGS="-g -Wall" \
-CPPFLAGS="-I${HOME}/sdk/libwebsockets/build/out/include -I${HOME}/src/libcm/build/linux/debug/include" \
-LDFLAGS="-L${HOME}/sdk/libwebsockets/build/out/lib      -L${HOME}/src/libcm/build/linux/debug/lib" \
+CPPFLAGS="-I${HOME}/src/libcm/build/linux/debug/include" \
+LDFLAGS="-L${HOME}/src/libcm/build/linux/debug/lib" \
 LIBS=
 
 
