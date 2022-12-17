@@ -411,7 +411,7 @@ cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, i
   if((rc = cfg->getv("flow_proc_dict",flow_proc_dict)) != cw::kOkRC )
     return cwLogError(rc,"The 'flow_proc_dict' specification object was not found.");
   */
-  return cw::preset_sel_app::main(args);
+  return cw::preset_sel_app::main(args,argc-1,argv+1);
 }
 #else
 cw::rc_t _no_alsa_websock() { return cwLogError(cw::kResourceNotAvailableRC,"Websock or ALSA functionality not included in this build."); } 
