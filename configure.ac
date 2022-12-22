@@ -3,7 +3,7 @@
 # this configure.ac or any of the Makefile.am files.
 #
 
-AC_COPYRIGHT([Copyright (C) 2019-2022 Kevin Larke])
+AC_COPYRIGHT([Copyright (C) 2019-2023 Kevin Larke])
 AC_INIT([cwtest],[1.0],[cwtest@larke.org])
 AC_CONFIG_SRCDIR([src/cwtest/main.cpp])
 AC_CONFIG_AUX_DIR([build-aux])                    # put aux files in build-aux
