@@ -46,9 +46,7 @@ All callbacks should return meaningful result codes.
 # Preset Select
    
 
-+ backup to numbered file on save
 + play on preset letter select
-+ Velocity of the individual notes of chords should be scaled to such that their sum matches the dynamic value.
 + allow the network to be reloaded without restarting the program
 + create an interactive spec-dist panel to experiment with presets
 
@@ -84,6 +82,8 @@ DONE:
 + flow:       Allow setting a specific variable value from a network preset
 + preset_sel: The sampler requires a different velocity map than the piano. The piano was scaled down but now the sampler is too quiet.
 + preset_set: deleting a fragment does not automatically fill in the missing location space.
++ preset_sel: backup to numbered file on save
++ preset_sel: Velocity of the individual notes of chords should be scaled to such that their sum matches the dynamic value.
 + libcw:      Make IO sub-systems optionally synchronous
 + UI:         clear UI when the app disconnects.
 + UI: Add an error indicator and API for each control (e.g. border set to red)
