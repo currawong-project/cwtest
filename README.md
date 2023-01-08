@@ -9,6 +9,9 @@ libcw Testing and Development App
     // if problems occur with gdb hanging while download debuginfo 
 	sudo dnf upgrade --enablerepo=*-debuginfo "*-debuginfo"   # update all debuginfo files
 
+    r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m302-325 beg_play_loc 9187 end_play_loc 10109
+	r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m350-458 beg_play_loc 12431 end_play_loc 14726
+	 
 # Valgrind setup
 
     export LD_LIBRARY_PATH=~/src/libcm/build/linux/debug/lib
