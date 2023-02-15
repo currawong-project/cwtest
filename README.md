@@ -11,6 +11,10 @@ libcw Testing and Development App
 
     r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m302-325 beg_play_loc 9187 end_play_loc 10109
 	r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m350-458 beg_play_loc 12431 end_play_loc 14726
+	r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m1_283 beg_play_loc 0 end_play_loc 8452
+	
+	r ~/src/cwtest/src/cwtest/cfg/spec_dist.cfg preset_sel  record_fn m350-458_coda_audio_file beg_play_loc 11499 end_play_loc 12426
+	 
 	 
 # Valgrind setup
 
@@ -27,9 +31,6 @@ How should errors be presented to the user? developer?
 ### 
 
 All callbacks should return meaningful result codes.
-
-
-
 
 
 ### UI Properties
