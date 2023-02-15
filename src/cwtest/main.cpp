@@ -30,6 +30,8 @@
 #include "cwFlow.h"
 #include "cwPianoScore.h"
 #include "cwIoPresetSelApp.h"
+#include "cwCmInterface.h"
+#include "cwScoreFollower.h"
 
 #if defined(cwWEBSOCK)
 #include "cwWebSock.h"
@@ -350,6 +352,16 @@ cw::rc_t objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc
   return cw::kOkRC;
 }
 
+cw::rc_t vectOpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+{
+  int v1[] = { 1,2,1,2,1,2,1,2,1,2 };
+  int v0[ 10 ];
+    
+  cw::vop::deinterleave( v0, v1, 5, 2 );
+  cw::vop::print(v0,10,"%i ");
+  return cw::kOkRC;
+}
+
 cw::rc_t timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::time::test(); }
 cw::rc_t threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::threadTest(); }
 cw::rc_t kbTest1Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest1(); return cw::kOkRC; }
@@ -393,6 +405,8 @@ cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args
     
   return cw::flow::test(flow_proc_dict,args);
 }
+
+cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follower::test(args); }
 
 
 #if defined(cwWEBSOCK)
@@ -718,6 +732,7 @@ int main( int argc, const char* argv[] )
    { "fileSys", fileSysTest },
    { "numbCvt", numbCvtTest },
    { "object", objectTest },
+   { "vop", vectOpTest },
    { "time", timeTest },
    { "thread", threadTest },
    { "kbTest1", kbTest1Test },
@@ -777,6 +792,7 @@ int main( int argc, const char* argv[] )
    { "flow_pv", flowTest },
    { "flow_spec_dist", flowTest },
    { "preset_sel", ioPresetSelTest },
+   { "score_follow", scoreFollowTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
