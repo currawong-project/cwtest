@@ -7,15 +7,15 @@ libcw Testing and Development App
     r ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
     // if problems occur with gdb hanging while download debuginfo 
-	sudo dnf upgrade --enablerepo=*-debuginfo "*-debuginfo"   # update all debuginfo files
+    sudo dnf upgrade --enablerepo=*-debuginfo "*-debuginfo"   # update all debuginfo files
 
     r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m302-325 beg_play_loc 9187 end_play_loc 10109
-	r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m350-458 beg_play_loc 12431 end_play_loc 14726
-	r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m1_283 beg_play_loc 0 end_play_loc 8452
-	
-	r ~/src/cwtest/src/cwtest/cfg/spec_dist.cfg preset_sel  record_fn m350-458_coda_audio_file beg_play_loc 11499 end_play_loc 12426
-	 
-	 
+    r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m350-458 beg_play_loc 12431 end_play_loc 14726
+    r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m1_283 beg_play_loc 0 end_play_loc 8452
+    
+    r ~/src/cwtest/src/cwtest/cfg/spec_dist.cfg preset_sel  record_fn m350-458_coda_audio_file beg_play_loc 11499 end_play_loc 12426
+     
+     
 # Valgrind setup
 
     export LD_LIBRARY_PATH=~/src/libcm/build/linux/debug/lib
@@ -43,9 +43,6 @@ All callbacks should return meaningful result codes.
     clickable         This elemnt will send a 'click' msg when clicked.
     enable            This element is enabled
     visible           This element is visible.
-
-
-
 
 # Preset Select
    
