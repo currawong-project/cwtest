@@ -1,5 +1,4 @@
-
-    {
+{
     "masterSyncDelayMs": 400.0,
     "masterDryGain": 1.0,
     "masterWetOutGain": 1.0,
@@ -11425,7 +11424,7 @@
           "order": 0
         }
       ]
-    },    
- ]
     }
+ ]
+ }
     
