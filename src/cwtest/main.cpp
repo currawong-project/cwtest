@@ -396,17 +396,7 @@ cw::rc_t pvocFileProc(         const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::mdns::test(); }
 cw::rc_t dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::dnssd::test(); }
 cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::eucon::test(); }
-
-cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::rc_t            rc;
-  const cw::object_t* flow_proc_dict = nullptr;
-  
-  if((rc = cfg->getv("flow_proc_dict",flow_proc_dict)) != cw::kOkRC )
-    return cwLogError(rc,"The 'flow_proc_dict' specification object was not found.");
-    
-  return cw::flow::test(flow_proc_dict,args);
-}
+cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::flow::test(args); }
 
 cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follower::test(args); }
 
