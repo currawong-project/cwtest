@@ -13,8 +13,7 @@ libcw Testing and Development App
     r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m350-458 beg_play_loc 12431 end_play_loc 14726
     r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m1_283 beg_play_loc 0 end_play_loc 8452
     
-    r ~/src/cwtest/src/cwtest/cfg/spec_dist.cfg preset_sel  record_fn m350-458_coda_audio_file beg_play_loc 11499 end_play_loc 12426
-     
+    r ~/src/cwtest/src/cwtest/cfg/gutim_full/gutim.cfg preset_sel  record_fn m1_350 beg_play_loc 11499 end_play_loc 12426
      
 # Valgrind setup
 
@@ -46,7 +45,7 @@ All callbacks should return meaningful result codes.
 
 # Preset Select
    
-
++ If the the parsing of the main cfg file fails the app crashes in main.cpp with a double free.
 + play on preset letter select
 + allow the network to be reloaded without restarting the program
 + create an interactive spec-dist panel to experiment with presets
