@@ -77,6 +77,8 @@
 
 #include "cwAudioFile.h"
 #include "cwAudioFileOps.h"
+#include "cwMidiState.h"
+#include "cwSvgMidi.h"
 
 //#include "cwNbMem.h"
 
@@ -399,6 +401,8 @@ cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::flow::test(args); }
 
 cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follower::test(args); }
+cw::rc_t svgMidiFileTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg_midi::test_midi_file(args); }
+cw::rc_t midiStateTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_state::test(args); }
 
 
 #if defined(cwWEBSOCK)
@@ -786,6 +790,8 @@ int main( int argc, const char* argv[] )
    { "flow_spec_dist", flowTest },
    { "preset_sel", ioPresetSelTest },
    { "score_follow", scoreFollowTest },
+   { "svg_midi_file", svgMidiFileTest },
+   { "midi_state", midiStateTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
