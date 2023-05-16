@@ -32,6 +32,7 @@
 #include "cwIoPresetSelApp.h"
 #include "cwCmInterface.h"
 #include "cwScoreFollower.h"
+#include "cwCsv.h"
 
 #if defined(cwWEBSOCK)
 #include "cwWebSock.h"
@@ -403,6 +404,7 @@ cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follower::test(args); }
 cw::rc_t svgMidiFileTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg_midi::test_midi_file(args); }
 cw::rc_t midiStateTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_state::test(args); }
+cw::rc_t csvTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::csv::test(args); }
 
 
 #if defined(cwWEBSOCK)
@@ -792,6 +794,7 @@ int main( int argc, const char* argv[] )
    { "score_follow", scoreFollowTest },
    { "svg_midi_file", svgMidiFileTest },
    { "midi_state", midiStateTest },
+   { "csv", csvTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
@@ -861,11 +864,12 @@ int main( int argc, const char* argv[] )
     if( modeArray[i].label == nullptr )
       rc = cwLogError(cw::kInvalidArgRC,"The mode selector: '%s' is not valid.", cwStringNullGuard(mode));
     
-    if( cfg != nullptr )
-      cfg->free();
   }
 
- errLabel:  
+ errLabel:
+  if( cfg != nullptr )
+      cfg->free();
+
   cw::log::destroyGlobal();
 
   return (int)rc;
