@@ -3,7 +3,7 @@ libcw Testing and Development App
 
 # GDB Setup:
 
-    set env LD_LIBRARY_PATH ~/src/libcm/build/linux/debug/lib
+    set env LD_LIBRARY_PATH /home/kevin/src/libcm/build/linux/debug/lib
     r ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
 
     // if problems occur with gdb hanging while download debuginfo 
@@ -13,7 +13,9 @@ libcw Testing and Development App
     r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m350-458 beg_play_loc 12431 end_play_loc 14726
     r ~/src/cwtest/src/cwtest/cfg/video/video.cfg preset_sel  record_fn m1_283 beg_play_loc 0 end_play_loc 8452
     
-    r ~/src/cwtest/src/cwtest/cfg/gutim_full/gutim.cfg preset_sel  record_fn m1_350 beg_play_loc 11499 end_play_loc 12426
+    r ~/src/cwtest/src/cwtest/cfg/gutim_full/gutim.cfg preset_sel  record_fn m1_458 beg_play_loc 327 end_play_loc 396
+	
+	
      
 # Valgrind setup
 
