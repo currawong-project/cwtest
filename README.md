@@ -21,6 +21,15 @@ libcw Testing and Development App
 
     export LD_LIBRARY_PATH=~/src/libcm/build/linux/debug/lib
     valgrind --leak-check=yes --log-file=vg0.txt ./cwtest  ~/src/cwtest/src/cwtest/cfg/main.cfg mtx
+	
+# Installation
+
+Dependencies:
+
+- libwebsockets-devel
+- fftw-devel
+- libcm: lapack-devel
+-       atlas-devel
 
 #Design Questions:
 
