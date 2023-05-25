@@ -31,6 +31,7 @@
 #include "cwPianoScore.h"
 #include "cwIoPresetSelApp.h"
 #include "cwCmInterface.h"
+#include "cwScoreFollowerPerf.h"
 #include "cwScoreFollower.h"
 #include "cwCsv.h"
 
