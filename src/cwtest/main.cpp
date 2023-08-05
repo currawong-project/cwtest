@@ -47,8 +47,10 @@
 #include "cwMidiFile.h"
 #include "cwAudioDevice.h"
 #include "cwSfScore.h"
+#include "cwSfMatch.h"
+#include "cwSfTrack.h"
 
-#if defined(cwALSA)
+#if(cwALSA)
 #include "cwMidiPort.h"
 #include "cwAudioDeviceTest.h"
 #include "cwAudioDeviceAlsa.h"
@@ -408,6 +410,8 @@ cw::rc_t svgMidiFileTest( const cw::object_t* cfg, const cw::object_t* args, int
 cw::rc_t midiStateTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_state::test(args); }
 cw::rc_t csvTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::csv::test(args); }
 cw::rc_t sfScoreTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::sfscore::test(args); }
+cw::rc_t sfMatchTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::sfmatch::test(args); }
+cw::rc_t sfTrackTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::sftrack::test(args); }
 
 #if defined(cwWEBSOCK)
 cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(cfg); }
@@ -798,6 +802,8 @@ int main( int argc, const char* argv[] )
    { "midi_state", midiStateTest },
    { "csv", csvTest },
    { "sfscore", sfScoreTest },
+   { "sfmatch", sfMatchTest },
+   { "sftrack", sfTrackTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
