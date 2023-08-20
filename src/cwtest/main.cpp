@@ -30,7 +30,17 @@
 #include "cwFlow.h"
 #include "cwPianoScore.h"
 #include "cwIoPresetSelApp.h"
-#include "cwCmInterface.h"
+
+#include "cwTime.h"
+#include "cwMidi.h"
+
+#include "cwDynRefTbl.h"
+#include "cwScoreParse.h"
+#include "cwSfScore.h"
+#include "cwSfMatch.h"
+#include "cwScoreTest.h"
+#include "cwSfTrack.h"
+
 #include "cwScoreFollowerPerf.h"
 #include "cwScoreFollower.h"
 #include "cwCsv.h"
@@ -42,13 +52,8 @@
 #include "cwUiTest.h"
 #endif
 
-#include "cwTime.h"
-#include "cwMidi.h"
 #include "cwMidiFile.h"
 #include "cwAudioDevice.h"
-#include "cwSfScore.h"
-#include "cwSfMatch.h"
-#include "cwSfTrack.h"
 
 #if(cwALSA)
 #include "cwMidiPort.h"
@@ -409,9 +414,7 @@ cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int
 cw::rc_t svgMidiFileTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg_midi::test_midi_file(args); }
 cw::rc_t midiStateTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_state::test(args); }
 cw::rc_t csvTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::csv::test(args); }
-cw::rc_t sfScoreTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::sfscore::test(args); }
-cw::rc_t sfMatchTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::sfmatch::test(args); }
-cw::rc_t sfTrackTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::sftrack::test(args); }
+cw::rc_t scoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_test::test(args); }
 
 #if defined(cwWEBSOCK)
 cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(cfg); }
@@ -801,9 +804,7 @@ int main( int argc, const char* argv[] )
    { "svg_midi_file", svgMidiFileTest },
    { "midi_state", midiStateTest },
    { "csv", csvTest },
-   { "sfscore", sfScoreTest },
-   { "sfmatch", sfMatchTest },
-   { "sftrack", sfTrackTest },
+   { "score_test", scoreTest },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
