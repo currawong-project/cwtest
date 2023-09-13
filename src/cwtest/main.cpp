@@ -34,6 +34,8 @@
 #include "cwTime.h"
 #include "cwMidi.h"
 
+#include "cwPresetSel.h"
+
 #include "cwDynRefTbl.h"
 #include "cwScoreParse.h"
 #include "cwSfScore.h"
@@ -43,6 +45,7 @@
 
 #include "cwScoreFollowerPerf.h"
 #include "cwScoreFollower.h"
+#include "cwScoreFollowTest.h"
 #include "cwCsv.h"
 
 #if defined(cwWEBSOCK)
@@ -400,7 +403,7 @@ cw::rc_t audioFileGenerate(    const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t fftTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::fft::test(); }
 cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::ifft::test(); }
 cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
-cw::rc_t pianoScoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score::test(args); }
+cw::rc_t pianoScoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::perf_score::test(args); }
 cw::rc_t audioTransformsTest(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::test(args); }
 cw::rc_t amToMidiFile(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_record_play::am_to_midi_file(args); }
 cw::rc_t audioFileProc(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::file_processor(args); }
@@ -410,12 +413,12 @@ cw::rc_t dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::eucon::test(); }
 cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::flow::test(args); }
 
-cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follower::test(args); }
+cw::rc_t scoreFollowTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follow_test::test(args); }
 cw::rc_t svgMidiFileTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg_midi::test_midi_file(args); }
 cw::rc_t midiStateTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_state::test(args); }
 cw::rc_t csvTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::csv::test(args); }
 cw::rc_t scoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_test::test(args); }
-
+cw::rc_t translateFrags(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::preset_sel::translate_frags(args); }
 #if defined(cwWEBSOCK)
 cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(cfg); }
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return cw::ui::test(args); }
@@ -805,6 +808,7 @@ int main( int argc, const char* argv[] )
    { "midi_state", midiStateTest },
    { "csv", csvTest },
    { "score_test", scoreTest },
+   { "translate_frags", translateFrags },
    { "stub", stubTest },
    { nullptr, nullptr }
   };
