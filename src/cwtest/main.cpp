@@ -368,6 +368,28 @@ cw::rc_t objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc
   return cw::kOkRC;
 }
 
+cw::rc_t objectToJsonTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
+{
+   double   v0[]  = {1.23,2.34,3.45};
+  unsigned v0N = sizeof(v0)/sizeof(v0[0]);
+  int      v1[]  = {-1,0,1,2,3,4};
+  unsigned v1N = sizeof(v1)/sizeof(v1[0]);
+  
+  cw::object_t* d = cw::newDictObject();
+
+  d->putv("A","Abc","B",1.234);
+  d->put_numeric_list("v0",v0,v0N);
+  d->put_numeric_list("v1",v1,v1N);
+
+  char* s = d->to_string();
+  printf("%s\n",s);
+  cw::mem::release(s);
+
+  d->free();
+
+  return cw::kOkRC;
+}
+
 cw::rc_t vectOpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   int v1[] = { 1,2,1,2,1,2,1,2,1,2 };
@@ -742,6 +764,7 @@ int main( int argc, const char* argv[] )
    { "fileSys", fileSysTest },
    { "numbCvt", numbCvtTest },
    { "object", objectTest },
+   { "objectToJson", objectToJsonTest },
    { "vop", vectOpTest },
    { "time", timeTest },
    { "thread", threadTest },
