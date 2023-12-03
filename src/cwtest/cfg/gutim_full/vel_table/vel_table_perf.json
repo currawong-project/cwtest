@@ -28,10 +28,43 @@
                 122,
                 127
             ],
-            "enableFl": false,
+            "enableFl": true,
             "defaultFl": true,
             "device": "sampler",
             "name": "ivory"
+        },
+        {
+            "table": [
+                1,
+                1,
+                2,
+                2,
+                3,
+                5,
+                8,
+                10,
+                13,
+                16,
+                20,
+                24,
+                28,
+                33,
+                38,
+                43,
+                49,
+                55,
+                62,
+                68,
+                72,
+                85,
+                94,
+                103,
+                112
+            ],
+            "enableFl": true,
+            "defaultFl": true,
+            "device": "piano",
+            "name": "spirio"
         },
         {
             "table": [
@@ -62,9 +95,9 @@
                 83
             ],
             "enableFl": false,
-            "defaultFl": true,
+            "defaultFl": false,
             "device": "piano",
-            "name": "spirio"
+            "name": "spirio_1"
         }
     ],
     "incr_pitch": 3,
