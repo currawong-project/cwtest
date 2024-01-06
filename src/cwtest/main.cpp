@@ -10,6 +10,7 @@
 #include "cwText.h"
 #include "cwNumericConvert.h"
 #include "cwObject.h"
+#include "cwB23Tree.h"
 #include "cwVectOps.h"
 #include "cwMtx.h"
 #include "cwThread.h"
@@ -413,6 +414,7 @@ cw::rc_t textBufTest(          const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::buf::test(); }
 cw::rc_t audioDevFileTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::file::test(args); }
 cw::rc_t mtxTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::mtx::test(args); }
+cw::rc_t b23TreeTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::b23::test(args); }
 cw::rc_t midiFileTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::file::test(args); }
 cw::rc_t audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audiofile::test(args); }
 cw::rc_t audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::test(args); }
@@ -805,6 +807,7 @@ int main( int argc, const char* argv[] )
    { "dataset_adapter", datasetAdapterTest },
    { "svg",   svgTest },
    { "mtx",   mtxTest },
+   { "b23Tree",   b23TreeTest },
    { "midifile", midiFileTest },
    { "audiofile", audioFileTest },
    { "afop",      audioFileOp },
