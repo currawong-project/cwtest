@@ -28,21 +28,25 @@
 #include "cwAudioTransforms.h"
 #include "cwAudioFileProc.h"
 #include "cwPvAudioFileProc.h"
+#include "cwFlowDecl.h"
 #include "cwFlow.h"
+
+#include "cwMidi.h"
+#include "cwDynRefTbl.h"
+#include "cwScoreParse.h"
+#include "cwSfScore.h"
+#include "cwPerfMeas.h"
+
 #include "cwPianoScore.h"
 #include "cwIoPresetSelApp.h"
 
 #include "cwTime.h"
-#include "cwMidi.h"
 
 #include "cwMidiFile.h"
 #include "cwAudioDevice.h"
 
 #include "cwPresetSel.h"
 
-#include "cwDynRefTbl.h"
-#include "cwScoreParse.h"
-#include "cwSfScore.h"
 #include "cwSfMatch.h"
 #include "cwScoreTest.h"
 #include "cwSfTrack.h"
@@ -98,7 +102,6 @@
 //#include "cwNbMem.h"
 
 #include <iostream>
-
 
 unsigned calc( unsigned n )
 { return n; }
@@ -187,7 +190,7 @@ char* instantiatePathVariable( const cw::object_t* args, const char* label, unsi
   {
     if( !cwIsFlag(flags,kVarOptionalFl) )
     {
-      rc = cwLogError(cw::kLabelNotFoundRC,"The mandatory file '%s' was not found.",cwStringNullGuard(label));
+      rc = cwLogError(cw::kEleNotFoundRC,"The mandatory file '%s' was not found.",cwStringNullGuard(label));
       goto errLabel;
     }
     
@@ -729,7 +732,7 @@ const cw::object_t* _locateArgsRecd( const cw::object_t* cfg, const char*& cfgLa
   }
 
   if((o = cfg->find_child(cfgLabel)) == nullptr )
-      cwLogError(cw::kLabelNotFoundRC,"The test selector: '%s' was not found in the configuration file.", cwStringNullGuard(cfgLabel));
+      cwLogError(cw::kEleNotFoundRC,"The test selector: '%s' was not found in the configuration file.", cwStringNullGuard(cfgLabel));
   else
   {
   
