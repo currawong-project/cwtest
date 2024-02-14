@@ -31,7 +31,9 @@
 #include "cwFlowDecl.h"
 #include "cwFlow.h"
 
+#include "cwTime.h"
 #include "cwMidi.h"
+#include "cwMidiDecls.h"
 #include "cwDynRefTbl.h"
 #include "cwScoreParse.h"
 #include "cwSfScore.h"
@@ -40,7 +42,6 @@
 #include "cwPianoScore.h"
 #include "cwIoPresetSelApp.h"
 
-#include "cwTime.h"
 
 #include "cwMidiFile.h"
 #include "cwAudioDevice.h"
@@ -65,7 +66,9 @@
 #endif
 
 #if(cwALSA)
-#include "cwMidiPort.h"
+#include "cwMidiDevice.h"
+#include "cwMidiDeviceTest.h"
+#include "cwMidiFileDev.h"
 #include "cwAudioDeviceTest.h"
 #include "cwAudioDeviceAlsa.h"
 #endif
@@ -484,14 +487,18 @@ cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, i
 
 
 #if defined(cwALSA)
-cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::test();}
+cw::rc_t midiDeviceReport(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::testReport();}
+cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::test(args);}
+cw::rc_t midiFileDevTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::file_dev::test( args );}
 cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test( args ); }
 cw::rc_t audioDevTestTone(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test_tone( args ); }
 cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::alsa::report(); }
 cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::report(); }
 #else
 cw::rc_t _no_alsa() { return cwLogError(cw::kResourceNotAvailableRC,"ALSA based functionality not included in this build."); } 
+cw::rc_t midiDeviceReport(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
 cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
+cw::rc_t midiFileDevTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
 cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 cw::rc_t audioDevTestTone(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
@@ -781,7 +788,9 @@ int main( int argc, const char* argv[] )
    { "spscQueueTmpl", spscQueueTmpl },
    { "websockSrv", websockSrvTest },
    { "serialSrv", serialPortSrvTest },
+   { "midiDeviceReport", midiDeviceReport },
    { "midiDevice", midiDeviceTest },
+   { "midiFileDev", midiFileDevTest },
    { "textBuf", textBufTest },
    { "audioBuf", audioBufTest },
    { "audioDevFileTest", audioDevFileTest },
