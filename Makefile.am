@@ -83,7 +83,7 @@ if cwWEBSOCK
   src_cwtest_cwtest_LDADD +=  -lwebsockets
 endif
 
-src_cwtest_cwtest_LDADD += -lsatlas -lcm
+src_cwtest_cwtest_LDADD += -lsatlas
 
 # src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
 bin_PROGRAMS               += src/cwtest/cwtest
