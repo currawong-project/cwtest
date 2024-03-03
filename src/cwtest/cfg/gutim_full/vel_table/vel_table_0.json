@@ -1,0 +1,24 @@
+{
+    "note_on_ms": 500,  // duration of note
+    "note_off_ms": 250, // duration between notes
+    "midi_pitch": 60,
+    "midi_velocity": 64,
+    "min_pitch": 22,
+    "max_pitch": 108,
+    "pitch_incr": 3,
+    
+    "tables": [
+    {
+	"enableFl": true,
+	"name": "spirio",
+	"device": "piano",  // must be 'piano' or 'sampler'
+	"table": [  1,  4, 10, 12, 12, 18, 24, 24, 30, 36, 36, 44, 48, 52, 54, 58, 58, 64, 68, 72, 76, 80, 84, 98, 102 ]
+    },
+    {
+	"enableFl": true,
+	"name": "ivory",
+	"device": "sampler", // must be 'piano' or 'sampler'
+	"table": [  1,  5  10, 16, 21, 26, 32, 37, 42, 48, 53, 58, 64, 69, 74, 80, 85, 90, 96,101,106,112,117,122,127 ]
+    }
+  ]
+}

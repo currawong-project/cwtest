@@ -1,6 +1,10 @@
 # directories to ignore
 libcw
 backup
+data
+data1
+data_perf_vel_study
+midi_record
 
 .deps
 autom4te.cache
