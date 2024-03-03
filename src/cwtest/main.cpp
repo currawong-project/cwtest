@@ -17,6 +17,7 @@
 #include "cwKeyboard.h"
 #include "cwSpScBuf.h"
 #include "cwSpScQueueTmpl.h"
+#include "cwNbMpScQueue.h"
 #include "cwThreadMach.h"
 #include "cwSerialPort.h"
 #include "cwSerialPortSrv.h"
@@ -40,6 +41,7 @@
 #include "cwPerfMeas.h"
 
 #include "cwPianoScore.h"
+#include "cwGutimReg.h"
 #include "cwIoPresetSelApp.h"
 
 
@@ -415,6 +417,7 @@ cw::rc_t kbTest2Test(          const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t kbTest3Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest3(); return cw::kOkRC; }
 cw::rc_t spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::spsc_buf::test(); }
 cw::rc_t spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::testSpScQueueTmpl(); }
+cw::rc_t nbMpScQueue(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::nbmpscq::test(args); }
 cw::rc_t serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::serialPortSrvTest(); }
 cw::rc_t textBufTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::textBuf::test(); }
 cw::rc_t audioBufTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::buf::test(); }
@@ -435,6 +438,7 @@ cw::rc_t fftTest(              const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::ifft::test(); }
 cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
 cw::rc_t pianoScoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::perf_score::test(args); }
+cw::rc_t gutimRegTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::gutim::reg::test(args); }
 cw::rc_t audioTransformsTest(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::test(args); }
 cw::rc_t amToMidiFile(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_record_play::am_to_midi_file(args); }
 cw::rc_t audioFileProc(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::file_processor(args); }
@@ -786,6 +790,7 @@ int main( int argc, const char* argv[] )
    { "kbTest3", kbTest3Test },
    { "spscBuf", spscBuf },
    { "spscQueueTmpl", spscQueueTmpl },
+   { "nbmpscQueue", nbMpScQueue },
    { "websockSrv", websockSrvTest },
    { "serialSrv", serialPortSrvTest },
    { "midiDeviceReport", midiDeviceReport },
@@ -834,6 +839,7 @@ int main( int argc, const char* argv[] )
    { "ifft", ifftTest },
    { "convolve", convolveTest },
    { "piano_score", pianoScoreTest },
+   { "gutim_reg", gutimRegTest },
    { "audio_transforms", audioTransformsTest },
    { "am_to_midi_file", amToMidiFile },
    { "audio_file_proc", audioFileProc },
