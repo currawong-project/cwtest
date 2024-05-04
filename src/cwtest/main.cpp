@@ -29,12 +29,13 @@
 #include "cwAudioTransforms.h"
 #include "cwAudioFileProc.h"
 #include "cwPvAudioFileProc.h"
-#include "cwFlowDecl.h"
-#include "cwFlow.h"
 
 #include "cwTime.h"
 #include "cwMidi.h"
 #include "cwMidiDecls.h"
+#include "cwFlowDecl.h"
+#include "cwFlow.h"
+
 #include "cwDynRefTbl.h"
 #include "cwScoreParse.h"
 #include "cwSfScore.h"
@@ -410,6 +411,7 @@ cw::rc_t vectOpTest( const cw::object_t* cfg, const cw::object_t* args, int argc
   return cw::kOkRC;
 }
 
+cw::rc_t lexTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::lex::test(); }
 cw::rc_t timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::time::test(); }
 cw::rc_t threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::threadTest(); }
 cw::rc_t kbTest1Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest1(); return cw::kOkRC; }
@@ -778,6 +780,7 @@ int main( int argc, const char* argv[] )
   func_t modeArray[] =
   {
    { "variadicTpl", variadicTplTest },
+   { "lex", lexTest },
    { "fileSys", fileSysTest },
    { "numbCvt", numbCvtTest },
    { "object", objectTest },
