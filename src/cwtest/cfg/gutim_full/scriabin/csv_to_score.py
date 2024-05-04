@@ -317,22 +317,30 @@ if __name__ == "__main__":
 
         # good
         { "src":"74_1",  "ifn":"scriabin_prelude_op74_1.csv",        "insert_loc": 2228, "after_fl":True,  "ofn":"scriabin_op74_1",  "beg_loc":774, "end_loc":775 },
+
+        # good
+        { "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "insert_loc": 3718, "after_fl":True,  "ofn":"scriabin_op74_3",  "beg_loc":1275, "end_loc":1276 },
         
         # good
         { "src":"74_2",  "ifn":"scriabin_prelude_op74_2.csv",        "insert_loc": 4088, "after_fl":False,  "ofn":"scriabin_op74_2",  "beg_loc":1383, "end_loc":1384 },
 
-        # good
-        { "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "insert_loc": 3718, "after_fl":True,  "ofn":"scriabin_op74_3",  "beg_loc":1275, "end_loc":1276 },
+        { "src":"65_1",  "ifn":"scriabin_etude_op65_1_allegro fantastico.csv",  "insert_loc": 4390, "after_fl":True,  "ofn":"scriabin_65_1",  "beg_loc":1659,  "end_loc":1660  },
+        
 
         # good 
         { "src":"74_4",  "ifn":"scriabin_prelude_op74_4.csv",        "insert_loc": 8160, "after_fl":True,  "ofn":"scriabin_op74_4",  "beg_loc":3676, "end_loc":3677 },
 
+        { "src":"8_3",  "ifn":"scriabin_etude_op8_3_b_minor.csv",    "insert_loc": 8450, "after_fl":False,  "ofn":"scriabin_8_3",  "beg_loc":3832,  "end_loc":3883  },
+        
         # good
         { "src":"74_5",  "ifn":"scriabin_prelude_op74_5.csv",        "insert_loc": 9567, "after_fl":False,  "ofn":"scriabin_op74_5",  "beg_loc":4470, "end_loc":4471 },
 
         
         { "src":"65_2",  "ifn":"scriabin_etude_op65_2_allegretto.csv",  "insert_loc": 10789, "after_fl":False,  "ofn":"scriabin_65_2",  "beg_loc":5440,  "end_loc":5441  },
 
+        { "src":"42_7", "ifn":"scriabin_etude_op42_7_f_minor.csv",       "insert_loc":12436, "after_fl":False, "ofn":"scriabin_42_7", "beg_loc":6044, "end_loc":6045 },
+
+        
         { "src":"65_3",  "ifn":"scriabin_etude_op65_3_molta_vivace.csv", "insert_loc": 13848, "after_fl":True,  "ofn":"scriabin_65_3",  "beg_loc":6740,  "end_loc":6741  },
         
         
