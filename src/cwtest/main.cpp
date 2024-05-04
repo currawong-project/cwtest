@@ -29,8 +29,6 @@
 #include "cwAudioTransforms.h"
 #include "cwAudioFileProc.h"
 #include "cwPvAudioFileProc.h"
-#include "cwFlowDecl.h"
-#include "cwFlow.h"
 
 #include "cwTime.h"
 #include "cwMidi.h"
@@ -39,6 +37,9 @@
 #include "cwScoreParse.h"
 #include "cwSfScore.h"
 #include "cwPerfMeas.h"
+
+#include "cwFlowDecl.h"
+#include "cwFlow.h"
 
 #include "cwPianoScore.h"
 #include "cwGutimReg.h"
