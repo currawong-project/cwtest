@@ -222,19 +222,33 @@ def gen_reference( scoreL, out_dir, out_fn ):
             
     out_fn = os.path.join(out_dir,out_fn)
 
+
     with open(out_fn,"w") as f:
+
+        f.write("source  meas oloc  op   secs\n")
+        f.write("------  ---- ----- ---- ----------\n")
+        
+        r0 = None
         for r in scoreL:
             
             if r['opcode']=='ped' or r['oloc']:
 
                 src  = r['src']
-                meas = r['meas'] if r['meas'] else ""
-                oloc = r['oloc'] if r['oloc'] else ""
+                meas = r['meas']      if r['meas'] else ""
+                oloc = r['oloc']      if r['oloc'] else ""
                 label= r['sci_pitch'] if r['opcode']=='non' else _pedal_label(r)
                 secs = r['sec']
                 
                 s = f"{src:7} {meas:4} {oloc:5} {label:5} {secs}\n"
                 f.write(s)
+
+                if r0 and (r0['src'] == 'gutim' and r['src'] != 'gutim'):
+                    print(r['src'],r['oloc'],end=" ")
+                    
+                if r0 and (r0['src'] != 'gutim' and r['src'] == 'gutim'):
+                    print(r0['oloc'])
+
+                r0 = r
 
 def insert_pedal( scoreL, locL ):
 
