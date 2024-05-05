@@ -41,6 +41,9 @@
 #include "cwSfScore.h"
 #include "cwPerfMeas.h"
 
+#include "cwFlowDecl.h"
+#include "cwFlow.h"
+
 #include "cwPianoScore.h"
 #include "cwGutimReg.h"
 #include "cwIoPresetSelApp.h"
