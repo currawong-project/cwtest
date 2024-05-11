@@ -64,7 +64,7 @@ def parse_scriabin( ifn ):
     return noteL
             
     
-def insert_scriabin( scoreL, noteL, src_label, insert_loc, insert_after_fl ):
+def insert_scriabin( scoreL, noteL, src_label, insert_loc, insert_after_fl, delta_sec ):
 
     status_map = { 'non':144, 'nof':144, 'ped':176, 'ctl':176 }
     type_map   = { 'non':'non', 'nof':'nof', 'ped':'ctl', 'ctl':'ctl' }
@@ -97,7 +97,7 @@ def insert_scriabin( scoreL, noteL, src_label, insert_loc, insert_after_fl ):
             for n in noteL:
                 d = { f:None  for f in fieldL }
                 dur_sec = max(dur_sec,n['sec'])
-                d['sec']       = offs_sec + n['sec']
+                d['sec']       = offs_sec + delta_sec + n['sec']
                 d['opcode']    = type_map[ n['type'].strip() ]
                 d['status']    = status_map[n['type'].strip()]
                 d['d0']        = n['d0']
@@ -243,7 +243,7 @@ def gen_reference( scoreL, out_dir, out_fn ):
                 f.write(s)
 
                 if r0 and (r0['src'] == 'gutim' and r['src'] != 'gutim'):
-                    print(r['src'],r['oloc'],end=" ")
+                    print(r['src'],r['oloc'],meas,end=" ")
                     
                 if r0 and (r0['src'] != 'gutim' and r['src'] == 'gutim'):
                     print(r0['oloc'])
@@ -284,11 +284,11 @@ if __name__ == "__main__":
     score_fn = "data/score/20231028/temp.csv"
 
     ref_fn = "ref.txt"
-    out_fn = "temp_with_scriabin_0.csv"
+    out_fn = "temp_with_scriabin_1.csv"
     out_dir= "data/score_scriabin/20240428"
     
     in_preset_fn  = "preset_select/m1_458_trans_5.txt"
-    out_preset_fn = "preset_select/m1_458_trans_5_scriabin.txt"
+    out_preset_fn = "preset_select/m1_458_trans_5_scriabin_1.txt"
 
     score_fn      = os.path.join(base_dir, score_fn)
     out_dir       = os.path.join(base_dir, out_dir)
@@ -360,6 +360,44 @@ if __name__ == "__main__":
         
     ]
 
+    fileL = [
+
+        # *
+        { "src":"74_1",  "ifn":"scriabin_prelude_op74_1.csv",        "insert_loc": 1229, "after_fl":False,  "ofn":"scriabin_op74_1",  "beg_loc":417, "end_loc":418, "delta_sec":0.0 },
+
+        # *
+        { "src":"74_2",  "ifn":"scriabin_prelude_op74_2.csv",        "insert_loc": 1867, "after_fl":False,  "ofn":"scriabin_op74_2",  "beg_loc":638, "end_loc":639, "delta_sec":0.0 },
+
+        # * 
+        { "src":"74_4",  "ifn":"scriabin_prelude_op74_4.csv",        "insert_loc": 2909, "after_fl":True,  "ofn":"scriabin_op74_4",  "beg_loc":1010, "end_loc":1011, "delta_sec":0.0 },
+        
+        # *
+        { "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "insert_loc": 4084, "after_fl":False,  "ofn":"scriabin_op74_3",  "beg_loc":1383, "end_loc":1384, "delta_sec":0.0 },
+        
+
+        
+        # 
+        #{ "src":"65_1",  "ifn":"scriabin_etude_op65_1_allegro fantastico.csv",  "insert_loc": 6323, "after_fl":True,  "ofn":"scriabin_65_1",  "beg_loc":2763,  "end_loc":2764, "delta_sec":0.0  },
+        { "src":"65_1",  "ifn":"scriabin_etude_op65_1_allegro fantastico.csv",  "insert_loc": 6376, "after_fl":False,  "ofn":"scriabin_65_1",  "beg_loc":2804,  "end_loc":2805, "delta_sec":0.0  },
+
+        # * 
+        { "src":"8_3",  "ifn":"scriabin_etude_op8_3_b_minor.csv",    "insert_loc": 8450, "after_fl":False,  "ofn":"scriabin_8_3",  "beg_loc":3832,  "end_loc":3883, "delta_sec":0.0  },
+
+        # *
+        { "src":"74_5",  "ifn":"scriabin_prelude_op74_5.csv",        "insert_loc": 9567, "after_fl":False,  "ofn":"scriabin_op74_5",  "beg_loc":4470, "end_loc":4471, "delta_sec":0.0 },
+
+        # *
+        { "src":"65_2",  "ifn":"scriabin_etude_op65_2_allegretto.csv",  "insert_loc": 10789, "after_fl":False,  "ofn":"scriabin_65_2",  "beg_loc":5440,  "end_loc":5441, "delta_sec":0.0  },
+
+        # *
+        { "src":"42_7", "ifn":"scriabin_etude_op42_7_f_minor.csv",       "insert_loc":12428, "after_fl":False, "ofn":"scriabin_42_7", "beg_loc":6043, "end_loc":6044, "delta_sec":0.0 },
+        
+        #{ "src":"65_3",  "ifn":"scriabin_etude_op65_3_molta_vivace.csv", "insert_loc": 13848, "after_fl":True,  "ofn":"scriabin_65_3",  "beg_loc":6740,  "end_loc":6741, "delta_sec":0.0  },
+        { "src":"65_3",  "ifn":"scriabin_etude_op65_3_molta_vivace.csv", "insert_loc": 13953, "after_fl":True,  "ofn":"scriabin_65_3",  "beg_loc":6780,  "end_loc":6781, "delta_sec":0.0  },
+        
+        
+    ]
+    
     scoreL = parse_score(score_fn)
     
     fieldnamesL = list(scoreL[0].keys())
@@ -370,7 +408,7 @@ if __name__ == "__main__":
 
         noteL = parse_scriabin(f['ifn'])
 
-        scoreL = insert_scriabin(scoreL, noteL, f['src'], f['insert_loc'], f['after_fl'] )
+        scoreL = insert_scriabin(scoreL, noteL, f['src'], f['insert_loc'], f['after_fl'], f['delta_sec'] )
 
     
     assign_loc(scoreL)
