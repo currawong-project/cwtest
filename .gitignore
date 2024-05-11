@@ -1,6 +1,10 @@
 # directories to ignore
 libcw
 backup
+old
+preset_sel
+matt_20230311
+matt_20230610
 data
 data1
 data_perf_vel_study
