@@ -35,6 +35,7 @@
 #include "cwMidiDecls.h"
 #include "cwFlowDecl.h"
 #include "cwFlow.h"
+#include "cwFlowTest.h"
 
 #include "cwDynRefTbl.h"
 #include "cwScoreParse.h"
@@ -451,7 +452,7 @@ cw::rc_t pvocFileProc(         const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::mdns::test(); }
 cw::rc_t dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::dnssd::test(); }
 cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::eucon::test(); }
-cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::flow::test(args); }
+cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::flow::test(args,argc,argv); }
 
 cw::rc_t scoreFollowTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follow_test::test(args); }
 cw::rc_t svgMidiFileTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg_midi::test_midi_file(args); }
