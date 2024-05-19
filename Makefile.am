@@ -22,8 +22,8 @@ AM_LDFLAGS  =
 # debug/release switches
 if DEBUG
   AM_CFLAGS   += -g
-  #  -Wextra -Werror -Wconversion -fsanitize=address
-  AM_CXXFLAGS += -g -Wall  -fsanitize=undefined
+  #  -Wextra -Werror -Wconversion -fsanitize=address -lasan -fsanitize=thread 
+  AM_CXXFLAGS += -g -Wall -Wextra -Wno-unused  -fsanitize=undefined
 else
   AM_CFLAGS   += -O3
   AM_CXXFLAGS += -O3

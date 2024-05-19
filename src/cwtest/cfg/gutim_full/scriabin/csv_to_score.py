@@ -243,10 +243,10 @@ def gen_reference( scoreL, out_dir, out_fn ):
                 f.write(s)
 
                 if r0 and (r0['src'] == 'gutim' and r['src'] != 'gutim'):
-                    print(r['src'],r['oloc'],end=" ")
+                    print(r['src'],f"m{r0['meas']}",f"loc-begin:{r['oloc']}",end=" ")
                     
                 if r0 and (r0['src'] != 'gutim' and r['src'] == 'gutim'):
-                    print(r0['oloc'])
+                    print(f"end:{r0['oloc']}")
 
                 r0 = r
 
