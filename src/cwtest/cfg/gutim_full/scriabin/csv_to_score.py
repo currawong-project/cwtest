@@ -131,7 +131,7 @@ def insert_scriabin( scoreL, noteL, src_label, insert_loc, insert_after_fl, delt
     return outL
 
 
-def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc, end_scriabin_uid ):
+def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc, end_scriabin_uid, end_offs_sec ):
     # beg_score_loc: the 'loc' where the inserted scriabin begins
     # cut_score_loc: the 'loc' where the inserted scriabin ends
     # end_scriabin_uid: the 'uid' which syncronizes to the 'cut_score_loc'.
@@ -145,7 +145,9 @@ def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc,
     #           |                     |   |
     #           +-------------------------+
     #                                ESU
-
+    #
+    # end_offs_sec is additional offset added to the time of CSL where sync to ESU occurs
+    
     def scribian_esu_secs( noteL, end_scriabin_uid ):
         if end_scriabin_uid is None:
             return noteL[-1]['sec']
@@ -163,7 +165,7 @@ def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc,
 
     def cut_score_loc_index( scoreL, cut_score_loc ):
         for i,d in enumerate(scoreL):
-            if d['loc'] == beg_score_loc:
+            if d['loc'] == cut_score_loc:
                 return i
         assert(0)
 
@@ -212,8 +214,18 @@ def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc,
         for d in noteL:
             d['sec'] += offset_sec
 
-    def offset_score_after_cut( scoreL, csl_index, secs ):
+    def offset_score_after_cut( scoreL, cut_score_loc, secs ):
+
+
+        # Score index of the first score note to play
+        # at the end of the scriabin sequence        
+        csl_index = cut_score_loc_index( scoreL, cut_score_loc )
+        
         csl_eid = scoreL[csl_index]['eid']
+
+        print("SECS:",secs,csl_eid,cut_score_loc)
+        print(scoreL[ csl_index ])
+        
 
         # offset all events that start on or after csl_index
         # (this will not shift note-off's/pedal-ups that
@@ -278,26 +290,25 @@ def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc,
     # sync it's start with 'beg_score_loc'
     bsl_secs  = score_bsl_secs( scoreL, beg_score_loc )
 
-    # Score index of the first score note to play
-    # at the end of the scriabin sequence
-    csl_index = cut_score_loc_index( scoreL, cut_score_loc )
 
     # Assign matching note-on/off events the same evt-id
     assign_event_id(scoreL)
 
-    #score_to_csv_debug(scoreL)
+    score_to_csv_debug(scoreL)
     
     # Shift scriabin to start at the beg_score_loc
     offset_scriabin(noteL,bsl_secs)
 
     # Start location in seconds of the second part of the score.
-    esu_secs  = scribian_esu_secs( noteL, end_scriabin_uid )
+    esu_secs  = scribian_esu_secs( noteL, end_scriabin_uid ) + end_offs_sec
+
+    print("ESU:",esu_secs)
 
     # Shift the second part of score to begin at 'esu_secs'
     # (while not shifting the end events (note-off/ped-up)
     # for events which started before the cut)
 
-    offset_score_after_cut( scoreL, csl_index, esu_secs )
+    offset_score_after_cut( scoreL, cut_score_loc, esu_secs )
 
     scoreL = scriabin_to_score( scoreL, noteL, src_label )
 
@@ -459,12 +470,12 @@ if __name__ == "__main__":
     base_dir = "/home/kevin/src/cwtest/src/cwtest/cfg/gutim_full"
     score_fn = "data/score/20231028/temp.csv"
 
-    ref_fn = "ref.txt"
-    out_fn = "temp_with_scriabin_1.csv"
+    ref_fn = "ref_2.txt"
+    out_fn = "temp_with_scriabin_2.csv"
     out_dir= "data/score_scriabin/20240428"
     
     in_preset_fn  = "preset_select/m1_458_trans_5.txt"
-    out_preset_fn = "preset_select/m1_458_trans_5_scriabin_1.txt"
+    out_preset_fn = "preset_select/m1_458_trans_5_scriabin_2.txt"
 
     score_fn      = os.path.join(base_dir, score_fn)
     out_dir       = os.path.join(base_dir, out_dir)
@@ -580,10 +591,45 @@ if __name__ == "__main__":
     fileL = [
 
         # *
-        { "src":"74_1",  "ifn":"scriabin_prelude_op74_1.csv",   "beg_score_loc":1229, "cut_score_loc":1231,  "end_scriabin_uid":740, "ofn":"scriabin_op74_1" },
+        { "src":"74_1",  "ifn":"scriabin_prelude_op74_1.csv",   "beg_score_loc":1229, "cut_score_loc":1231,  "end_scriabin_uid":743, "end_offs_sec":0, "ofn":"scriabin_op74_1" },
 
         # *
-        { "src":"74_2",  "ifn":"scriabin_prelude_op74_2.csv",   "beg_score_loc": 1867, "cut_score_loc":1870,  "end_scriabin_uid":628,  "ofn":"scriabin_op74_2" },
+        { "src":"74_2",  "ifn":"scriabin_prelude_op74_2.csv",   "beg_score_loc": 1867, "cut_score_loc":1877,  "end_scriabin_uid":631,  "end_offs_sec":1.0,  "ofn":"scriabin_op74_2"  },
+
+
+        # * 
+        #{ "src":"74_4",  "ifn":"scriabin_prelude_op74_4.csv",        "insert_loc": 2909, "after_fl":True,  "ofn":"scriabin_op74_4",  "beg_loc":1010, "end_loc":1011, "delta_sec":0.0 },
+        #{ "src":"74_4",  "ifn":"scriabin_prelude_op74_4.csv",        "beg_score_loc":2924, "cut_score_loc":2927,  "end_scriabin_uid":917, "end_offs_sec":0, "ofn":"scriabin_op74_4" },
+         { "src":"74_4",  "ifn":"scriabin_prelude_op74_4.csv",        "beg_score_loc":2998, "cut_score_loc":3003,  "end_scriabin_uid":917, "end_offs_sec":0, "ofn":"scriabin_op74_4" },
+        
+        
+        # *
+        #{ "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "insert_loc": 4084, "after_fl":False,  "ofn":"scriabin_op74_3",  "beg_loc":1383, "end_loc":1384, "delta_sec":0.0 },
+        #{ "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "beg_score_loc":4062, "cut_score_loc":4070,  "end_scriabin_uid":804, "end_offs_sec":0, "ofn":"scriabin_op74_3" },
+        { "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "beg_score_loc": 4086, "cut_score_loc":4087,  "end_scriabin_uid":804, "end_offs_sec":2.0,  "ofn":"scriabin_op74_3" },
+        
+
+        
+        # 
+        #{ "src":"65_1",  "ifn":"scriabin_etude_op65_1_allegro fantastico.csv",  "insert_loc": 6323, "after_fl":True,  "ofn":"scriabin_65_1",  "beg_loc":2763,  "end_loc":2764, "delta_sec":0.0  },
+        { "src":"65_1",  "ifn":"scriabin_etude_op65_1_allegro fantastico.csv",  "insert_loc": 6376, "after_fl":False,  "ofn":"scriabin_65_1",  "beg_loc":2804,  "end_loc":2805, "delta_sec":0.0  },
+
+        # * 
+        #{ "src":"8_3",  "ifn":"scriabin_etude_op8_3_b_minor.csv",    "insert_loc": 8450, "after_fl":False,  "ofn":"scriabin_8_3",  "beg_loc":3832,  "end_loc":3883, "delta_sec":0.0  },
+        { "src":"8_3",  "ifn":"scriabin_etude_op8_3_b_minor.csv",    "insert_loc": 8446, "after_fl":False,  "ofn":"scriabin_8_3",  "beg_loc":3832,  "end_loc":3883, "delta_sec":0.0  },
+
+        # *
+        #{ "src":"74_5",  "ifn":"scriabin_prelude_op74_5.csv",        "insert_loc": 9567, "after_fl":False,  "ofn":"scriabin_op74_5",  "beg_loc":4470, "end_loc":4471, "delta_sec":0.0 },
+        { "src":"74_5",  "ifn":"scriabin_prelude_op74_5.csv",        "beg_score_loc": 9566, "cut_score_loc":9574,  "end_scriabin_uid":1168, "end_offs_sec":0.0,  "ofn":"scriabin_op74_5" },
+
+        # *
+        #{ "src":"65_2",  "ifn":"scriabin_etude_op65_2_allegretto.csv",  "insert_loc": 10789, "after_fl":False,  "ofn":"scriabin_65_2",  "beg_loc":5440,  "end_loc":5441, "delta_sec":0.0  },
+        { "src":"65_2",   "ifn":"scriabin_etude_op65_2_allegretto.csv",   "beg_score_loc": 10790, "cut_score_loc":10789,  "end_scriabin_uid":479, "end_offs_sec":2.0,  "ofn":"scriabin_op65_2" },
+
+        # *
+        { "src":"42_7", "ifn":"scriabin_etude_op42_7_f_minor.csv",       "insert_loc":12428, "after_fl":False, "ofn":"scriabin_42_7", "beg_loc":6043, "end_loc":6044, "delta_sec":0.0 },
+        
+        { "src":"65_3",  "ifn":"scriabin_etude_op65_3_molta_vivace.csv", "insert_loc": 13953, "after_fl":True,  "ofn":"scriabin_65_3",  "beg_loc":6780,  "end_loc":6781, "delta_sec":0.0  },
         
     ]
     
@@ -598,7 +644,7 @@ if __name__ == "__main__":
         noteL = parse_scriabin(f['ifn'])
 
         if 'beg_score_loc' in f:
-            scoreL = interleave_scriabin( scoreL, noteL, f['src'], f['beg_score_loc'],f['cut_score_loc'], f['end_scriabin_uid'] )
+            scoreL = interleave_scriabin( scoreL, noteL, f['src'], f['beg_score_loc'],f['cut_score_loc'], f['end_scriabin_uid'], f['end_offs_sec'] )
         else:
             scoreL = insert_scriabin(     scoreL, noteL, f['src'], f['insert_loc'], f['after_fl'], f['delta_sec'] )
         
