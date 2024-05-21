@@ -222,9 +222,6 @@ def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc,
         csl_index = cut_score_loc_index( scoreL, cut_score_loc )
         
         csl_eid = scoreL[csl_index]['eid']
-
-        print("SECS:",secs,csl_eid,cut_score_loc)
-        print(scoreL[ csl_index ])
         
 
         # offset all events that start on or after csl_index
@@ -301,8 +298,6 @@ def interleave_scriabin( scoreL, noteL, src_label, beg_score_loc, cut_score_loc,
 
     # Start location in seconds of the second part of the score.
     esu_secs  = scribian_esu_secs( noteL, end_scriabin_uid ) + end_offs_sec
-
-    print("ESU:",esu_secs)
 
     # Shift the second part of score to begin at 'esu_secs'
     # (while not shifting the end events (note-off/ped-up)
@@ -419,12 +414,14 @@ def gen_reference( scoreL, out_dir, out_fn ):
 
     with open(out_fn,"w") as f:
 
+        meas0 = None
         f.write("source  meas oloc  op   secs\n")
         f.write("------  ---- ----- ---- ----------\n")
         
         r0 = None
         for r in scoreL:
-            
+
+        
             if r['opcode']=='ped' or r['oloc']:
 
                 src  = r['src']
@@ -432,12 +429,15 @@ def gen_reference( scoreL, out_dir, out_fn ):
                 oloc = r['oloc']      if r['oloc'] else ""
                 label= r['sci_pitch'] if r['opcode']=='non' else _pedal_label(r)
                 secs = r['sec']
+
+                if meas:
+                    meas0 = meas
                 
                 s = f"{src:7} {meas:4} {oloc:5} {label:5} {secs}\n"
                 f.write(s)
 
                 if r0 and (r0['src'] == 'gutim' and r['src'] != 'gutim'):
-                    print(r['src'],r['oloc'],meas,end=" ")
+                    print(r['src'],'m:',meas0,r['oloc'],end=" ")
                     
                 if r0 and (r0['src'] != 'gutim' and r['src'] == 'gutim'):
                     print(r0['oloc'])
