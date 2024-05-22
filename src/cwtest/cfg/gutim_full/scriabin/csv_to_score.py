@@ -30,15 +30,15 @@ def invert_velocity( d1 ):
     if d1 == 0:
         return 0
 
-    d1 = max(1,int(d1/6))
+    d1 = max(1,int(d1/5))
 
     for i,v in enumerate(tbl):
 
-        if d1 <= v:
-            return i
+        if d1 < v:
+            return max(0,i-1)
         
     return len(tbl)-1
-    
+
 
 def parse_scriabin( ifn ):
 
@@ -475,7 +475,7 @@ if __name__ == "__main__":
     out_dir= "data/score_scriabin/20240428"
     
     in_preset_fn  = "preset_select/m1_458_trans_5.txt"
-    out_preset_fn = "preset_select/m1_458_trans_5_scriabin_2.txt"
+    out_preset_fn = "preset_select/m1_458_trans_5_scriabin_4.txt"
 
     score_fn      = os.path.join(base_dir, score_fn)
     out_dir       = os.path.join(base_dir, out_dir)
@@ -648,18 +648,19 @@ if __name__ == "__main__":
         else:
             scoreL = insert_scriabin(     scoreL, noteL, f['src'], f['insert_loc'], f['after_fl'], f['delta_sec'] )
         
-    
-    assign_loc(scoreL)
-    
-    olocMapD = assign_oloc(scoreL)
-    
-    max_oloc = max( r['oloc'] for r in scoreL if r['oloc'] )
 
-    print(f"max oloc:{max_oloc}")
-    
-    write_output( out_dir, out_fn, scoreL, 0, max_oloc, fieldnamesL )
-        
+    if 1:
+        assign_loc(scoreL)
 
-    remap_preset_locs( in_preset_fn, out_preset_fn, olocMapD )
+        olocMapD = assign_oloc(scoreL)
 
-    gen_reference( scoreL, out_dir, ref_fn )
+        max_oloc = max( r['oloc'] for r in scoreL if r['oloc'] )
+
+        print(f"max oloc:{max_oloc}")
+
+        write_output( out_dir, out_fn, scoreL, 0, max_oloc, fieldnamesL )
+
+
+        remap_preset_locs( in_preset_fn, out_preset_fn, olocMapD )
+
+        gen_reference( scoreL, out_dir, ref_fn )
