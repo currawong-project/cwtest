@@ -26,11 +26,12 @@ def parse_score( score_fn ):
 def invert_velocity( d1 ):
 
     tbl =  [ 1,1,2,2,3,5,8,10,13,16,20,24,28,33,38,43,49,55,62,68,72,85,94,103,112]
+    tbl =  [ 1, 5,10,16,21,26,32,37,42,48,53,58,64,69,74,80,85,90,96,101,106,112,117,122,127 ]
 
     if d1 == 0:
         return 0
 
-    d1 = max(1,int(d1/5))
+    d1 = max(1,int(d1))
 
     for i,v in enumerate(tbl):
 
@@ -632,6 +633,54 @@ if __name__ == "__main__":
         { "src":"65_3",  "ifn":"scriabin_etude_op65_3_molta_vivace.csv", "insert_loc": 13953, "after_fl":True,  "ofn":"scriabin_65_3",  "beg_loc":6780,  "end_loc":6781, "delta_sec":0.0  },
         
     ]
+
+    # 2024-05-24
+    fileL = [
+
+        # *
+        { "src":"74_1",  "ifn":"scriabin_prelude_op74_1.csv",   "beg_score_loc":1229, "cut_score_loc":1231,  "end_scriabin_uid":743, "end_offs_sec":0, "ofn":"scriabin_op74_1" },
+
+        # *
+        { "src":"74_2",  "ifn":"scriabin_prelude_op74_2.csv",   "beg_score_loc": 1867, "cut_score_loc":1877,  "end_scriabin_uid":631,  "end_offs_sec":1.0,  "ofn":"scriabin_op74_2"  },
+
+
+        # * 
+         { "src":"74_4",  "ifn":"scriabin_prelude_op74_4.csv",        "beg_score_loc":2998, "cut_score_loc":3003,  "end_scriabin_uid":917, "end_offs_sec":0, "ofn":"scriabin_op74_4" },
+        
+        
+        # *
+        { "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",        "beg_score_loc": 4086, "cut_score_loc":4087,  "end_scriabin_uid":804, "end_offs_sec":2.0,  "ofn":"scriabin_op74_3" },
+        #{ "src":"67_2", "ifn":"scriabin_prelude_op67_2.csv",       "insert_loc":4086, "after_fl":False, "ofn":"scriabin_67_2", "beg_loc":6043, "end_loc":6044, "delta_sec":0.0 },
+        
+
+        
+        # 
+        { "src":"65_1",  "ifn":"scriabin_etude_op65_1_allegro fantastico.csv",  "insert_loc": 6376, "after_fl":False,  "ofn":"scriabin_65_1",  "beg_loc":2804,  "end_loc":2805, "delta_sec":0.0  },
+
+        # * 
+        #{ "src":"8_3",  "ifn":"scriabin_etude_op8_3_b_minor.csv",    "insert_loc": 8446, "after_fl":False,  "ofn":"scriabin_8_3",  "beg_loc":3832,  "end_loc":3883, "delta_sec":0.0  },
+        { "src":"67_2", "ifn":"scriabin_prelude_op67_2.csv",          "insert_loc":8446,  "after_fl":False, "ofn":"scriabin_67_2", "beg_loc":3832, "end_loc":3883, "delta_sec":0.0 },
+
+        # *
+        { "src":"74_5",  "ifn":"scriabin_prelude_op74_5.csv",        "beg_score_loc": 9566, "cut_score_loc":9574,  "end_scriabin_uid":1168, "end_offs_sec":0.0,  "ofn":"scriabin_op74_5" },
+
+        # *
+        { "src":"65_2",   "ifn":"scriabin_etude_op65_2_allegretto.csv",   "beg_score_loc": 10790, "cut_score_loc":10789,  "end_scriabin_uid":479, "end_offs_sec":2.0,  "ofn":"scriabin_op65_2" },
+
+        # *
+        #{ "src":"67_2", "ifn":"scriabin_prelude_op67_2.csv",       "insert_loc":12428, "after_fl":False, "ofn":"scriabin_67_2", "beg_loc":6043, "end_loc":6044, "delta_sec":0.0 },
+        #{ "src":"74_3",  "ifn":"scriabin_prelude_op74_3.csv",       "insert_loc":12428, "after_fl":False, "ofn":"scriabin_op74_3", "beg_loc":6043, "end_loc":6044, "delta_sec":0.0 },
+        #{ "src":"49_1",  "ifn":"scriabin_prelude_op49_1.csv",       "insert_loc":12428, "after_fl":False, "ofn":"scriabin_op49_1", "beg_loc":6043, "end_loc":6044, "delta_sec":0.0 },
+        { "src":"8_3",  "ifn":"scriabin_etude_op8_3_b_minor.csv",    "insert_loc": 12428, "after_fl":False,  "ofn":"scriabin_8_3",  "beg_loc":6043,  "end_loc":6044, "delta_sec":0.0  },
+        
+        { "src":"65_3",  "ifn":"scriabin_etude_op65_3_molta_vivace.csv", "insert_loc": 13953, "after_fl":True,  "ofn":"scriabin_65_3",  "beg_loc":6780,  "end_loc":6781, "delta_sec":0.0  },
+
+        
+        
+        { "src":"64_0",  "ifn":"scriabin_sonate_7_op64.csv", "insert_loc": 16339, "after_fl":True,  "ofn":"scriabin_64_0",  "beg_loc":7826,  "end_loc":7827, "delta_sec":0.0  },
+        
+    ]
+
     
     scoreL = parse_score(score_fn)
     
