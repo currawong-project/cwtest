@@ -362,10 +362,23 @@ cw::rc_t objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc
 
   int a = 0;
   int b = 0;
-
+  const cw::object_t* c = nullptr;
+  bool d,e,f;
+  
   o->getv("a",a,"b",b);
   printf("G: %i %i\n",a,b);
 
+
+  o->readv("a",0,a,
+           "b",0,b,
+           "c",cw::kOptFl | cw::kListTId,c,
+           "d",0,d,
+           "e",0,e,
+           "f",0,f);
+  
+  printf("R: %i %i : %i %i %i\n",a,b,d,e,f);
+
+  
   const unsigned bufN = 128;
   char buf[bufN];
 
