@@ -1,12 +1,12 @@
 #include "cwCommon.h"
 #include "cwLog.h"
 #include "cwCommonImpl.h"
+#include "cwTest.h"
 #include "cwMem.h"
 #include "cwFile.h"
 #include "cwVariant.h"
 #include "cwFileSys.h"
 #include "cwTextBuf.h"
-#include "cwLex.h"
 #include "cwText.h"
 #include "cwNumericConvert.h"
 #include "cwObject.h"
@@ -33,9 +33,6 @@
 #include "cwTime.h"
 #include "cwMidi.h"
 #include "cwMidiDecls.h"
-#include "cwFlowDecl.h"
-#include "cwFlow.h"
-#include "cwFlowTest.h"
 
 #include "cwDynRefTbl.h"
 #include "cwScoreParse.h"
@@ -108,8 +105,6 @@
 #include "cwAudioFileOps.h"
 #include "cwMidiState.h"
 #include "cwSvgMidi.h"
-
-//#include "cwNbMem.h"
 
 #include <iostream>
 
@@ -278,6 +273,8 @@ char* optionalNewFile( const cw::object_t* args, const char* label )
 { return instantiatePathVariable(args,label,kVarOptionalFl); }
 
 
+
+
 cw::rc_t variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   print("a", 1, "b", 3.14, "c",5L);
@@ -301,135 +298,26 @@ cw::rc_t variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int
   return cw::kOkRC;
 }
 
-
-
-cw::rc_t fileSysTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::filesys::pathPart_t* pp = cw::filesys::pathParts(__FILE__);
-  
-  cwLogInfo("dir:%s",pp->dirStr);
-  cwLogInfo("fn: %s",pp->fnStr);
-  cwLogInfo("ext:%s",pp->extStr);
-
-  char* fn = cw::filesys::makeFn( pp->dirStr, pp->fnStr, pp->extStr, nullptr );
-
-  cwLogInfo("fn: %s",fn);
-
-  cw::mem::release(pp);
-  cw::mem::release(fn);
-
-
-  const char myPath[] = "~/src/foo";
-
-  char* expPath = cw::filesys::expandPath(myPath);
-
-  cwLogInfo("%s %s",myPath,expPath);
-
-  cw::mem::release(expPath);
-  
-  return cw::kOkRC;
-}
-
 cw::rc_t numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   int8_t x0 = 3;
   int x1 = 127;
   
   cw::numeric_convert( x1, x0 );
-  printf("%i %i\n",x0,x1);
+  cwLogPrint("%i %i\n",x0,x1);
     
 
   int v0 = -1;
   double v1 = -1;
   cw::string_to_number("123",v0);
   cw::string_to_number("3.4",v1);
-  printf("%i %f\n",v0,v1 );
+  cwLogPrint("%i %f\n",v0,v1 );
 
   return cw::kOkRC;
 }
 
-cw::rc_t objectTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::object_t* o;
-  const char s [] = "{ a:1, b:2, c:[ 1.23, 4.56 ], d:true, e:false, f:true }";
-  cw::objectFromString(s,o);
 
-  int v;
-  o->get("b",v);
-  printf("value:%i\n",v);
-  
-  o->print();
-
-  int a = 0;
-  int b = 0;
-  const cw::object_t* c = nullptr;
-  bool d,e,f;
-  
-  o->getv("a",a,"b",b);
-  printf("G: %i %i\n",a,b);
-
-
-  o->readv("a",0,a,
-           "b",0,b,
-           "c",cw::kOptFl | cw::kListTId,c,
-           "d",0,d,
-           "e",0,e,
-           "f",0,f);
-  
-  printf("R: %i %i : %i %i %i\n",a,b,d,e,f);
-
-  
-  const unsigned bufN = 128;
-  char buf[bufN];
-
-  unsigned i = o->to_string(buf,bufN);
-  printf("%i : %s\n",i, buf);
-  
-  cw::object_t* oo = o->duplicate();
-
-  oo->print();
-  
-  oo->free();
-  
-    
-  o->free();
-  return cw::kOkRC;
-}
-
-cw::rc_t objectToJsonTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-   double   v0[]  = {1.23,2.34,3.45};
-  unsigned v0N = sizeof(v0)/sizeof(v0[0]);
-  int      v1[]  = {-1,0,1,2,3,4};
-  unsigned v1N = sizeof(v1)/sizeof(v1[0]);
-  
-  cw::object_t* d = cw::newDictObject();
-
-  d->putv("A","Abc","B",1.234);
-  d->put_numeric_list("v0",v0,v0N);
-  d->put_numeric_list("v1",v1,v1N);
-
-  char* s = d->to_string();
-  printf("%s\n",s);
-  cw::mem::release(s);
-
-  d->free();
-
-  return cw::kOkRC;
-}
-
-cw::rc_t vectOpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  int v1[] = { 1,2,1,2,1,2,1,2,1,2 };
-  int v0[ 10 ];
-    
-  cw::vop::deinterleave( v0, v1, 5, 2 );
-  cw::vop::print(v0,10,"%i ");
-  return cw::kOkRC;
-}
-
-cw::rc_t lexTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::lex::test(); }
-cw::rc_t timeTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::time::test(); }
+cw::rc_t testTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::test::test(args,argc,argv); }
 cw::rc_t threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::threadTest(); }
 cw::rc_t kbTest1Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest1(); return cw::kOkRC; }
 cw::rc_t kbTest2Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest2(); return cw::kOkRC; }
@@ -465,7 +353,6 @@ cw::rc_t pvocFileProc(         const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t socketMdnsTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::mdns::test(); }
 cw::rc_t dnsSdTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::dnssd::test(); }
 cw::rc_t euConTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::eucon::test(); }
-cw::rc_t flowTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::flow::test(args,argc,argv); }
 
 cw::rc_t scoreFollowTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follow_test::test(args); }
 cw::rc_t svgMidiFileTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg_midi::test_midi_file(args); }
@@ -482,13 +369,6 @@ cw::rc_t ioMinTest(         const cw::object_t* cfg, const cw::object_t* args, i
 cw::rc_t ioAudioMidiTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio_midi_app::main(args); }
 cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
-  /*
-  cw::rc_t            rc;
-  const cw::object_t* flow_proc_dict = nullptr;
-  
-  if((rc = cfg->getv("flow_proc_dict",flow_proc_dict)) != cw::kOkRC )
-    return cwLogError(rc,"The 'flow_proc_dict' specification object was not found.");
-  */
   return cw::preset_sel_app::main(args,argc-1,argv+1);
 }
 #else
@@ -797,13 +677,8 @@ int main( int argc, const char* argv[] )
   func_t modeArray[] =
   {
    { "variadicTpl", variadicTplTest },
-   { "lex", lexTest },
-   { "fileSys", fileSysTest },
+    { "test", testTest },
    { "numbCvt", numbCvtTest },
-   { "object", objectTest },
-   { "objectToJson", objectToJsonTest },
-   { "vop", vectOpTest },
-   { "time", timeTest },
    { "thread", threadTest },
    { "kbTest1", kbTest1Test },
    { "kbTest2", kbTest2Test },
@@ -864,9 +739,6 @@ int main( int argc, const char* argv[] )
    { "am_to_midi_file", amToMidiFile },
    { "audio_file_proc", audioFileProc },
    { "pvoc_file_proc",  pvocFileProc },
-   { "flow_test", flowTest },
-   { "flow_pv", flowTest },
-   { "flow_spec_dist", flowTest },
    { "preset_sel", ioPresetSelTest },
    { "score_follow", scoreFollowTest },
    { "svg_midi_file", svgMidiFileTest },
