@@ -343,7 +343,6 @@ cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
 cw::rc_t pianoScoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::perf_score::test(args); }
 cw::rc_t gutimRegTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::gutim::reg::test(args); }
-cw::rc_t audioTransformsTest(  const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::test(args); }
 cw::rc_t amToMidiFile(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_record_play::am_to_midi_file(args); }
 cw::rc_t audioFileProc(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::file_processor(args); }
 cw::rc_t pvocFileProc(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::pvoc_file_processor(args); }
@@ -729,7 +728,6 @@ int main( int argc, const char* argv[] )
    { "convolve", convolveTest },
    { "piano_score", pianoScoreTest },
    { "gutim_reg", gutimRegTest },
-   { "audio_transforms", audioTransformsTest },
    { "am_to_midi_file", amToMidiFile },
    { "audio_file_proc", audioFileProc },
    { "pvoc_file_proc",  pvocFileProc },
