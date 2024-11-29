@@ -298,24 +298,6 @@ cw::rc_t variadicTplTest( const cw::object_t* cfg, const cw::object_t* args, int
   return cw::kOkRC;
 }
 
-cw::rc_t numbCvtTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  int8_t x0 = 3;
-  int x1 = 127;
-  
-  cw::numeric_convert( x1, x0 );
-  cwLogPrint("%i %i\n",x0,x1);
-    
-
-  int v0 = -1;
-  double v1 = -1;
-  cw::string_to_number("123",v0);
-  cw::string_to_number("3.4",v1);
-  cwLogPrint("%i %f\n",v0,v1 );
-
-  return cw::kOkRC;
-}
-
 
 cw::rc_t testTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::test::test(args,argc,argv); }
 cw::rc_t threadTest(           const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::threadTest(); }
@@ -674,7 +656,6 @@ int main( int argc, const char* argv[] )
   {
    { "variadicTpl", variadicTplTest },
     { "test", testTest },
-   { "numbCvt", numbCvtTest },
    { "thread", threadTest },
    { "kbTest1", kbTest1Test },
    { "kbTest2", kbTest2Test },
