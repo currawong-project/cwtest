@@ -5,6 +5,9 @@ data
 data1
 data_perf_vel_study
 midi_record
+cur
+old
+
 
 .deps
 autom4te.cache
