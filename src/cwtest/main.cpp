@@ -339,7 +339,7 @@ cw::rc_t csvTest(            const cw::object_t* cfg, const cw::object_t* args, 
 cw::rc_t scoreTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_test::test(args); }
 cw::rc_t translateFrags(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::preset_sel::translate_frags(args); }
 #if defined(cwWEBSOCK)
-cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(cfg); }
+cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(args); }
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return cw::ui::test(args); }
 #if defined(cwALSA)
 cw::rc_t ioTest(            const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::io::test(args); }
@@ -370,7 +370,6 @@ cw::rc_t ioPresetSelTest(   const cw::object_t* cfg, const cw::object_t* args, i
 #if defined(cwALSA)
 cw::rc_t midiDeviceReport(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::testReport();}
 cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::test(args);}
-cw::rc_t midiFileDevTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::device::file_dev::test( args );}
 cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test( args ); }
 cw::rc_t audioDevTestTone(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::test_tone( args ); }
 cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::alsa::report(); }
@@ -379,7 +378,6 @@ cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t _no_alsa() { return cwLogError(cw::kResourceNotAvailableRC,"ALSA based functionality not included in this build."); } 
 cw::rc_t midiDeviceReport(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
 cw::rc_t midiDeviceTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
-cw::rc_t midiFileDevTest(      const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa();}
 cw::rc_t audioDevTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 cw::rc_t audioDevTestTone(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
@@ -667,7 +665,6 @@ int main( int argc, const char* argv[] )
    { "serialSrv", serialPortSrvTest },
    { "midiDeviceReport", midiDeviceReport },
    { "midiDevice", midiDeviceTest },
-   { "midiFileDev", midiFileDevTest },
    { "audioDevFileTest", audioDevFileTest },
    { "audioDevTest",audioDevTest },
    { "audioDevTone", audioDevTestTone },
