@@ -22,8 +22,8 @@ AM_LDFLAGS  =
 # debug/release switches
 if DEBUG
   AM_CFLAGS   += -g
-  #  -Wextra -Werror -Wconversion -fsanitize=address
-  AM_CXXFLAGS += -g -Wall  -fsanitize=undefined
+  #  -Wextra -Werror -Wconversion -fsanitize=address -lasan -fsanitize=thread 
+  AM_CXXFLAGS += -g -Wall -Wextra -Wno-unused  -fsanitize=undefined
 else
   AM_CFLAGS   += -O3
   AM_CXXFLAGS += -O3
@@ -84,7 +84,7 @@ if cwWEBSOCK
   src_cwtest_cwtest_LDADD +=  -lwebsockets
 endif
 
-src_cwtest_cwtest_LDADD += -lsatlas
+# src_cwtest_cwtest_LDADD += -lsatlas
 
 # src_cwtest_cwtest_CPPFLAGS  = -I$(srcdir)/src/libcw $(AM_CPPFLAGS)
 bin_PROGRAMS               += src/cwtest/cwtest

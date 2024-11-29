@@ -1,0 +1,7 @@
+: cycle:        0 :          a:    0:            out:  0 vid:  2 ch: -1 :         : : <invalid>: 
+: cycle:        0 :          a:    0:            out:  0 vid:  2 ch: -1 :         : : i:1 : 
+: cycle:        0 :          b:    0:            out:  0 vid:  2 ch: -1 :         : : <invalid>: 
+: cycle:        0 :          b:    0:            out:  0 vid:  2 ch: -1 :         : : i:2 : 
+: cycle:        0 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:3 : 
+info: : Entering runtime.   
+info: : 'maxCycleCnt' reached: 0. Shutting down flow.   

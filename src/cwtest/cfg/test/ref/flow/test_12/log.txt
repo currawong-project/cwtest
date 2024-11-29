@@ -1,0 +1,25 @@
+: cycle:        0 :          a:    0:          value:  0 vid:  0 ch: -1 :         : : i:1 : 
+: cycle:        0 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:2 : 
+: cycle:        0 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:3 :  dst:b:0.store:0: 
+info: : Entering runtime.   
+: cycle:        0 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:3 :  dst:add:0.in:1: 
+: cycle:        0 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:4 :  dst:b:0.store:0: 
+: cycle:        1 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:4 :  dst:add:0.in:1: 
+: cycle:        1 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:5 :  dst:b:0.store:0: 
+: cycle:        2 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:5 :  dst:add:0.in:1: 
+: cycle:        2 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:6 :  dst:b:0.store:0: 
+: cycle:        3 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:6 :  dst:add:0.in:1: 
+: cycle:        3 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:7 :  dst:b:0.store:0: 
+: cycle:        4 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:7 :  dst:add:0.in:1: 
+: cycle:        4 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:8 :  dst:b:0.store:0: 
+: cycle:        5 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:8 :  dst:add:0.in:1: 
+: cycle:        5 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:9 :  dst:b:0.store:0: 
+: cycle:        6 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:9 :  dst:add:0.in:1: 
+: cycle:        6 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:10 :  dst:b:0.store:0: 
+: cycle:        7 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:10 :  dst:add:0.in:1: 
+: cycle:        7 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:11 :  dst:b:0.store:0: 
+: cycle:        8 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:11 :  dst:add:0.in:1: 
+: cycle:        8 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:12 :  dst:b:0.store:0: 
+: cycle:        9 :          b:    0:          value:  0 vid:  0 ch: -1 :         : : i:12 :  dst:add:0.in:1: 
+: cycle:        9 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:13 :  dst:b:0.store:0: 
+info: : 'maxCycleCnt' reached: 10. Shutting down flow.   

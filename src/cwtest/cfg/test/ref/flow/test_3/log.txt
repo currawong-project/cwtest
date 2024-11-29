@@ -1,0 +1,24 @@
+: cycle:        0 :      srate:    0:            out:  0 vid:  2 ch: -1 :         : : <invalid>: 
+: cycle:        0 :      srate:    0:            out:  0 vid:  2 ch: -1 :         : : f:48000.000000 : 
+: cycle:        0 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:false : 
+: cycle:        0 :        cnt:    0:            out:  0 vid: 12 ch: -1 :         : : u:0 : 
+: cycle:        0 :        x0v:    0:            out:  0 vid:  2 ch: -1 :         : : <invalid>: 
+: cycle:        0 :        x0v:    0:            out:  0 vid:  2 ch: -1 :         : : i:2 : 
+: cycle:        0 :        x1v:    0:            out:  0 vid:  2 ch: -1 :         : : <invalid>: 
+: cycle:        0 :        x1v:    0:            out:  0 vid:  2 ch: -1 :         : : i:3 : 
+: cycle:        0 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:5 : 
+info: : Entering runtime.   
+: cycle:      750 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:true :  dst:cnt:0.trigger:0: 
+: cycle:      750 :        cnt:    0:            out:  0 vid: 12 ch: -1 :         : : u:1 :  dst:add:0.in:2: 
+: cycle:      750 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:6 : 
+: cycle:     1500 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:false :  dst:cnt:0.trigger:0: 
+: cycle:     1500 :        cnt:    0:            out:  0 vid: 12 ch: -1 :         : : u:2 :  dst:add:0.in:2: 
+: cycle:     1500 :        add:    0:            out:  0 vid:  0 ch: -1 :         : : i:7 : 
+: cycle:     2250 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:true :  dst:cnt:0.trigger:0: 
+: cycle:     3000 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:false :  dst:cnt:0.trigger:0: 
+: cycle:     3750 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:true :  dst:cnt:0.trigger:0: 
+: cycle:     4500 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:false :  dst:cnt:0.trigger:0: 
+: cycle:     5250 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:true :  dst:cnt:0.trigger:0: 
+: cycle:     6000 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:false :  dst:cnt:0.trigger:0: 
+: cycle:     6750 :        tmr:    0:            out:  0 vid:  3 ch: -1 :         : : b:true :  dst:cnt:0.trigger:0: 
+info: : 'maxCycleCnt' reached: 7500. Shutting down flow.   
