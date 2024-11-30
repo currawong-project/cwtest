@@ -5,11 +5,11 @@
 #include "cwMem.h"
 #include "cwFile.h"
 #include "cwVariant.h"
+#include "cwObject.h"
 #include "cwFileSys.h"
 #include "cwTextBuf.h"
 #include "cwText.h"
 #include "cwNumericConvert.h"
-#include "cwObject.h"
 #include "cwB23Tree.h"
 #include "cwVectOps.h"
 #include "cwMtx.h"
@@ -389,87 +389,8 @@ cw::rc_t socketTestTcp(    const cw::object_t* cfg, const cw::object_t* args, in
 cw::rc_t socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::srv::test_udp_srv(args); }
 cw::rc_t socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::srv::test_tcp_srv(args); }
 
-cw::rc_t sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::rc_t       rc          = cw::kOkRC;
-  bool           tcpFl       = false;
-  const char*    localNicDev = nullptr;
-  unsigned short localPort   = 0;
-  const char*    remoteIp    = nullptr;
-  unsigned short remotePort  = 0;
-  int argi = 0;
-  
-  if( argc <3 )
-  {
-    rc = cwLogError(cw::kInvalidArgRC,"Error: Invalid argument count to sockMgrTest().");
-    goto errLabel;
-  }
-
-  // The first arg. must be 'tcp' or 'udp'.
-  if( strcmp(argv[1],"tcp")!=0 && strcmp(argv[1],"udp")!=0 )
-  {
-    rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: The first argument must be 'udp' or 'tcp'\n");
-    goto errLabel;
-  }
-
-   
-  tcpFl  = strcmp(argv[1],"tcp")==0;
- 
-  argi = 2;
-
-  // If the next token is 'dev' ...
-  if( strcmp(argv[argi],"dev") == 0 )
-  {
-    if( argc <= ++argi )
-    {
-      rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: No local NIC given.\n");
-      goto errLabel;
-    }
-
-    // .. then the next arg is the localNicDev
-    localNicDev = argv[argi++];
-  }
-
-  if( argc <= argi )
-  {
-    rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: No local port was given.\n");
-    goto errLabel;
-  }
-
-  // get the local port
-  localPort = atoi(argv[argi++]);
-  
-  if( argc > argi)
-  {
-    remoteIp   = argv[argi++];
-
-    if( argc > argi)
-      remotePort = atoi(argv[argi++]);
-  }
-  
-  
-  if( remoteIp != nullptr && remotePort == 0 )
-  {
-    rc = cwLogError(cw::kInvalidArgRC,"sockMgrTest() Error: A remote adddress '%s' was given but no remote port was given.", remoteIp);
-    goto errLabel;
-  }
-
-  cwLogInfo("style:%s local:%i to remote:%s %i\n", argv[1], localPort, cwStringNullGuard(remoteIp), remotePort);      
-
-  rc = cw::socksrv::testMain( tcpFl, localNicDev, localPort, remoteIp, remotePort  );
-
-  return rc;
-    
-  errLabel:
-
-  rc = cwLogError(rc,"SockMgrTest() failed.");
-  
-  //                                                1                                 2               3          4
-  //                                                1         2         3             4               5          6
-  cwLogInfo("Usage: ./cwtest <cfg_fn> sockMgrTest 'udp | tcp' {'dev' <localNicDevice>} <localPort>  { <remote_ip> <remote_port> }\n");
-  
-  return rc;
-}
+cw::rc_t sockMgrSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::socksrv::testMain(args); }
+cw::rc_t sockMgrClientTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::socksrv::testMain(args); }
 
 #if defined(cwWEB)
 cw::rc_t _no_c11() { return cwLogError(cw::kResourceNotAvailableRC,"C++11 functionality not included in this build."); } 
@@ -503,7 +424,8 @@ cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc,
 #endif
 
 cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
+{  return cw::filesys::dirEntryTest(args); }
+/*  
   cw::rc_t rc = cw::kOkRC;
   if( argc < 2 )
     rc = cwLogError(cw::kInvalidArgRC,"dirEntryTest() error: Invalid arg. count.");
@@ -520,6 +442,7 @@ cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int ar
   }
   return rc;
 }
+*/
 
 cw::rc_t stubTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -596,7 +519,8 @@ int main( int argc, const char* argv[] )
    { "socketTcpServer", socketTestTcp },
    { "socketSrvUdp", socketSrvUdpTest },
    { "socketSrvTcp", socketSrvTcpTest },
-   { "sockMgrTest", sockMgrTest },
+   { "sockMgrSrvTest", sockMgrSrvTest },
+   { "sockMgrClientTest", sockMgrClientTest },
    { "uiTest", uiTest },
    { "socketMdns", socketMdnsTest },
    { "dnssd",  dnsSdTest },
