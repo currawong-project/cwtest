@@ -384,86 +384,10 @@ cw::rc_t audioDevAlsaTest(     const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t audioDevRpt(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return _no_alsa(); }
 #endif
 
-cw::rc_t socketTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::rc_t rc = cw::kOkRC;
-  
-  if( argc < 3 )
-    rc = cwLogError(cw::kInvalidArgRC,"Invalid arg count to socketTest().");
-  else
-  {
-    unsigned short localPort  = atoi(argv[1]);
-    unsigned short remotePort = atoi(argv[2]);
-    const char* remoteAddr = "127.0.0.1"; //"224.0.0.251"; //"127.0.0.1";
-    printf("local:%i remote:%i\n", localPort, remotePort);
-    
-    rc = cw::net::socket::test( localPort, remoteAddr, remotePort );
-  }
-  return rc;
-}
-
-cw::rc_t socketTestTcp( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  // server: ./cw_rt main.cfg socketTcp 5434 5435 dgram/stream server
-  // client: ./cw_rt main.cfg socketTcp 5435 5434 dgram/stream
-  cw::rc_t rc = cw::kOkRC;
-  
-  if( argc < 4 )
-    rc = cwLogError(cw::kInvalidArgRC,"Invalid arg. count to socketTestTcp().");
-  else
-  {
-    unsigned short localPort  = atoi(argv[1]);
-    unsigned short remotePort = atoi(argv[2]);
-    bool           dgramFl    = strcmp(argv[3],"dgram") == 0;
-    bool           serverFl   = false;
-    
-    if( argc >= 5 )
-      serverFl = strcmp(argv[4],"server") == 0;
-
-    printf("local:%i remote:%i %s %s\n", localPort, remotePort, dgramFl ? "dgram":"stream", serverFl?"server":"client");
-    
-    rc = cw::net::socket::test_tcp( localPort, "127.0.0.1", remotePort, dgramFl, serverFl );
-  }
-
-  return rc;
-}
-
-cw::rc_t socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::rc_t rc = cw::kOkRC;
-  
-  if( argc < 4 )
-    rc = cwLogError(cw::kInvalidArgRC,"Invalid arg. count to socketSrvUdpTest().");
-  else
-  {
-    unsigned short localPort  = atoi(argv[1]);
-    const char*    remoteIp   = argv[2];
-    unsigned short remotePort = atoi(argv[3]);
-
-    printf("local:%i to remote:%s %i\n", localPort, remoteIp, remotePort);
-    
-    rc = cw::net::srv::test_udp_srv( localPort, remoteIp, remotePort );
-  }
-  return rc;
-}
-cw::rc_t socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  cw::rc_t rc = cw::kOkRC;
-  
-  if( argc < 4 )
-    rc = cwLogError(cw::kInvalidArgRC,"Invaid arg. count to socketSrvTcpTest().");
-  else
-  {
-    unsigned short localPort  = atoi(argv[1]);
-    const char*    remoteIp   = argv[2];
-    unsigned short remotePort = atoi(argv[3]);
-
-    printf("local:%i to remote:%s %i\n", localPort, remoteIp, remotePort);
-    
-    rc = cw::net::srv::test_tcp_srv( localPort, remoteIp, remotePort );
-  }
-  return rc;
-}
+cw::rc_t socketTestUdp(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::socket::test_udp(args); }
+cw::rc_t socketTestTcp(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::socket::test_tcp(args); }
+cw::rc_t socketSrvUdpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::srv::test_udp_srv(args); }
+cw::rc_t socketSrvTcpTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::net::srv::test_tcp_srv(args); }
 
 cw::rc_t sockMgrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -559,15 +483,11 @@ cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, 
 
 #else
 
-cw::rc_t mnistTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{  
-  return cw::dataset::mnist::test(cfg);
-}
-
-cw::rc_t datasetTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )     { return cw::dataset::test(args); }
-cw::rc_t datasetWtrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return cw::dataset::wtr::test(args); }
-cw::rc_t datasetRdrTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return cw::dataset::rdr::test(args); }
-cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )  { return cw::dataset::adapter::test(args); }
+cw::rc_t mnistTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::mnist::test(cfg); }
+cw::rc_t datasetTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::test(args); }
+cw::rc_t datasetWtrTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::wtr::test(args); }
+cw::rc_t datasetRdrTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::rdr::test(args); }
+cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::adapter::test(args); }
 
 cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
@@ -671,8 +591,9 @@ int main( int argc, const char* argv[] )
    { "audioDevAlsa", audioDevAlsaTest },
    { "audioDevRpt", audioDevRpt },
    //{ "nbmem", nbmemTest },
-   { "socket", socketTest },
-   { "socketTcp", socketTestTcp },
+   { "socketUdp", socketTestUdp },
+   { "socketTcpClient", socketTestTcp },
+   { "socketTcpServer", socketTestTcp },
    { "socketSrvUdp", socketSrvUdpTest },
    { "socketSrvTcp", socketSrvTcpTest },
    { "sockMgrTest", sockMgrTest },
