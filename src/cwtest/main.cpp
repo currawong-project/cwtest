@@ -1,3 +1,5 @@
+//| Copyright: (C) 2020-2024 Kevin Larke <contact AT larke DOT org> 
+//| License: GNU GPL version 3.0 or above. See the accompanying LICENSE file.
 #include "cwCommon.h"
 #include "cwLog.h"
 #include "cwCommonImpl.h"
@@ -413,36 +415,15 @@ cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, 
 cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
   char* htmlFn = requiredNewFile( args, "outHtmlFn");
-  char* cssFn  = optionalNewFile( args, "outCssFn");
-  
-  cw::rc_t rc = cw::svg::test(htmlFn,cssFn);
-  
+  char* cssFn  = optionalNewFile( args, "outCssFn");  
+  cw::rc_t rc = cw::svg::test(htmlFn,cssFn);  
   cw::mem::release(htmlFn);
   cw::mem::release(cssFn);
   return rc;
 }
 #endif
 
-cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{  return cw::filesys::dirEntryTest(args); }
-/*  
-  cw::rc_t rc = cw::kOkRC;
-  if( argc < 2 )
-    rc = cwLogError(cw::kInvalidArgRC,"dirEntryTest() error: Invalid arg. count.");
-  else
-  {
-    const char*              path         = argv[1];
-    unsigned                 dirEntryN    = 0;
-    unsigned                 includeFlags = cw::filesys::kFileFsFl | cw::filesys::kDirFsFl | cw::filesys::kFullPathFsFl | cw::filesys::kRecurseFsFl;
-    cw::filesys::dirEntry_t* de           = cw::filesys::dirEntries( path,includeFlags, &dirEntryN );
-    for(unsigned i=0; i<dirEntryN; ++i)
-      cwLogInfo("%s",de[i].name);
-
-    cw::mem::release(de);
-  }
-  return rc;
-}
-*/
+cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) {  return cw::filesys::dirEntryTest(args); }
 
 cw::rc_t stubTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
 {
