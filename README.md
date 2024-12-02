@@ -33,6 +33,7 @@ The goal of `cwtest` is to be able to easily exercise `libcw`
 functions, or build simple utilities based on them, with a flexible
 sets of parameters.  The primary parameter file is `src/cwtest/cfg/main.cfg`.
 
+----
 
 # MIDI - MIDI Device Manager
 
@@ -124,17 +125,38 @@ Generate a list of devices and device attributes directly from the ALSA sub-syst
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-audioDevRpt       | cwAudioDevice.cpp    | report
+audioDevRpt       | cwAudioDevice.cpp    | report()
 
 Generate a list of devices and device attributes from libcw.  This will include audio file based devices.
+
+CLI Label         |      Source File     | Function     
+------------------|----------------------|---------------------
+audiofile         | cwAudioFile.cpp      | test()
+
+Print the audio file format.
+
+# Operations on Audio Files
+
+CLI Label         |      Source File     | Function     
+------------------|----------------------|---------------------
+afop              | cwAudioFile.cpp      | test()
+
+sine - generate a sine signal
+mix - mix multiple audio files with selectable gains per file.
+select_to_file - save sections of audio files to new audio files
+cutAndMix
+parallelMix
+transformApp
+convolve
+generate
 
 
 # Socket
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-socketMgrSrvTest     | cwSocket             | mainTest()
-socketMgrClientTest  | cwSocket             | mainTest()
+socketMgrSrvTest     | cwSocket.cpp         | mainTest()
+socketMgrClientTest  | cwSocket.cpp         | mainTest()
 
 Interactive socket based client/server application.
 Start `socketMgrSrvTest` in one process, then `socketMgrClientTest`
