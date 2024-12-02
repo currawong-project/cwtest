@@ -37,11 +37,14 @@ sets of parameters.  The primary parameter file is `src/cwtest/cfg/main.cfg`.
 
 # MIDI - MIDI Device Manager
 
-CLI Label         |      Source File     | Function     
-------------------|----------------------|--------------
-midiDeviceReport  | cwMidiDeviceTest.cpp | testReport()
-
-List The current set of MIID hardware devices and their ports.
++-------------------+----------------------+--------------+
+| CLI Label         |      Source File     | Function     |
++-------------------+----------------------+--------------+
+| midiDeviceReport  | cwMidiDeviceTest.cpp | testReport() |
++-------------------+----------------------+--------------+
+| List The current set of MIID hardware devices and       |
+| their ports.                                            |
++---------------------------------------------------------+
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|--------------
