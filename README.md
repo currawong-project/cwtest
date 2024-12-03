@@ -39,9 +39,9 @@ sets of parameters.  The primary parameter file is `src/cwtest/cfg/main.cfg`.
 
 ----
 
-Label             |      Source File     | Function     
-------------------|----------------------|--------------
-midiDeviceReport  | cwMidiDeviceTest.cpp | testReport()
+Label                 |      Source File     | Function     
+----------------------|----------------------|--------------
+__midiDeviceReport__  | cwMidiDeviceTest.cpp | testReport()
 
 List The current set of MIDI hardware devices
 
@@ -49,7 +49,7 @@ List The current set of MIDI hardware devices
 
 Label             |      Source File     | Function     
 ------------------|----------------------|--------------
-midiDevice        | cwMidiDeviceTest.cpp | test()
+__midiDevice__    | cwMidiDeviceTest.cpp | test()
 
 Interactive testing of the MIDI input file device
 start/pause/unpause/stop functions.  This function also validates the
@@ -61,7 +61,7 @@ MIDI file.
 
 Label             |      Source File     | Function     
 ------------------|----------------------|--------------
-midifile          | cwMidiFile.cpp       | test()
+__midifile__      | cwMidiFile.cpp       | test()
 
 MIDI file utility parameters:
 
