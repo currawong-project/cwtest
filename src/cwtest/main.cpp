@@ -93,7 +93,6 @@
 #include "cwIo.h"
 #include "cwIoTest.h"
 #include "cwIoMinTest.h"
-#include "cwIoAudioMidi.h"
 #include "cwIoAudioMidiApp.h"
 #include "cwIoMidiRecordPlay.h"
 #endif
@@ -315,16 +314,6 @@ cw::rc_t b23TreeTest(          const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t midiFileTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi::file::test(args); }
 cw::rc_t audioFileTest(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audiofile::test(args); }
 cw::rc_t audioFileOp(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::test(args); }
-cw::rc_t audioFileMix(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::mix(args); }
-cw::rc_t audioFileSelToFile(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::selectToFile(args); }
-cw::rc_t audioFileCutAndMix(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::cutAndMix(args); }
-cw::rc_t audioFileParallelMix( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::parallelMix(args); }
-cw::rc_t audioFileTransformApp(const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::transformApp(args); }
-cw::rc_t audioFileConvolve(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::convolve(args); }
-cw::rc_t audioFileGenerate(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::afop::generate(args); }
-cw::rc_t fftTest(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::fft::test(); }
-cw::rc_t ifftTest(             const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::ifft::test(); }
-cw::rc_t convolveTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dsp::convolve::test(); }
 cw::rc_t pianoScoreTest(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::perf_score::test(args); }
 cw::rc_t gutimRegTest(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::gutim::reg::test(args); }
 cw::rc_t amToMidiFile(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_record_play::am_to_midi_file(args); }
@@ -412,15 +401,7 @@ cw::rc_t datasetWtrTest(     const cw::object_t* cfg, const cw::object_t* args, 
 cw::rc_t datasetRdrTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::rdr::test(args); }
 cw::rc_t datasetAdapterTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::dataset::adapter::test(args); }
 
-cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )
-{
-  char* htmlFn = requiredNewFile( args, "outHtmlFn");
-  char* cssFn  = optionalNewFile( args, "outCssFn");  
-  cw::rc_t rc = cw::svg::test(htmlFn,cssFn);  
-  cw::mem::release(htmlFn);
-  cw::mem::release(cssFn);
-  return rc;
-}
+cw::rc_t svgTest(   const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::svg::test(args); }
 #endif
 
 cw::rc_t dirEntryTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) {  return cw::filesys::dirEntryTest(args); }
@@ -520,16 +501,6 @@ int main( int argc, const char* argv[] )
    { "midifile", midiFileTest },
    { "audiofile", audioFileTest },
    { "afop",      audioFileOp },
-   { "audio_mix", audioFileMix },
-   { "select_to_file", audioFileSelToFile },
-   { "cut_and_mix", audioFileCutAndMix },
-   { "parallel_mix",audioFileParallelMix },
-   { "transform_app", audioFileTransformApp },
-   { "convolve_file", audioFileConvolve },
-   { "generate_audio",audioFileGenerate },
-   { "fft", fftTest },
-   { "ifft", ifftTest },
-   { "convolve", convolveTest },
    { "piano_score", pianoScoreTest },
    { "gutim_reg", gutimRegTest },
    { "am_to_midi_file", amToMidiFile },
