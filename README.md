@@ -1,8 +1,12 @@
 # cwtest Testing and Development Application for libcw.
 
-`cwtest` is a command line interface to `libcw`.  
+`cwtest` is a command line interface to [`libcw`](https://gitea.currawongproject.org/cml/libcw).
+It is primarily used to as a minimal interface to develop and test `libcw` subsystems.
 
-Command line:
+See the [Currawong audio processing language and environment `caw`](https://gitea.currawongproject.org/cml/caw)
+for an example of a complete application based on [`libcw`](https://gitea.currawongproject.org/cml/libcw).
+
+`cwtest` command line:
 ```
 cwtest <file.cfg> <label>
 ```
@@ -31,7 +35,18 @@ functions.
 
 The goal of `cwtest` is to be able to easily exercise `libcw`
 functions, or build simple utilities based on them, with a flexible
-sets of parameters.  The primary parameter file is `src/cwtest/cfg/main.cfg`.
+sets of parameters.  The primary parameter file used for the programs
+and tests below is `src/cwtest/cfg/main.cfg`.
+
+Below is a list of named parameter sets from `src/cwtest/cfg/main.cfg`.
+The `label` field refers to the name given to a parameter set
+in the `main.cfg` and is also used to select the associated program
+from the command line utility.  Searching for the label in 'main.cfg'
+will show the complete set of editable parameters available for a given
+test function.
+
+The `Source File` and `Function` field gives the source code
+location for the function associated with each parameter set.
 
 ----
 
@@ -88,7 +103,7 @@ batch_convert: { io_dir:<path>, session_dir:<folder>, take_begin:<int>, take_end
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-serialSrv         | cwSerialPortSrv.cpp  | sesrialPortSrvTest()
+__serialSrv__     | cwSerialPortSrv.cpp  | sesrialPortSrvTest()
 
 This is an interactive test of the serial port send/receive functions.
 The function continuously transmits ASCII values '0' through 'z' to external devices `/dev/ttyACM0` and `/dev/ttyACM1`.
@@ -101,7 +116,7 @@ Firmware to run on ATMEGA328 based devices, like the Arduino Uno, is provided in
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-websockSrv        | cwWebSockSvr.cpp     | websockSrvTest()
+__websockSrv__    | cwWebSockSvr.cpp     | websockSrvTest()
 
 
 Interactive websocket server testing application.
@@ -113,7 +128,7 @@ Run the app and navigate in a web browser to `localhost:5687` to run the applica
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-nbmpscQueue       | nbmpscQueue.cpp      | test()
+__nbmpscQueue__   | nbmpscQueue.cpp      | test()
 
 Run the non-blocking, multiple producer, single consumer queue for 'testDurMs' millisecdons
 and write the result into 'out_fname'.  This is the queue used by the websocket implementation
@@ -125,16 +140,16 @@ and write the result into 'out_fname'.  This is the queue used by the websocket 
 
 CLI Label         |      Source File      | Function     
 ------------------|-----------------------|---------------------
-audioDevTest      | cwAudioDeviceTest.cpp | test()
+__audioDevTest__  | cwAudioDeviceTest.cpp | test()
 
 Interactive testing of a specified audio device using the
 cwAudioBuf functions: tones, pass-through, metering.
 Use 'audioDevRpt' to get the possible labels for 'inDev' and 'outDev'.
 
 
-CLI Label         |      Source File      | Function     
-------------------|-----------------------|---------------------
-audioDevFileTest  | cwAudioDeviceFile.cpp | Test()
+CLI Label            |      Source File      | Function     
+---------------------|-----------------------|---------------------
+__audioDevFileTest__ | cwAudioDeviceFile.cpp | Test()
 
 Test the input and output audio file device driver
 by setting a input file to 'inAudioFname' and writing
@@ -144,13 +159,13 @@ is the total count of test audio cycles.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-audioDevRpt       | cwAudioDevice.cpp    | report()
+__audioDevRpt__   | cwAudioDevice.cpp    | report()
 
 Generate a list of devices and device attributes from libcw.  This will include audio file based devices.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-audiofile         | cwAudioFile.cpp      | test()
+__audiofile__     | cwAudioFile.cpp      | test()
 
 Report the audio file format and a selected set of sample values.
 
@@ -158,7 +173,7 @@ Report the audio file format and a selected set of sample values.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-afop              | cwAudioFile.cpp      | test()
+__afop__          | cwAudioFile.cpp      | test()
 
 sine - generate a sine signal
 mix - mix multiple audio files with selectable gains per file.
@@ -171,13 +186,13 @@ generate - Synthesize a signal.
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-audio_file_proc      | cwAudioFileProc.cpp  | file_processor()
+__audio_file_proc__  | cwAudioFileProc.cpp  | file_processor()
 
 General purpose audio file processing pipeline.
 
 CLI Label            |      Source File      | Function     
 ---------------------|-----------------------|---------------------
-pvoc_file_proc       | cwPvAudioFileProc.cpp | pvoc_file_processor()
+__pvoc_file_proc__   | cwPvAudioFileProc.cpp | pvoc_file_processor()
 
 General purpose audio file processing for phase-vocoder based processing.
 
@@ -186,10 +201,10 @@ General purpose audio file processing for phase-vocoder based processing.
 
 # Socket
 
-CLI Label            |      Source File     | Function     
----------------------|----------------------|---------------------
-socketMgrSrvTest     | cwSocket.cpp         | mainTest()
-socketMgrClientTest  | cwSocket.cpp         | mainTest()
+CLI Label               |      Source File     | Function     
+------------------------|----------------------|---------------------
+__socketMgrSrvTest__    | cwSocket.cpp         | mainTest()
+__socketMgrClientTest__ | cwSocket.cpp         | mainTest()
 
 This is based on the current cwSocket implementation.
 Interactive socket based client/server application.
@@ -199,23 +214,23 @@ in a second processor.
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-socketUdp            | cwTcpSocketTest.cpp  | test_udp()
+__socketUdp__        | cwTcpSocketTest.cpp  | test_udp()
 
 This is based on the cwTcpSocket implemetation, as developed for use with MDNS,DNSD,EUCON.
 Interactive tester.
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-socketTcpClient      | cwTcpSocketTest.cpp  | test_tcp()
-socketTcpServer      | cwTcpSocketTest.cpp  | test_tcp()
+__socketTcpClient__  | cwTcpSocketTest.cpp  | test_tcp()
+__socketTcpServer__  | cwTcpSocketTest.cpp  | test_tcp()
 
 This is based on the cwTcpSocket implemetation, as developed for use with MDNS,DNSD,EUCON.
 Interactive tester.
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-socketSrvUdp         | cwTcpSocketTest.cpp  | test_udp_srv()
-socketSrvTcp         | cwTcpSocketTest.cpp  | test_tcp_srv()
+__socketSrvUdp__     | cwTcpSocketTest.cpp  | test_udp_srv()
+__socketSrvTcp__     | cwTcpSocketTest.cpp  | test_tcp_srv()
 
 This is based on the cwTcpSocket implemetation, as developed for use with MDNS,DNSD,EUCON.
 Interactive tester.
@@ -223,21 +238,21 @@ Interactive tester.
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-socketMdns           | cwMdns.cpp           | test()
+__socketMdns__       | cwMdns.cpp           | test()
 
 Runs a very specific test for simulating a Euphonix MC Mixer surface.
 
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-dnssd                | cwDnssd.cpp           | test()
+__dnssd__            | cwDnssd.cpp           | test()
 
 Runs a very specific test for simulating a Euphonix MC Mix surface.
 
 
 CLI Label            |      Source File     | Function     
 ---------------------|----------------------|---------------------
-eucon                | cwEuCon.cpp           | test()
+__eucon__            | cwEuCon.cpp           | test()
 
 Runs a very specific test for simulating a Euphonix MC Mix surface.
 
@@ -248,7 +263,7 @@ Runs a very specific test for simulating a Euphonix MC Mix surface.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-dirEntry          | cwFileSys.cpp        | dirEntryTest()
+__dirEntry__      | cwFileSys.cpp        | dirEntryTest()
 
 Exercise the directory reader.
 
@@ -258,56 +273,57 @@ Exercise the directory reader.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-io_minimal        | cwIoMinTest.cpp      | min_test()
+__io_minimal__    | cwIoMinTest.cpp      | min_test()
 
 Incomplete minimal template for an application based on cwIo.h/cpp without a GUI.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-io                | cwIoTest.cpp         | test()
+__io__            | cwIoTest.cpp         | test()
 
 Incomplete but working interactive app used to test and develop cwIo based applications.
-
-----
 
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-audio_midi        | cwIoAudioMidiApp.cpp | main()
+__audio_midi__    | cwIoAudioMidiApp.cpp | main()
 
 Program for recording and playing back real-time Audio and MIDI.
 Based on cwIoAudioRecordPlay and cwIoMidiRecordPlay.
 
+----
 
 # Dataset Related
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-mnist             | cwDatasets.cpp       | mnist::test()
+__mnist__         | cwDatasets.cpp       | mnist::test()
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-dataset_wtr       | cwDatasets.cpp       | wtr::test()
+__dataset_wtr__   | cwDatasets.cpp       | wtr::test()
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-dataset_rdr       | cwDatasets.cpp       | rdr::test()
+__dataset_rdr__   | cwDatasets.cpp       | rdr::test()
+
+CLI Label          |      Source File     | Function     
+-------------------|----------------------|---------------------
+__dataset_adpter__ | cwDatasets.cpp       | adapter::test()
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-dataset_adapter   | cwDatasets.cpp       | adapter::test()
-
-CLI Label         |      Source File     | Function     
-------------------|----------------------|---------------------
-dataset           | cwDatasets.cpp       | test()
+__dataset__       | cwDatasets.cpp       | test()
 
 Read MNIST native file -> write dataset file -> read datasetfile -> write SVG file
+
+----
 
 # SVG
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-svg               | cwSvg.cpp            | test()
+__svg__           | cwSvg.cpp            | test()
 
 Test the SVG file writer.
 
