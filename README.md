@@ -173,7 +173,7 @@ Report the audio file format and a selected set of sample values.
 
 CLI Label         |      Source File     | Function     
 ------------------|----------------------|---------------------
-__afop__          | cwAudioFile.cpp      | test()
+__afop__          | cwAudioFileOps.cpp   | test()
 
 sine - generate a sine signal
 mix - mix multiple audio files with selectable gains per file.
