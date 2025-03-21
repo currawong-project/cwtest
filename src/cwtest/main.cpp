@@ -20,6 +20,7 @@
 #include "cwSpScBuf.h"
 #include "cwSpScQueueTmpl.h"
 #include "cwNbMpScQueue.h"
+#include "cwMtQueueTester.h"
 #include "cwThreadMach.h"
 #include "cwSerialPort.h"
 #include "cwSerialPortSrv.h"
@@ -307,7 +308,7 @@ cw::rc_t kbTest2Test(          const cw::object_t* cfg, const cw::object_t* args
 cw::rc_t kbTest3Test(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { cw::kbTest3(); return cw::kOkRC; }
 cw::rc_t spscBuf(              const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::spsc_buf::test(); }
 cw::rc_t spscQueueTmpl(        const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::testSpScQueueTmpl(); }
-cw::rc_t nbMpScQueue(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::nbmpscq::test(args); }
+cw::rc_t nbMpScQueue(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::mt_queue_tester::test(args); }
 cw::rc_t serialPortSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::serialPortSrvTest(); }
 cw::rc_t audioDevFileTest(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::audio::device::file::test(args); }
 cw::rc_t b23TreeTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::b23::test(args); }
