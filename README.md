@@ -1,10 +1,10 @@
 # cwtest Testing and Development Application for libcw.
 
-`cwtest` is a command line interface to [`libcw`](https://gitea.currawongproject.org/cml/libcw).
+`cwtest` is a command line interface to [`libcw`](https://github.com/currawong-project/libcw).
 It is primarily used to as a minimal interface to develop and test `libcw` subsystems.
 
-See the [Currawong audio processing language and environment `caw`](https://gitea.currawongproject.org/cml/caw)
-for an example of a complete application based on [`libcw`](https://gitea.currawongproject.org/cml/libcw).
+See the [Currawong audio processing language and environment `caw`](https://github.com/currawong-project/caw)
+for an example of a complete application based on [`libcw`](https://github.com/github.com/currawong-project/cml/libcw).
 
 `cwtest` command line:
 ```
