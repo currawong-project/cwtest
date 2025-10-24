@@ -65,6 +65,7 @@
 #include "cwScoreFollowTest.h"
 
 #include "cwScoreFollow2Test.h"
+#include "cwMidiDetectors.h"
 
 #include "cwCsv.h"
 
@@ -334,6 +335,8 @@ cw::rc_t csvTest(            const cw::object_t* cfg, const cw::object_t* args, 
 cw::rc_t scoreTest(          const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_test::test(args); }
 cw::rc_t translateFrags(     const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::preset_sel::translate_frags(args); }
 cw::rc_t scoreFollow2(       const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::score_follow_2::test(args); }
+cw::rc_t midiDetect(         const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::midi_detect::test(args); }
+
 #if defined(cwWEBSOCK)
 cw::rc_t websockSrvTest(    const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] ) { return cw::websockSrvTest(args); }
 cw::rc_t uiTest( const cw::object_t* cfg, const cw::object_t* args, int argc, const char* argv[] )         { return cw::ui::test(args); }
@@ -519,6 +522,7 @@ int main( int argc, const char* argv[] )
    { "score_test", scoreTest },
    { "translate_frags", translateFrags },
    { "sf2", scoreFollow2 },
+   { "midi_detect",midiDetect},
    { "stub", stubTest },
    { nullptr, nullptr }
   };
